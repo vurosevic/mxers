@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName")})
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 41251387554598707L;
+    private static final long serialVersionUID = 41251387554598709L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
