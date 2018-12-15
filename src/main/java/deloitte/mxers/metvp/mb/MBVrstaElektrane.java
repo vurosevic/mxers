@@ -87,11 +87,11 @@ public class MBVrstaElektrane {
         init();
     }
     
-    public void azurirajGrupuZahteva() {
+    public void azurirajVrstuElektrane() {
         vrstaElektraneService.save(selectVrstaElektrane);
     }
     
-    public void brisiGrupuZahteva() {        
+    public void brisiVrstuElektrane() {        
         vrstaElektraneService.delete(selectVrstaElektrane); 
         init();
     }
