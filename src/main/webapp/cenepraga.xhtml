@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">                
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="frmDatatableTd">   
+                <center>
+                <p:dataTable  id="tdDT" style="width: 60%" 
+                              value="#{MBCenePraga.lazyModel}" var="td" paginator="true" rows="10"                                
+                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                              rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                              selection="#{MBCenePraga.selectCenaPraga}" lazy="true">
+                    <f:facet name="header">
+                        <p:outputLabel value="Цене на прагу електране" />
+                    </f:facet>                    
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column>
+                        <f:facet name="header" >Назив електране</f:facet>
+                        #{td.elektrana.naziv}
+                    </p:column>    
+                    <p:column>
+                        <f:facet name="header" >Цена</f:facet>
+                        #{td.cena}
+                    </p:column>                        
+                    <p:column>
+                        <f:facet name="header" >Датум од</f:facet>
+                        <div style="text-align: center;">
+                            <p:outputLabel value="#{td.datumOd}" style="text-align: center">
+                            <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </p:outputLabel>                 
+                        </div>
+                    </p:column>                      
+                    <p:column>
+                        <f:facet name="header" >Датум до</f:facet>
+                        <div style="text-align: center;">
+                            <p:outputLabel value="#{td.datumDo}" style="text-align: center">
+                            <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </p:outputLabel>                 
+                        </div>
+                    </p:column>                        
+                    <f:facet name="footer">
+                        <div style="text-align:left">                                                    
+                            <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
+                                icon="ui ui-icon-plus" value="Додај"  />
+                            <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBCenePraga.selectCenaPraga}" 
+                                icon="ui ui-icon-pencil" value="Измени"  />                    
+                            <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBCenePraga.selectCenaPraga}"
+                                icon="ui ui-icon-close" value="Бриши"  />                                                            
+                        </div>
+                 </f:facet>       
+                    <f:ajax event="rowSelectRadio" render="tdDT" />       
+                    <f:ajax event="rowUnselectCheckbox" render="tdDT" />   
+                </p:dataTable>   
+                </center>
+                <p:dialog header="Унос нове цене" widgetVar="tdDialogNovi" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:messages style="color:red" autoUpdate="true" />   
+                    <p:outputPanel id="tdDetailNovi" style="text-align:left;">
+                        <p:panelGrid  columns="3" rendered="true" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                            <p:outputLabel for="elektrana" value="Електрана:" />
+                            <p:selectOneMenu id="elektrana" required="true" style="width:150px" value="#{MBCenePraga.selectElektranaId}">
+                                <f:selectItem itemLabel="Изаберите електрану" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBElektrane.lista}" var="elek" itemLabel="#{elek.naziv}" itemValue="#{elek.id}"/>
+                            </p:selectOneMenu>                                                          
+                            <p:spacer/>                            
+                            
+                            <p:outputLabel for="cena" value="Цена:" />
+                            <p:inputText id="cena" required="true" value="#{MBCenePraga.novaCenaPraga.cena}" >
+                                <p:ajax update="cena" event="keyup" />
+                            </p:inputText>
+                            <p:message for="cena" display="icon" />
+                            
+                            <p:outputLabel for="datumod" value="Датум од:" />
+                            <p:calendar id="datumod" required="true" value="#{MBCenePraga.novaCenaPraga.datumOd}" 
+                                        pattern="dd.MM.yyyy" />                                        
+                            <p:message for="datumod" display="icon" />                            
+                            
+                            <p:outputLabel for="datumdo" value="Датум до:" />
+                            <p:calendar id="datumdo" required="true" value="#{MBCenePraga.novaCenaPraga.datumDo}" 
+                                        pattern="dd.MM.yyyy" />                                        
+                            <p:message for="datumdo" display="icon" />                                                        
+                            
+                        </p:panelGrid>
+                        <p:panel >
+                            <p:commandButton id="btnNovi" update="tdDetailNovi" process="@form" action="#{MBCenePraga.dodajNovuCenuPraga()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogNovi').hide();" >                               
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false" onclick="PF('tdDialogNovi').hide()"/>                            
+                        </p:panel>                         
+                    </p:outputPanel>
+                    <f:ajax event="close" render="frmDatatableTd" /> 
+                 </p:dialog>                 
+                
+                <p:dialog header="Ажурирање цене прага" widgetVar="tdDialogIzmeni" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">     
+                    <p:messages style="color:red" autoUpdate="true" /> 
+                    <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
+                        <h:form id="frmIzmenaTd">
+                            <p:panelGrid  columns="3" rendered="#{not empty MBCenePraga.selectCenaPraga}" columnClasses="label,value" class="panelGridNoBorderDialog">
+ 
+                            <p:outputLabel for="elektrana2" value="Електрана:" />
+                            <p:selectOneMenu id="elektrana2" required="false" style="width:150px" value="#{MBCenePraga.selectElektranaId}">
+                                <f:selectItem itemLabel="#{MBCenePraga.selectCenaPraga.elektrana.naziv}" itemValue="#{MBCenePraga.selectCenaPraga.elektrana.id}" noSelectionOption="true" />
+                                <f:selectItems value="#{MBElektrane.lista}" var="elek2" itemLabel="#{elek2.naziv}" itemValue="#{elek2.id}"/>
+                            </p:selectOneMenu>                             
+                            <p:spacer/>                                
+                                
+                            <p:outputLabel for="cena" value="Цена:" />
+                            <p:inputText id="cena" required="true" value="#{MBCenePraga.selectCenaPraga.cena}" >
+                                <p:ajax update="cena" event="keyup" />
+                            </p:inputText>
+                            <p:message for="cena" display="icon" />
+                            
+                            <p:outputLabel for="datumod" value="Датум од:" />
+                            <p:calendar id="datumod" required="true" value="#{MBCenePraga.selectCenaPraga.datumOd}" 
+                                        pattern="dd.MM.yyyy" >                                        
+                                <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </p:calendar>
+                            <p:message for="datumod" display="icon" />                            
+                            
+                            <p:outputLabel for="datumdo" value="Датум до:" />
+                            <p:calendar id="datumdo" required="true" value="#{MBCenePraga.selectCenaPraga.datumDo}" 
+                                        pattern="dd.MM.yyyy" >                                        
+                                <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </p:calendar>                                
+                            <p:message for="datumdo" display="icon" />                                  
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBCenePraga.selectCenaPraga}">
+                                <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBCenePraga.azurirajCenuPraga()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false"  onclick="PF('tdDialogIzmeni').hide()"/>
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />
+                 </p:dialog>                
+
+                <p:dialog header="Потврда брисања" widgetVar="tdDialogBrisi" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">                    
+                    <p:outputPanel id="tdDetailBrisi" style="text-align:left;">
+                        <h:form id="frmBrisiTd">
+                            <p:panelGrid  columns="2" rendered="#{not empty MBCenePraga.selectCenaPraga}" columnClasses="label,value" class="panelGridNoBorderDialog">        
+                            <h:outputText value="Електране:" />
+                            <h:outputLabel value="#{MBCenePraga.selectCenaPraga.elektrana.naziv}" />
+
+                            <h:outputText value="Цена:" />
+                            <h:outputLabel value="#{MBCenePraga.selectCenaPraga.cena}" /> 
+
+                            <h:outputText value="Датум од:" />
+                            <h:outputText value="#{MBCenePraga.selectCenaPraga.datumOd}" >    
+                            <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </h:outputText>
+
+                            <h:outputText value="Датум до:" />
+                            <h:outputText value="#{MBCenePraga.selectCenaPraga.datumDo}" >
+                            <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </h:outputText>                            
+                            
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBCenePraga.selectCenaPraga}">
+                                <p:commandButton process="@form" action="#{MBCenePraga.brisiCenuPraga()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15"/>
+                            <p:commandButton value="Одустани"  onclick="PF('tdDialogBrisi').hide()"/> 
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />                                        
+                 </p:dialog>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
