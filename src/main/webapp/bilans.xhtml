@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">                
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="frmDatatableTd">   
+                <center>
+                <p:dataTable  id="tdDT" style="width: 60%" 
+                              value="#{MBBilans.lazyModel}" var="td" paginator="true" rows="10"                                
+                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                              rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                              selection="#{MBBilans.selectBilans}" lazy="true">
+                    <f:facet name="header">
+                        <p:outputLabel value="Биланс" />
+                    </f:facet>                    
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column>
+                        <f:facet name="header" >Назив електране</f:facet>
+                        #{td.elektrana.naziv}
+                    </p:column>    
+                    <p:column>
+                        <f:facet name="header" >Месец</f:facet>
+                        #{td.mesec}
+                    </p:column>                        
+                    <p:column>
+                        <f:facet name="header" >Година</f:facet>
+                        #{td.godina}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >Планирана производња</f:facet>
+                        #{td.planiranaProizvodnja}
+                    </p:column>                  
+                    <p:column>
+                        <f:facet name="header" >Остварена производња</f:facet>
+                        #{td.ostvarenaProizvodnja}
+                    </p:column>                  
+                    <p:column>
+                        <f:facet name="header" >Планирани увоз</f:facet>
+                        #{td.planiraniUvoz}
+                    </p:column>                        
+                    <p:column>
+                        <f:facet name="header" >Планирани извоз</f:facet>
+                        #{td.planiraniIzvoz}
+                    </p:column>                        
+                    <f:facet name="footer">
+                        <div style="text-align:left">                                                    
+                            <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
+                                icon="ui ui-icon-plus" value="Додај"  />
+                            <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBBilans.selectBilans}" 
+                                icon="ui ui-icon-pencil" value="Измени"  />                    
+                            <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBBilans.selectBilans}"
+                                icon="ui ui-icon-close" value="Бриши"  />                                                            
+                        </div>
+                 </f:facet>       
+                    <f:ajax event="rowSelectRadio" render="tdDT" />       
+                    <f:ajax event="rowUnselectCheckbox" render="tdDT" />   
+                </p:dataTable>   
+                </center>
+                <p:dialog header="Унос новог биланса" widgetVar="tdDialogNovi" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:messages style="color:red" autoUpdate="true" />   
+                    <p:outputPanel id="tdDetailNovi" style="text-align:left;">
+                        <p:panelGrid  columns="3" rendered="true" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                            <p:outputLabel for="elektrana" value="Електрана:" />
+                            <p:selectOneMenu id="elektrana" required="true" style="width:150px" value="#{MBBilans.selectElektranaId}">
+                                <f:selectItem itemLabel="Изаберите врсту електране" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBElektrane.lista}" var="elek" itemLabel="#{elek.naziv}" itemValue="#{elek.id}"/>
+                            </p:selectOneMenu>                                                          
+                            <p:spacer/>                            
+                            
+                            <p:outputLabel for="mesec" value="Месец:" />
+                            <p:inputText id="mesec" required="true" value="#{MBBilans.noviBilans.mesec}" >
+                                <p:ajax update="mesec" event="keyup" />
+                            </p:inputText>
+                            <p:message for="mesec" display="icon" />
+                            
+                            <p:outputLabel for="godina" value="Година:" />
+                            <p:inputText id="godina" required="true" value="#{MBBilans.noviBilans.godina}" >
+                                <p:ajax update="godina" event="keyup" />
+                            </p:inputText>
+                            <p:message for="godina" display="icon" />                            
+                            
+                            <p:outputLabel for="pproizvodnja" value="Планирана производња:" />
+                            <p:inputText id="pproizvodnja" required="true" value="#{MBBilans.noviBilans.planiranaProizvodnja}" >
+                                <p:ajax update="pproizvodnja" event="keyup" />
+                            </p:inputText>
+                            <p:message for="pproizvodnja" display="icon" /> 
+                            
+                            <p:outputLabel for="oproizvodnja" value="Остварена производња:" />
+                            <p:inputText id="oproizvodnja" required="true" value="#{MBBilans.noviBilans.ostvarenaProizvodnja}" >
+                                <p:ajax update="oproizvodnja" event="keyup" />
+                            </p:inputText>
+                            <p:message for="oproizvodnja" display="icon" />
+                            
+                            <p:outputLabel for="puvoz" value="Планирани увоз:" />
+                            <p:inputText id="puvoz" required="true" value="#{MBBilans.noviBilans.planiraniUvoz}" >
+                                <p:ajax update="puvoz" event="keyup" />
+                            </p:inputText>
+                            <p:message for="puvoz" display="icon" />                            
+
+                            <p:outputLabel for="pizvoz" value="Планирани извоз:" />
+                            <p:inputText id="pizvoz" required="true" value="#{MBBilans.noviBilans.planiraniIzvoz}" >
+                                <p:ajax update="pizvoz" event="keyup" />
+                            </p:inputText>
+                            <p:message for="pizvoz" display="icon" />                                                                                                                
+                            
+                        </p:panelGrid>
+                        <p:panel >
+                            <p:commandButton id="btnNovi" update="tdDetailNovi" process="@form" action="#{MBBilans.dodajNoviBilans()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogNovi').hide();" >                               
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false" onclick="PF('tdDialogNovi').hide()"/>                            
+                        </p:panel>                         
+                    </p:outputPanel>
+                    <f:ajax event="close" render="frmDatatableTd" /> 
+                 </p:dialog>                 
+                
+                <p:dialog header="Ажурирање електране" widgetVar="tdDialogIzmeni" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">     
+                    <p:messages style="color:red" autoUpdate="true" /> 
+                    <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
+                        <h:form id="frmIzmenaTd">
+                            <p:panelGrid  columns="3" rendered="#{not empty MBElektrane.selectElektrana}" columnClasses="label,value" class="panelGridNoBorderDialog">
+ 
+                            <p:outputLabel for="naziv" value="Назив:" />
+                            <p:inputText id="naziv" required="true" value="#{MBElektrane.selectElektrana.naziv}" >
+                                <p:ajax update="naziv" event="keyup" />
+                            </p:inputText>
+                            <p:message for="naziv" display="icon" />
+
+                            <p:outputLabel for="vrstaelektrane2" value="Врста електране:" />
+                            <p:selectOneMenu id="vrstaelektrane2" required="false" style="width:150px" value="#{MBElektrane.selectVrstaElektraneId}">
+                                <f:selectItem itemLabel="#{MBElektrane.selectElektrana.vrstaElektrane.naziv}" itemValue="#{MBElektrane.selectElektrana.vrstaElektrane.id}" noSelectionOption="true" />
+                                <f:selectItems value="#{MBVrstaElektrane.lista}" var="vrstael" itemLabel="#{vrstael.naziv}" itemValue="#{vrstael.id}"/>
+                            </p:selectOneMenu>                             
+                            <p:spacer/>
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBElektrane.selectElektrana}">
+                                <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBElektrane.azurirajElektranu()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false"  onclick="PF('tdDialogIzmeni').hide()"/>
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />
+                 </p:dialog>                
+
+                <p:dialog header="Потврда брисања" widgetVar="tdDialogBrisi" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">                    
+                    <p:outputPanel id="tdDetailBrisi" style="text-align:left;">
+                        <h:form id="frmBrisiTd">
+                            <p:panelGrid  columns="2" rendered="#{not empty MBElektrane.selectElektrana}" columnClasses="label,value" class="panelGridNoBorderDialog">        
+                            <h:outputText value="Назив:" />
+                            <h:outputLabel value="#{MBElektrane.selectElektrana.naziv}" />
+
+                            <h:outputText value="Врста електране:" />
+                            <h:outputLabel value="#{MBElektrane.selectElektrana.vrstaElektrane.naziv}" /> 
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBElektrane.selectElektrana}">
+                                <p:commandButton process="@form" action="#{MBElektrane.brisiElektranu()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15"/>
+                            <p:commandButton value="Одустани"  onclick="PF('tdDialogBrisi').hide()"/> 
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />                                        
+                 </p:dialog>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -44,10 +44,10 @@ public class Bilans implements Serializable {
     @Column(name = "OstvarenaProizvodnja")
     private Double ostvarenaProizvodnja;            
     
-    @Column(name = "PlaniraniUvoz")
+    @Column(name = "PlaniranUvoz")
     private Double planiraniUvoz;
     
-    @Column(name = "PlaniraniIzvoz")
+    @Column(name = "PlaniranIzvoz")
     private Double planiraniIzvoz;    
     
     @ManyToOne
