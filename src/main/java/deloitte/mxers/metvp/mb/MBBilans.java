@@ -117,7 +117,7 @@ public class MBBilans {
         selectElektranaId = null; 
     }
     
-    public void brisiCenuPraga() {        
+    public void brisiBilans() {        
         bilansService.delete(selectBilans);
         init();
     }    

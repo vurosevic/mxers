@@ -132,29 +132,59 @@
                     <f:ajax event="close" render="frmDatatableTd" /> 
                  </p:dialog>                 
                 
-                <p:dialog header="Ажурирање електране" widgetVar="tdDialogIzmeni" modal="true"                                                     
+                <p:dialog header="Ажурирање биланса" widgetVar="tdDialogIzmeni" modal="true"                                                     
                           showEffect="fade" hideEffect="fade" resizable="false">     
                     <p:messages style="color:red" autoUpdate="true" /> 
                     <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
                         <h:form id="frmIzmenaTd">
-                            <p:panelGrid  columns="3" rendered="#{not empty MBElektrane.selectElektrana}" columnClasses="label,value" class="panelGridNoBorderDialog">
+                            <p:panelGrid  columns="3" rendered="#{not empty MBBilans.selectBilans}" columnClasses="label,value" class="panelGridNoBorderDialog">
  
-                            <p:outputLabel for="naziv" value="Назив:" />
-                            <p:inputText id="naziv" required="true" value="#{MBElektrane.selectElektrana.naziv}" >
-                                <p:ajax update="naziv" event="keyup" />
+                            <p:outputLabel for="elektrana" value="Електрана:" />
+                            <p:selectOneMenu id="elektrana" required="false" style="width:150px" value="#{MBBilans.selectElektranaId}">
+                                <f:selectItem itemLabel="#{MBBilans.selectBilans.elektrana.naziv}" itemValue="#{MBBilans.selectBilans.elektrana.id}" noSelectionOption="true" />
+                                <f:selectItems value="#{MBElektrane.lista}" var="elek" itemLabel="#{elek.naziv}" itemValue="#{elek.id}"/>
+                            </p:selectOneMenu>                                                          
+                            <p:spacer/>                            
+                            
+                            <p:outputLabel for="mesec" value="Месец:" />
+                            <p:inputText id="mesec" required="true" value="#{MBBilans.selectBilans.mesec}" >
+                                <p:ajax update="mesec" event="keyup" />
                             </p:inputText>
-                            <p:message for="naziv" display="icon" />
+                            <p:message for="mesec" display="icon" />
+                            
+                            <p:outputLabel for="godina" value="Година:" />
+                            <p:inputText id="godina" required="true" value="#{MBBilans.selectBilans.godina}" >
+                                <p:ajax update="godina" event="keyup" />
+                            </p:inputText>
+                            <p:message for="godina" display="icon" />                            
+                            
+                            <p:outputLabel for="pproizvodnja" value="Планирана производња:" />
+                            <p:inputText id="pproizvodnja" required="true" value="#{MBBilans.selectBilans.planiranaProizvodnja}" >
+                                <p:ajax update="pproizvodnja" event="keyup" />
+                            </p:inputText>
+                            <p:message for="pproizvodnja" display="icon" /> 
+                            
+                            <p:outputLabel for="oproizvodnja" value="Остварена производња:" />
+                            <p:inputText id="oproizvodnja" required="true" value="#{MBBilans.selectBilans.ostvarenaProizvodnja}" >
+                                <p:ajax update="oproizvodnja" event="keyup" />
+                            </p:inputText>
+                            <p:message for="oproizvodnja" display="icon" />
+                            
+                            <p:outputLabel for="puvoz" value="Планирани увоз:" />
+                            <p:inputText id="puvoz" required="true" value="#{MBBilans.selectBilans.planiraniUvoz}" >
+                                <p:ajax update="puvoz" event="keyup" />
+                            </p:inputText>
+                            <p:message for="puvoz" display="icon" />                            
 
-                            <p:outputLabel for="vrstaelektrane2" value="Врста електране:" />
-                            <p:selectOneMenu id="vrstaelektrane2" required="false" style="width:150px" value="#{MBElektrane.selectVrstaElektraneId}">
-                                <f:selectItem itemLabel="#{MBElektrane.selectElektrana.vrstaElektrane.naziv}" itemValue="#{MBElektrane.selectElektrana.vrstaElektrane.id}" noSelectionOption="true" />
-                                <f:selectItems value="#{MBVrstaElektrane.lista}" var="vrstael" itemLabel="#{vrstael.naziv}" itemValue="#{vrstael.id}"/>
-                            </p:selectOneMenu>                             
-                            <p:spacer/>
+                            <p:outputLabel for="pizvoz" value="Планирани извоз:" />
+                            <p:inputText id="pizvoz" required="true" value="#{MBBilans.selectBilans.planiraniIzvoz}" >
+                                <p:ajax update="pizvoz" event="keyup" />
+                            </p:inputText>
+                            <p:message for="pizvoz" display="icon" />     
 
                         </p:panelGrid>
-                            <p:panel rendered="#{not empty MBElektrane.selectElektrana}">
-                                <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBElektrane.azurirajElektranu()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
+                            <p:panel rendered="#{not empty MBBilans.selectBilans}">
+                                <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBBilans.azurirajBilans()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
                             </p:commandButton>
                             <p:spacer width="15" />
                             <p:commandButton value="Одустани" ajax="false"  onclick="PF('tdDialogIzmeni').hide()"/>
@@ -168,16 +198,30 @@
                           showEffect="fade" hideEffect="fade" resizable="false">                    
                     <p:outputPanel id="tdDetailBrisi" style="text-align:left;">
                         <h:form id="frmBrisiTd">
-                            <p:panelGrid  columns="2" rendered="#{not empty MBElektrane.selectElektrana}" columnClasses="label,value" class="panelGridNoBorderDialog">        
-                            <h:outputText value="Назив:" />
-                            <h:outputLabel value="#{MBElektrane.selectElektrana.naziv}" />
+                            <p:panelGrid  columns="2" rendered="#{not empty MBBilans.selectBilans}" columnClasses="label,value" class="panelGridNoBorderDialog">        
+                            <h:outputText value="Електрана:" />
+                            <h:outputLabel value="#{MBBilans.selectBilans.elektrana.naziv}" />
 
-                            <h:outputText value="Врста електране:" />
-                            <h:outputLabel value="#{MBElektrane.selectElektrana.vrstaElektrane.naziv}" /> 
+                            <h:outputText value="Месец:" />
+                            <h:outputLabel value="#{MBBilans.selectBilans.mesec}" /> 
+                            
+                            <h:outputText value="Година:" />
+                            <h:outputLabel value="#{MBBilans.selectBilans.mesec}" />                             
+                            
+                            <h:outputText value="Планирана производња:" />
+                            <h:outputLabel value="#{MBBilans.selectBilans.planiranaProizvodnja}" />                             
 
+                            <h:outputText value="Остварена производња:" />
+                            <h:outputLabel value="#{MBBilans.selectBilans.ostvarenaProizvodnja}" />  
+                            
+                            <h:outputText value="Планирани увоз:" />
+                            <h:outputLabel value="#{MBBilans.selectBilans.planiraniUvoz}" />  
+                            
+                            <h:outputText value="Планирани извоз:" />
+                            <h:outputLabel value="#{MBBilans.selectBilans.planiraniIzvoz}" />                              
                         </p:panelGrid>
-                            <p:panel rendered="#{not empty MBElektrane.selectElektrana}">
-                                <p:commandButton process="@form" action="#{MBElektrane.brisiElektranu()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
+                            <p:panel rendered="#{not empty MBBilans.selectBilans}">
+                                <p:commandButton process="@form" action="#{MBBilans.brisiBilans()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
                             </p:commandButton>
                             <p:spacer width="15"/>
                             <p:commandButton value="Одустани"  onclick="PF('tdDialogBrisi').hide()"/> 
