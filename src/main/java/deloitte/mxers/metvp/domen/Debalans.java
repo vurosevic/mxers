@@ -52,5 +52,79 @@ public class Debalans implements Serializable {
     private Float manjakEnergija;        
 
     @Column(name = "ManjakCena")
-    private Float manjakCena;          
+    private Float manjakCena;      
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getMesec() {
+        return mesec;
+    }
+
+    public void setMesec(Integer mesec) {
+        this.mesec = mesec;
+    }
+
+    public Integer getGodina() {
+        return godina;
+    }
+
+    public void setGodina(Integer godina) {
+        this.godina = godina;
+    }
+
+    public Float getVisakEnergija() {
+        return visakEnergija;
+    }
+
+    public void setVisakEnergija(Float visakEnergija) {
+        this.visakEnergija = visakEnergija;
+    }
+
+    public Float getVisakCena() {
+        return visakCena;
+    }
+
+    public void setVisakCena(Float visakCena) {
+        this.visakCena = visakCena;
+    }
+
+    public Float getVisakNcEnergija() {
+        return visakNcEnergija;
+    }
+
+    public void setVisakNcEnergija(Float visakNcEnergija) {
+        this.visakNcEnergija = visakNcEnergija;
+    }
+
+    public Float getVisakNcCena() {
+        return visakNcCena;
+    }
+
+    public void setVisakNcCena(Float visakNcCena) {
+        this.visakNcCena = visakNcCena;
+    }
+
+    public Float getManjakEnergija() {
+        return manjakEnergija;
+    }
+
+    public void setManjakEnergija(Float manjakEnergija) {
+        this.manjakEnergija = manjakEnergija;
+    }
+
+    public Float getManjakCena() {
+        return manjakCena;
+    }
+
+    public void setManjakCena(Float manjakCena) {
+        this.manjakCena = manjakCena;
+    }
+
+    
 }
