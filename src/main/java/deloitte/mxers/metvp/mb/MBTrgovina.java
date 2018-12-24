@@ -88,7 +88,7 @@ public class MBTrgovina {
         trgovinaService.save(selectTrgovina);
     }
     
-    public void brisiVrstuElektrane() {        
+    public void brisiTrgovinu() {        
         trgovinaService.delete(selectTrgovina); 
         init();
     }    
