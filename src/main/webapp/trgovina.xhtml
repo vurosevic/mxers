@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">                
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="frmDatatableTd">   
+                <center>
+                <p:dataTable  id="tdDT" style="width: 60%" 
+                              value="#{MBTrgovina.lazyModel}" var="td" paginator="true" rows="10"                                
+                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                              rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                              selection="#{MBTrgovina.selectTrgovina}" lazy="true">
+                    <f:facet name="header">
+                        <p:outputLabel value="Трговина" />
+                    </f:facet>                    
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column>
+                        <f:facet name="header" >Година</f:facet>
+                        <div style="text-align: center;">
+                            #{td.godina}
+                        </div>
+                    </p:column>    
+                    <p:column>
+                        <f:facet name="header" >Куповина</f:facet>     
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.kupovina}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>  
+                        </div>
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >Вредност куповине</f:facet>    
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.vrednostKupovine}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                            
+                    </p:column>                          
+                    <p:column>
+                        <f:facet name="header" >Продаја</f:facet>   
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.prodaja}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>  
+                        </div>                        
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >Вредност продаје</f:facet>                        
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.vrednostProdaje}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>  
+                        </div>
+                    </p:column>                                  
+                    <f:facet name="footer">
+                        <div style="text-align:left">                                                    
+                            <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
+                                icon="ui ui-icon-plus" value="Додај"  />
+                            <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBTrgovina.selectTrgovina}" 
+                                icon="ui ui-icon-pencil" value="Измени"  />                    
+                            <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBTrgovina.selectTrgovina}"
+                                icon="ui ui-icon-close" value="Бриши"  />                                                            
+                        </div>
+                 </f:facet>       
+                    <f:ajax event="rowSelectRadio" render="tdDT" />       
+                    <f:ajax event="rowUnselectCheckbox" render="tdDT" />   
+                </p:dataTable>   
+                </center>
+                <p:dialog header="Унос нових података о трговини" widgetVar="tdDialogNovi" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:messages style="color:red" autoUpdate="true" />   
+                    <p:outputPanel id="tdDetailNovi" style="text-align:left;">
+                        <p:panelGrid  columns="3" rendered="true" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                            <p:outputLabel for="godina" value="Година:" />
+                            <p:inputText id="godina" required="true" value="#{MBTrgovina.novaTrgovina.godina}" >
+                                <p:ajax update="godina" event="keyup" />
+                            </p:inputText>
+                            <p:message for="godina" display="icon" />
+
+                            <p:outputLabel for="kupovinaee" value="Куповина ЕЕ:" />
+                            <p:inputText id="kupovinaee" required="true" value="#{MBTrgovina.novaTrgovina.kupovina}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                                <p:ajax update="kupovinaee" event="keyup" />
+                            </p:inputText>
+                            <p:message for="kupovinaee" display="icon" />     
+                            
+                            <p:outputLabel for="vkupovinaee" value="Вредност куповине ЕЕ:" />
+                            <p:inputText id="vkupovinaee" required="true" value="#{MBTrgovina.novaTrgovina.vrednostKupovine}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                                <p:ajax update="vkupovinaee" event="keyup" />
+                            </p:inputText>
+                            <p:message for="vkupovinaee" display="icon" />      
+                            
+                            <p:outputLabel for="prodajaee" value="Продаја ЕЕ:" />
+                            <p:inputText id="prodajaee" required="true" value="#{MBTrgovina.novaTrgovina.prodaja}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                                <p:ajax update="prodajaee" event="keyup" />
+                            </p:inputText>
+                            <p:message for="prodajaee" display="icon" />     
+                            
+                            <p:outputLabel for="vprodajaee" value="Вредност продаје ЕЕ:" />
+                            <p:inputText id="vprodajaee" required="true" value="#{MBTrgovina.novaTrgovina.vrednostProdaje}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                                <p:ajax update="vprodajaee" event="keyup" />
+                            </p:inputText>
+                            <p:message for="vprodajaee" display="icon" />                                                            
+                            
+                        </p:panelGrid>
+                        <p:panel >
+                            <p:commandButton id="btnNovi" update="tdDetailNovi" process="@form" action="#{MBTrgovina.dodajNovuTrgovinu()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogNovi').hide();" >                               
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false" onclick="PF('tdDialogNovi').hide()"/>                            
+                        </p:panel>                         
+                    </p:outputPanel>
+                    <f:ajax event="close" render="frmDatatableTd" /> 
+                 </p:dialog>                 
+                
+                <p:dialog header="Ажурирање врсте електране" widgetVar="tdDialogIzmeni" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">     
+                    <p:messages style="color:red" autoUpdate="true" /> 
+                    <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
+                        <h:form id="frmIzmenaTd">
+                            <p:panelGrid  columns="3" rendered="#{not empty MBTrgovina.selectTrgovina}" columnClasses="label,value" class="panelGridNoBorderDialog">
+ 
+                            <p:outputLabel for="godina" value="Година:" />
+                            <p:inputText id="godina" required="true" value="#{MBTrgovina.selectTrgovina.godina}" >
+                                <p:ajax update="godina" event="keyup" />
+                            </p:inputText>
+                            <p:message for="godina" display="icon" />
+
+                            <p:outputLabel for="kupovinaee" value="Куповина ЕЕ:" />
+                            <p:inputText id="kupovinaee" required="true" value="#{MBTrgovina.selectTrgovina.kupovina}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                                <p:ajax update="kupovinaee" event="keyup" />
+                            </p:inputText>
+                            <p:message for="kupovinaee" display="icon" />     
+                            
+                            <p:outputLabel for="vkupovinaee" value="Вредност куповине ЕЕ:" />
+                            <p:inputText id="vkupovinaee" required="true" value="#{MBTrgovina.selectTrgovina.vrednostKupovine}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                                <p:ajax update="vkupovinaee" event="keyup" />
+                            </p:inputText>
+                            <p:message for="vkupovinaee" display="icon" />      
+                            
+                            <p:outputLabel for="prodajaee" value="Продаја ЕЕ:" />
+                            <p:inputText id="prodajaee" required="true" value="#{MBTrgovina.selectTrgovina.prodaja}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                                <p:ajax update="prodajaee" event="keyup" />
+                            </p:inputText>
+                            <p:message for="prodajaee" display="icon" />     
+                            
+                            <p:outputLabel for="vprodajaee" value="Вредност продаје ЕЕ:" />
+                            <p:inputText id="vprodajaee" required="true" value="#{MBTrgovina.selectTrgovina.vrednostProdaje}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                                <p:ajax update="vprodajaee" event="keyup" />
+                            </p:inputText>
+                            <p:message for="vprodajaee" display="icon" /> 
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBTrgovina.selectTrgovina}">
+                                <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBTrgovina.azurirajTrgovinu()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false"  onclick="PF('tdDialogIzmeni').hide()"/>
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />
+                 </p:dialog>                
+
+                <p:dialog header="Потврда брисања" widgetVar="tdDialogBrisi" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">                    
+                    <p:outputPanel id="tdDetailBrisi" style="text-align:left;">
+                        <h:form id="frmBrisiTd">
+                            <p:panelGrid  columns="2" rendered="#{not empty MBTrgovina.selectTrgovina}" columnClasses="label,value" class="panelGridNoBorderDialog">        
+                            <h:outputText value="Година:" />
+                            <h:outputLabel value="#{MBTrgovina.selectTrgovina.godina}" />
+
+                            <h:outputText value="Куповина ЕЕ:" />
+                            <h:outputLabel value="#{MBTrgovina.selectTrgovina.kupovina}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </h:outputLabel>
+
+                            <h:outputText value="Вредност куповине ЕЕ:" />
+                            <h:outputLabel value="#{MBTrgovina.selectTrgovina.vrednostKupovine}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </h:outputLabel>                            
+                            
+                            <h:outputText value="Продаја ЕЕ:" />
+                            <h:outputLabel value="#{MBTrgovina.selectTrgovina.prodaja}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </h:outputLabel>                            
+                            
+                            <h:outputText value="Вредност продаје ЕЕ:" />
+                            <h:outputLabel value="#{MBTrgovina.selectTrgovina.vrednostProdaje}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </h:outputLabel>                                                        
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBTrgovina.selectTrgovina}">
+                                <p:commandButton process="@form" action="#{MBTrgovina.brisiTrgovinu()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15"/>
+                            <p:commandButton value="Одустани"  onclick="PF('tdDialogBrisi').hide()"/> 
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />                                        
+                 </p:dialog>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
