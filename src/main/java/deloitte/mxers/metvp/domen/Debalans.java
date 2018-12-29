@@ -37,22 +37,22 @@ public class Debalans implements Serializable {
     private Integer godina;     
 
     @Column(name = "VisakEnergija")
-    private Float visakEnergija;        
+    private Double visakEnergija;        
 
     @Column(name = "VisakCena")
-    private Float visakCena;    
+    private Double visakCena;    
 
     @Column(name = "VisakNCEnergija")
-    private Float visakNcEnergija;        
+    private Double visakNcEnergija;        
 
     @Column(name = "VisakNCCena")
-    private Float visakNcCena;        
+    private Double visakNcCena;        
     
     @Column(name = "ManjakEnergija")
-    private Float manjakEnergija;        
+    private Double manjakEnergija;        
 
     @Column(name = "ManjakCena")
-    private Float manjakCena;      
+    private Double manjakCena;      
 
     public Long getId() {
         return id;
@@ -78,51 +78,51 @@ public class Debalans implements Serializable {
         this.godina = godina;
     }
 
-    public Float getVisakEnergija() {
+    public Double getVisakEnergija() {
         return visakEnergija;
     }
 
-    public void setVisakEnergija(Float visakEnergija) {
+    public void setVisakEnergija(Double visakEnergija) {
         this.visakEnergija = visakEnergija;
     }
 
-    public Float getVisakCena() {
+    public Double getVisakCena() {
         return visakCena;
     }
 
-    public void setVisakCena(Float visakCena) {
+    public void setVisakCena(Double visakCena) {
         this.visakCena = visakCena;
     }
 
-    public Float getVisakNcEnergija() {
+    public Double getVisakNcEnergija() {
         return visakNcEnergija;
     }
 
-    public void setVisakNcEnergija(Float visakNcEnergija) {
+    public void setVisakNcEnergija(Double visakNcEnergija) {
         this.visakNcEnergija = visakNcEnergija;
     }
 
-    public Float getVisakNcCena() {
+    public Double getVisakNcCena() {
         return visakNcCena;
     }
 
-    public void setVisakNcCena(Float visakNcCena) {
+    public void setVisakNcCena(Double visakNcCena) {
         this.visakNcCena = visakNcCena;
     }
 
-    public Float getManjakEnergija() {
+    public Double getManjakEnergija() {
         return manjakEnergija;
     }
 
-    public void setManjakEnergija(Float manjakEnergija) {
+    public void setManjakEnergija(Double manjakEnergija) {
         this.manjakEnergija = manjakEnergija;
     }
 
-    public Float getManjakCena() {
+    public Double getManjakCena() {
         return manjakCena;
     }
 
-    public void setManjakCena(Float manjakCena) {
+    public void setManjakCena(Double manjakCena) {
         this.manjakCena = manjakCena;
     }
 

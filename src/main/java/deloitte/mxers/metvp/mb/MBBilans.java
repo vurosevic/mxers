@@ -113,7 +113,7 @@ public class MBBilans {
         if (getSelectElektranaId() != null)
         selectBilans.setElektrana(getElektraneService().findById(getSelectElektranaId()).get());   
         
-        bilansService.save(selectBilans);
+        bilansService.save(selectBilans);         
         selectElektranaId = null; 
     }
     

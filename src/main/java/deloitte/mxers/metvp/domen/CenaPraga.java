@@ -40,7 +40,7 @@ public class CenaPraga implements Serializable {
     private Date datumDo;    
     
     @Column(name = "Cena")
-    private Float cena;
+    private Double cena;
     
     @ManyToOne
     @JoinColumn(name = "Elektrana_fk")
@@ -70,11 +70,11 @@ public class CenaPraga implements Serializable {
         this.datumDo = datumDo;
     }
 
-    public Float getCena() {
+    public Double getCena() {
         return cena;
     }
 
-    public void setCena(Float cena) {
+    public void setCena(Double cena) {
         this.cena = cena;
     }
 

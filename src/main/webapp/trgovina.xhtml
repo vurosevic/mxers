@@ -90,36 +90,23 @@
 
                             <p:outputLabel for="godina" value="Година:" />
                             <p:inputText id="godina" required="true" value="#{MBTrgovina.novaTrgovina.godina}" >
-                                <p:ajax update="godina" event="keyup" />
                             </p:inputText>
                             <p:message for="godina" display="icon" />
 
                             <p:outputLabel for="kupovinaee" value="Куповина ЕЕ:" />
-                            <p:inputText id="kupovinaee" required="true" value="#{MBTrgovina.novaTrgovina.kupovina}" >
-                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
-                                <p:ajax update="kupovinaee" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="kupovinaee" required="true" value="#{MBTrgovina.novaTrgovina.kupovina}" />                            
                             <p:message for="kupovinaee" display="icon" />     
                             
                             <p:outputLabel for="vkupovinaee" value="Вредност куповине ЕЕ:" />
-                            <p:inputText id="vkupovinaee" required="true" value="#{MBTrgovina.novaTrgovina.vrednostKupovine}" >
-                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
-                                <p:ajax update="vkupovinaee" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="vkupovinaee" required="true" value="#{MBTrgovina.novaTrgovina.vrednostKupovine}" />                            
                             <p:message for="vkupovinaee" display="icon" />      
                             
                             <p:outputLabel for="prodajaee" value="Продаја ЕЕ:" />
-                            <p:inputText id="prodajaee" required="true" value="#{MBTrgovina.novaTrgovina.prodaja}" >
-                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
-                                <p:ajax update="prodajaee" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="prodajaee" required="true" value="#{MBTrgovina.novaTrgovina.prodaja}" />
                             <p:message for="prodajaee" display="icon" />     
                             
                             <p:outputLabel for="vprodajaee" value="Вредност продаје ЕЕ:" />
-                            <p:inputText id="vprodajaee" required="true" value="#{MBTrgovina.novaTrgovina.vrednostProdaje}" >
-                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
-                                <p:ajax update="vprodajaee" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="vprodajaee" required="true" value="#{MBTrgovina.novaTrgovina.vrednostProdaje}" />                            
                             <p:message for="vprodajaee" display="icon" />                                                            
                             
                         </p:panelGrid>
@@ -133,7 +120,7 @@
                     <f:ajax event="close" render="frmDatatableTd" /> 
                  </p:dialog>                 
                 
-                <p:dialog header="Ажурирање врсте електране" widgetVar="tdDialogIzmeni" modal="true"                                                     
+                <p:dialog header="Ажурирање података о трговини" widgetVar="tdDialogIzmeni" modal="true"                                                     
                           showEffect="fade" hideEffect="fade" resizable="false">     
                     <p:messages style="color:red" autoUpdate="true" /> 
                     <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
@@ -141,37 +128,23 @@
                             <p:panelGrid  columns="3" rendered="#{not empty MBTrgovina.selectTrgovina}" columnClasses="label,value" class="panelGridNoBorderDialog">
  
                             <p:outputLabel for="godina" value="Година:" />
-                            <p:inputText id="godina" required="true" value="#{MBTrgovina.selectTrgovina.godina}" >
-                                <p:ajax update="godina" event="keyup" />
-                            </p:inputText>
+                            <p:inputText id="godina" required="true" value="#{MBTrgovina.selectTrgovina.godina}" />                            
                             <p:message for="godina" display="icon" />
 
                             <p:outputLabel for="kupovinaee" value="Куповина ЕЕ:" />
-                            <p:inputText id="kupovinaee" required="true" value="#{MBTrgovina.selectTrgovina.kupovina}" >
-                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
-                                <p:ajax update="kupovinaee" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="kupovinaee" required="true" value="#{MBTrgovina.selectTrgovina.kupovina}"/>                            
                             <p:message for="kupovinaee" display="icon" />     
                             
                             <p:outputLabel for="vkupovinaee" value="Вредност куповине ЕЕ:" />
-                            <p:inputText id="vkupovinaee" required="true" value="#{MBTrgovina.selectTrgovina.vrednostKupovine}" >
-                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
-                                <p:ajax update="vkupovinaee" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="vkupovinaee" required="true" value="#{MBTrgovina.selectTrgovina.vrednostKupovine}"/>
                             <p:message for="vkupovinaee" display="icon" />      
                             
                             <p:outputLabel for="prodajaee" value="Продаја ЕЕ:" />
-                            <p:inputText id="prodajaee" required="true" value="#{MBTrgovina.selectTrgovina.prodaja}" >
-                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
-                                <p:ajax update="prodajaee" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="prodajaee" required="true" value="#{MBTrgovina.selectTrgovina.prodaja}" />
                             <p:message for="prodajaee" display="icon" />     
                             
                             <p:outputLabel for="vprodajaee" value="Вредност продаје ЕЕ:" />
-                            <p:inputText id="vprodajaee" required="true" value="#{MBTrgovina.selectTrgovina.vrednostProdaje}" >
-                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
-                                <p:ajax update="vprodajaee" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="vprodajaee" required="true" value="#{MBTrgovina.selectTrgovina.vrednostProdaje}"/> 
                             <p:message for="vprodajaee" display="icon" /> 
 
                         </p:panelGrid>

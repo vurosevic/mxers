@@ -34,16 +34,16 @@ public class Trgovina implements Serializable {
     private Integer godina;    
 
     @Column(name = "Kupovina")
-    private Float kupovina;        
+    private Double kupovina;        
     
     @Column(name = "VrednostKupovine")
-    private Float vrednostKupovine;
+    private Double vrednostKupovine;
 
     @Column(name = "Prodaja")
-    private Float prodaja;        
+    private Double prodaja;        
     
     @Column(name = "VrednostProdaje")
-    private Float vrednostProdaje;    
+    private Double vrednostProdaje;    
 
     public Long getId() {
         return id;
@@ -61,35 +61,35 @@ public class Trgovina implements Serializable {
         this.godina = godina;
     }
 
-    public Float getKupovina() {
+    public Double getKupovina() {
         return kupovina;
     }
 
-    public void setKupovina(Float kupovina) {
+    public void setKupovina(Double kupovina) {
         this.kupovina = kupovina;
     }
 
-    public Float getVrednostKupovine() {
+    public Double getVrednostKupovine() {
         return vrednostKupovine;
     }
 
-    public void setVrednostKupovine(Float vrednostKupovine) {
+    public void setVrednostKupovine(Double vrednostKupovine) {
         this.vrednostKupovine = vrednostKupovine;
     }
 
-    public Float getProdaja() {
+    public Double getProdaja() {
         return prodaja;
     }
 
-    public void setProdaja(Float prodaja) {
+    public void setProdaja(Double prodaja) {
         this.prodaja = prodaja;
     }
 
-    public Float getVrednostProdaje() {
+    public Double getVrednostProdaje() {
         return vrednostProdaje;
     }
 
-    public void setVrednostProdaje(Float vrednostProdaje) {
+    public void setVrednostProdaje(Double vrednostProdaje) {
         this.vrednostProdaje = vrednostProdaje;
     }
     
