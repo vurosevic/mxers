@@ -44,20 +44,36 @@
                         #{td.godina}
                     </p:column>                       
                     <p:column>
-                        <f:facet name="header" >Планирана производња</f:facet>
-                        #{td.planiranaProizvodnja}
+                        <f:facet name="header" >Планирана производња</f:facet>                        
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.planiranaProizvodnja}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                         
                     </p:column>                  
                     <p:column>
-                        <f:facet name="header" >Остварена производња</f:facet>
-                        #{td.ostvarenaProizvodnja}
+                        <f:facet name="header" >Остварена производња</f:facet>                        
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.ostvarenaProizvodnja}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                           
                     </p:column>                  
                     <p:column>
-                        <f:facet name="header" >Планирани увоз</f:facet>
-                        #{td.planiraniUvoz}
+                        <f:facet name="header" >Планирани увоз</f:facet>                        
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.planiraniUvoz}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                             
                     </p:column>                        
                     <p:column>
-                        <f:facet name="header" >Планирани извоз</f:facet>
-                        #{td.planiraniIzvoz}
+                        <f:facet name="header" >Планирани извоз</f:facet>                        
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.planiraniIzvoz}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                           
                     </p:column>                        
                     <f:facet name="footer">
                         <div style="text-align:left">                                                    
@@ -92,33 +108,23 @@
                             <p:message for="mesec" display="icon" />
                             
                             <p:outputLabel for="godina" value="Година:" />
-                            <p:inputText id="godina" required="true" value="#{MBBilans.noviBilans.godina}" >
-                                <p:ajax update="godina" event="keyup" />
-                            </p:inputText>
+                            <p:inputText id="godina" required="true" value="#{MBBilans.noviBilans.godina}" />
                             <p:message for="godina" display="icon" />                            
                             
                             <p:outputLabel for="pproizvodnja" value="Планирана производња:" />
-                            <p:inputText id="pproizvodnja" required="true" value="#{MBBilans.noviBilans.planiranaProizvodnja}" >
-                                <p:ajax update="pproizvodnja" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="pproizvodnja" required="true" value="#{MBBilans.noviBilans.planiranaProizvodnja}" />
                             <p:message for="pproizvodnja" display="icon" /> 
                             
                             <p:outputLabel for="oproizvodnja" value="Остварена производња:" />
-                            <p:inputText id="oproizvodnja" required="true" value="#{MBBilans.noviBilans.ostvarenaProizvodnja}" >
-                                <p:ajax update="oproizvodnja" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="oproizvodnja" required="true" value="#{MBBilans.noviBilans.ostvarenaProizvodnja}" />
                             <p:message for="oproizvodnja" display="icon" />
                             
                             <p:outputLabel for="puvoz" value="Планирани увоз:" />
-                            <p:inputText id="puvoz" required="true" value="#{MBBilans.noviBilans.planiraniUvoz}" >
-                                <p:ajax update="puvoz" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="puvoz" required="true" value="#{MBBilans.noviBilans.planiraniUvoz}" />
                             <p:message for="puvoz" display="icon" />                            
 
                             <p:outputLabel for="pizvoz" value="Планирани извоз:" />
-                            <p:inputText id="pizvoz" required="true" value="#{MBBilans.noviBilans.planiraniIzvoz}" >
-                                <p:ajax update="pizvoz" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="pizvoz" required="true" value="#{MBBilans.noviBilans.planiraniIzvoz}" />                            
                             <p:message for="pizvoz" display="icon" />                                                                                                                
                             
                         </p:panelGrid>
@@ -147,39 +153,27 @@
                             <p:spacer/>                            
                             
                             <p:outputLabel for="mesec" value="Месец:" />
-                            <p:inputText id="mesec" required="true" value="#{MBBilans.selectBilans.mesec}" >
-                                <p:ajax update="mesec" event="keyup" />
-                            </p:inputText>
+                            <p:inputText id="mesec" required="true" value="#{MBBilans.selectBilans.mesec}" />
                             <p:message for="mesec" display="icon" />
                             
                             <p:outputLabel for="godina" value="Година:" />
-                            <p:inputText id="godina" required="true" value="#{MBBilans.selectBilans.godina}" >
-                                <p:ajax update="godina" event="keyup" />
-                            </p:inputText>
+                            <p:inputText id="godina" required="true" value="#{MBBilans.selectBilans.godina}" />
                             <p:message for="godina" display="icon" />                            
                             
                             <p:outputLabel for="pproizvodnja" value="Планирана производња:" />
-                            <p:inputText id="pproizvodnja" required="true" value="#{MBBilans.selectBilans.planiranaProizvodnja}" >
-                                <p:ajax update="pproizvodnja" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="pproizvodnja" required="true" value="#{MBBilans.selectBilans.planiranaProizvodnja}" />
                             <p:message for="pproizvodnja" display="icon" /> 
                             
                             <p:outputLabel for="oproizvodnja" value="Остварена производња:" />
-                            <p:inputText id="oproizvodnja" required="true" value="#{MBBilans.selectBilans.ostvarenaProizvodnja}" >
-                                <p:ajax update="oproizvodnja" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="oproizvodnja" required="true" value="#{MBBilans.selectBilans.ostvarenaProizvodnja}" />
                             <p:message for="oproizvodnja" display="icon" />
                             
                             <p:outputLabel for="puvoz" value="Планирани увоз:" />
-                            <p:inputText id="puvoz" required="true" value="#{MBBilans.selectBilans.planiraniUvoz}" >
-                                <p:ajax update="puvoz" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="puvoz" required="true" value="#{MBBilans.selectBilans.planiraniUvoz}" />
                             <p:message for="puvoz" display="icon" />                            
 
                             <p:outputLabel for="pizvoz" value="Планирани извоз:" />
-                            <p:inputText id="pizvoz" required="true" value="#{MBBilans.selectBilans.planiraniIzvoz}" >
-                                <p:ajax update="pizvoz" event="keyup" />
-                            </p:inputText>
+                            <p:inputNumber id="pizvoz" required="true" value="#{MBBilans.selectBilans.planiraniIzvoz}" />
                             <p:message for="pizvoz" display="icon" />     
 
                         </p:panelGrid>
