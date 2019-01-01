@@ -44,5 +44,8 @@ public class DebalansServiceImpl implements DebalansService {
     public void delete(Debalans t) {
         debalansDAO.delete(t); 
     }
-    
+ 
+    public Double ukupniTroskoviDebalansaPoGodini(Integer godina){
+        return debalansDAO.ukupniTroskoviDebalansaPoGodini(godina);
+    }
 }

@@ -8,7 +8,9 @@ package deloitte.mxers.metvp.repository;
 import deloitte.mxers.metvp.domen.Debalans;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -29,5 +31,8 @@ public interface DebalansDAO extends CrudRepository<Debalans, Long>{
         
     @Override
     public void delete(Debalans t);    
+    
+    @Query("SELECT SUM(d.visakEnergija + d.visakNcEnergija + d.manjakEnergija) FROM Debalans d WHERE godina = :godina")
+    public Double ukupniTroskoviDebalansaPoGodini(@Param("godina") Integer godina);      
     
 }

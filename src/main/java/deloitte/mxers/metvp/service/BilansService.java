@@ -18,6 +18,7 @@ public interface BilansService {
     public List<Bilans> findAll();
     public Optional<Bilans> findById(Long id);
     public <S extends Bilans> S save(S s);
-    public void delete(Bilans t);     
+    public void delete(Bilans t);   
+    public Double ukupnoOstvarenoPoGodini(Integer godina);    
     
 }

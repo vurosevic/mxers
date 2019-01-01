@@ -23,4 +23,6 @@ public interface DebalansService {
     
     public void delete(Debalans t);     
     
+    public Double ukupniTroskoviDebalansaPoGodini(Integer godina);   
+    
 }

@@ -45,4 +45,7 @@ public class BilansServiceImpl implements BilansService {
         bilansDAO.delete(t); 
     }
     
+    public Double ukupnoOstvarenoPoGodini(Integer godina) {
+        return bilansDAO.ukupnoOstvarenoPoGodini(godina);
+    }
 }
