@@ -19,27 +19,33 @@
             <ui:define name="right">
             </ui:define>
 
-            <ui:define name="content">                
+            <ui:define name="content">  
+                <h:form id="frmCenaMix">
                 <center>
-                    <p:panelGrid columns="2">
+                    <p:panelGrid columns="2" class="panelGridNoBorderDialog">
                         <f:facet name="header">
 <!--                            <p:graphicImage name="demo/images/misc/kobe.png" />-->
                         <p:outputLabel value="Одређивање цене производног микса" />
                         </f:facet>
 
-                        <h:outputText value="Name:" />
-                        <h:outputText value="Kobe Bryant" />
+                        <p:outputLabel for="godinaod" value="Година од:" />
+                        <p:inputText id="godinaod" value="#{MBCenaProizvodnogMiksa.godinaOd}" />                       
+                        
+                        <p:outputLabel for="godinado" value="Година до:" />
+                        <p:inputText id="godinado" value="#{MBCenaProizvodnogMiksa.godinaDo}" />                        
 
-                        <h:outputText value="Team:" />
-                        <h:outputText value="Los Angeles Lakers" />
+                        <p:outputLabel for="troskoviers" value="Трошкови ЕРС-а [%]:" />
+                        <p:inputText id="troskoviers" value="#{MBCenaProizvodnogMiksa.procenatTroskovaErs}" /> 
 
-                        <h:outputText value="Position:" />
-                        <h:outputText value="Shooting Guard" />
+                        <p:separator/>
+                        <p:commandButton process="@form" update="frmCenaMix" value="Израчунај" action="#{MBCenaProizvodnogMiksa.racunajUkupneTroskoveBalansiranja()}"/>
+                        
+                        <p:outputLabel for="troskovibalansiranja" value="Укупни трошкови балансирања:" />
+                        <p:inputText id="troskovibalansiranja" value="#{MBCenaProizvodnogMiksa.ukupniTroskoviBalansiranja}" />  
 
-                        <h:outputText value="Number:" />
-                        <h:outputText value="24" />
                     </p:panelGrid>                    
                 </center>
+                </h:form>
             </ui:define>
 
             <ui:define name="bottom">

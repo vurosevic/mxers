@@ -7,12 +7,16 @@ package deloitte.mxers.metvp.mb;
 
 import deloitte.mxers.metvp.service.BilansService;
 import deloitte.mxers.metvp.service.DebalansService;
+import javax.faces.bean.SessionScoped;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Vladimir
  */
+@Component("MBCenaProizvodnogMiksa")
+@SessionScoped
 public class MBCenaProizvodnogMiksa {
     
     @Autowired      
@@ -78,8 +82,8 @@ public class MBCenaProizvodnogMiksa {
             pom += bilansService.ukupnoOstvarenoPoGodini(i);
         }
         
-        result = result / pom;        
-        return result;
+        ukupniTroskoviBalansiranja = result / pom;        
+        return ukupniTroskoviBalansiranja;
     }
 
     public Double getUkupniTroskoviBalansiranja() {

@@ -32,7 +32,7 @@ public interface DebalansDAO extends CrudRepository<Debalans, Long>{
     @Override
     public void delete(Debalans t);    
     
-    @Query("SELECT SUM(d.visakEnergija + d.visakNcEnergija + d.manjakEnergija) FROM Debalans d WHERE godina = :godina")
+    @Query("SELECT SUM(d.visakCena) + ABS(SUM(d.visakCena + d.visakNcCena + d.manjakCena)) FROM Debalans d WHERE godina = :godina")
     public Double ukupniTroskoviDebalansaPoGodini(@Param("godina") Integer godina);      
     
 }
