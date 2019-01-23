@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">                
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="frmDatatableTd">   
+                <center>
+                <p:dataTable  id="tdDT" style="width: 60%" 
+                              value="#{MBTrosakPGK.lazyModel}" var="td" paginator="true" rows="10"                                
+                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                              rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                              selection="#{MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta}" lazy="true">
+                    <f:facet name="header">
+                        <p:outputLabel value="Трошкови прекограничних капацитета" />
+                    </f:facet>                    
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column>
+                        <f:facet name="header" >Месец</f:facet>
+                        <div style="text-align: center;">
+                            #{td.mesec}
+                        </div>
+                    </p:column>                        
+                    <p:column>
+                        <f:facet name="header" >Година</f:facet>
+                        <div style="text-align: center;">
+                            #{td.godina}
+                        </div>
+                    </p:column>    
+                    <p:column>
+                        <f:facet name="header" >Трошак</f:facet>     
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.trosak}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>  
+                        </div>
+                    </p:column>                                                                                                       
+                    <f:facet name="footer">
+                        <div style="text-align:left">                                                    
+                            <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
+                                icon="ui ui-icon-plus" value="Додај"  />
+                            <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta}" 
+                                icon="ui ui-icon-pencil" value="Измени"  />                    
+                            <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta}"
+                                icon="ui ui-icon-close" value="Бриши"  />                                                            
+                        </div>
+                 </f:facet>       
+                    <f:ajax event="rowSelectRadio" render="tdDT" />       
+                    <f:ajax event="rowUnselectCheckbox" render="tdDT" />   
+                </p:dataTable>   
+                </center>
+                <p:dialog header="Унос нових трошкова прекограничних капацитета" widgetVar="tdDialogNovi" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:messages style="color:red" autoUpdate="true" />   
+                    <p:outputPanel id="tdDetailNovi" style="text-align:left;">
+                        <p:panelGrid  columns="3" rendered="true" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                            <p:outputLabel for="mesec" value="Месец:" />
+                            <p:inputText id="mesec" required="true" value="#{MBTrosakPGK.noviTrosakPrekogranicnihKapaciteta.mesec}" >
+                            </p:inputText>
+                            <p:message for="mesec" display="icon" />                            
+                            
+                            <p:outputLabel for="godina" value="Година:" />
+                            <p:inputText id="godina" required="true" value="#{MBTrosakPGK.noviTrosakPrekogranicnihKapaciteta.godina}" >
+                            </p:inputText>
+                            <p:message for="godina" display="icon" />
+                                                          
+                            <p:outputLabel for="trosak1" value="Трошак:" />
+                            <p:inputNumber id="trosak1" required="true" value="#{MBTrosakPGK.noviTrosakPrekogranicnihKapaciteta.trosak}" />                            
+                            <p:message for="trosak1" display="icon" />                                                            
+                            
+                        </p:panelGrid>
+                        <p:panel >
+                            <p:commandButton id="btnNovi" update="tdDetailNovi" process="@form" action="#{MBTrosakPGK.dodajNoviTrosakPGK()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogNovi').hide();" >                               
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false" onclick="PF('tdDialogNovi').hide()"/>                            
+                        </p:panel>                         
+                    </p:outputPanel>
+                    <f:ajax event="close" render="frmDatatableTd" /> 
+                 </p:dialog>                 
+                
+                <p:dialog header="Ажурирање података о трошковима прекограничних капацитета" widgetVar="tdDialogIzmeni" modal="true"  
+                          showEffect="fade" hideEffect="fade" resizable="false">     
+                    <p:messages style="color:red" autoUpdate="true" /> 
+                    <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
+                        <h:form id="frmIzmenaTd">
+                            <p:panelGrid  columns="3" rendered="#{not empty MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta}" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                            <p:outputLabel for="mesec" value="Месец:" />
+                            <p:inputText id="mesec" required="true" value="#{MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta.mesec}" /> 
+                            <p:message for="mesec" display="icon" />                                
+                                
+                            <p:outputLabel for="godina" value="Година:" />
+                            <p:inputText id="godina" required="true" value="#{MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta.godina}" /> 
+                            <p:message for="godina" display="icon" />   
+                            
+                            <p:outputLabel for="trosak" value="Трошак:" />
+                            <p:inputNumber id="trosak" value="#{MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta.trosak}" />
+                            <p:message for="trosak" display="icon" />                                 
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta}">
+                                <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBTrosakPGK.azurirajTrosakPGK()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false"  onclick="PF('tdDialogIzmeni').hide()"/>
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />
+                 </p:dialog>                
+
+                <p:dialog header="Потврда брисања" widgetVar="tdDialogBrisi" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">                    
+                    <p:outputPanel id="tdDetailBrisi" style="text-align:left;">
+                        <h:form id="frmBrisiTd">
+                            
+                            <p:panelGrid  columns="2" rendered="#{not empty MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta}" columnClasses="label,value" class="panelGridNoBorderDialog">        
+                            <h:outputText value="Месец:" />
+                            <h:outputLabel value="#{MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta.mesec}" />                            
+                            
+                            <h:outputText value="Година:" />
+                            <h:outputLabel value="#{MBTrgovina.selectTrgovina.godina}" />
+
+                            <h:outputText value="Трошак:" />
+                            <h:outputLabel value="#{MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta.trosak}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </h:outputLabel>                                                                                                    
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBTrosakPGK.selectTrosakPrekogranicnihKapaciteta}">
+                                <p:commandButton process="@form" action="#{MBTrosakPGK.brisiTrosakPGK()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15"/>
+                            <p:commandButton value="Одустани"  onclick="PF('tdDialogBrisi').hide()"/> 
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />                                        
+                 </p:dialog>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

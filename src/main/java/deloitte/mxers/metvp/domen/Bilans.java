@@ -50,6 +50,12 @@ public class Bilans implements Serializable {
     @Column(name = "PlaniranIzvoz")
     private Double planiraniIzvoz;    
     
+    @Column(name = "OstvareniUvoz")
+    private Double ostvareniUvoz;
+    
+    @Column(name = "OstvareniIzvoz")
+    private Double ostvareniIzvoz;      
+    
     @ManyToOne
     @JoinColumn(name = "Elektrana_fk")
     private Elektrana elektrana;    
@@ -117,7 +123,21 @@ public class Bilans implements Serializable {
     public void setElektrana(Elektrana elektrana) {
         this.elektrana = elektrana;
     }
-    
-    
-    
+
+    public Double getOstvareniUvoz() {
+        return ostvareniUvoz;
+    }
+
+    public void setOstvareniUvoz(Double ostvareniUvoz) {
+        this.ostvareniUvoz = ostvareniUvoz;
+    }
+
+    public Double getOstvareniIzvoz() {
+        return ostvareniIzvoz;
+    }
+
+    public void setOstvareniIzvoz(Double ostvareniIzvoz) {
+        this.ostvareniIzvoz = ostvareniIzvoz;
+    }
+           
 }

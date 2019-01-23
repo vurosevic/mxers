@@ -6,6 +6,8 @@
 package deloitte.mxers.metvp.domen;
 
 import java.io.Serializable;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.apache.commons.lang.time.DateFormatUtils;
 
 /**
  *
@@ -85,6 +88,12 @@ public class CenaPraga implements Serializable {
     public void setElektrana(Elektrana elektrana) {
         this.elektrana = elektrana;
     }
+
+    @Override
+    public String toString() {
+        return "Elektrana: " + elektrana.getId() + " Datum <" + datumOd.toInstant().atZone(ZoneId.of("CET")).format(DateTimeFormatter.ISO_LOCAL_DATE) + " , " + datumDo.toInstant().atZone(ZoneId.of("CET")).format(DateTimeFormatter.ISO_LOCAL_DATE) + "> Cena: " + cena + ".";
+    }
+    
     
     
 }

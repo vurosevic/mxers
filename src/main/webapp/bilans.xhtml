@@ -74,7 +74,25 @@
                                 <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
                             </p:outputLabel>                
                         </div>                           
+                    </p:column>         
+                    
+                    <p:column>
+                        <f:facet name="header" >Остварени увоз</f:facet>                        
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.ostvareniUvoz}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                             
                     </p:column>                        
+                    <p:column>
+                        <f:facet name="header" >Остварени извоз</f:facet>                        
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.ostvareniIzvoz}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                           
+                    </p:column>                      
+                    
                     <f:facet name="footer">
                         <div style="text-align:left">                                                    
                             <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
@@ -126,6 +144,14 @@
                             <p:outputLabel for="pizvoz" value="Планирани извоз:" />
                             <p:inputNumber id="pizvoz" required="true" value="#{MBBilans.noviBilans.planiraniIzvoz}" />                            
                             <p:message for="pizvoz" display="icon" />                                                                                                                
+
+                            <p:outputLabel for="ouvoz" value="Остварени увоз:" />
+                            <p:inputNumber id="ouvoz" required="true" value="#{MBBilans.noviBilans.ostvareniUvoz}" />
+                            <p:message for="ouvoz" display="icon" />                            
+
+                            <p:outputLabel for="oizvoz" value="Остварени извоз:" />
+                            <p:inputNumber id="oizvoz" required="true" value="#{MBBilans.noviBilans.ostvareniIzvoz}" /> 
+                            <p:message for="oizvoz" display="icon" />  
                             
                         </p:panelGrid>
                         <p:panel >
@@ -174,7 +200,15 @@
 
                             <p:outputLabel for="pizvoz" value="Планирани извоз:" />
                             <p:inputNumber id="pizvoz" required="true" value="#{MBBilans.selectBilans.planiraniIzvoz}" />
-                            <p:message for="pizvoz" display="icon" />     
+                            <p:message for="pizvoz" display="icon" />  
+                            
+                            <p:outputLabel for="ouvoz" value="Остварени увоз:" />
+                            <p:inputNumber id="ouvoz" required="true" value="#{MBBilans.selectBilans.ostvareniUvoz}" />
+                            <p:message for="ouvoz" display="icon" />                            
+
+                            <p:outputLabel for="oizvoz" value="Остварени извоз:" />
+                            <p:inputNumber id="oizvoz" required="true" value="#{MBBilans.selectBilans.ostvareniIzvoz}" />
+                            <p:message for="oizvoz" display="icon" />                                                         
 
                         </p:panelGrid>
                             <p:panel rendered="#{not empty MBBilans.selectBilans}">
@@ -213,6 +247,13 @@
                             
                             <h:outputText value="Планирани извоз:" />
                             <h:outputLabel value="#{MBBilans.selectBilans.planiraniIzvoz}" />                              
+                            
+                            <h:outputText value="Остварени увоз:" />
+                            <h:outputLabel value="#{MBBilans.selectBilans.ostvareniUvoz}" />  
+                            
+                            <h:outputText value="Остварени извоз:" />
+                            <h:outputLabel value="#{MBBilans.selectBilans.ostvareniIzvoz}" /> 
+                            
                         </p:panelGrid>
                             <p:panel rendered="#{not empty MBBilans.selectBilans}">
                                 <p:commandButton process="@form" action="#{MBBilans.brisiBilans()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 

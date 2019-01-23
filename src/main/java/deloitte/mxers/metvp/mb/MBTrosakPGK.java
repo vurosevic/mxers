@@ -27,7 +27,8 @@ public class MBTrosakPGK {
     private TrosakPrekogranicnihKapacitetaService trosakPrekogranicnihKapacitetaService;        
     private List<TrosakPrekogranicnihKapaciteta> lista;        
     private TrosakPrekogranicnihKapaciteta selectTrosakPrekogranicnihKapaciteta;
-    private TrosakPrekogranicnihKapaciteta noviTrosakPrekogranicnihKapaciteta;        
+    private TrosakPrekogranicnihKapaciteta noviTrosakPrekogranicnihKapaciteta;   
+    
     private LazyDataModel<TrosakPrekogranicnihKapaciteta> lazyModel;      
 
     public TrosakPrekogranicnihKapacitetaService getTrosakPrekogranicnihKapacitetaService() {

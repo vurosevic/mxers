@@ -6,6 +6,7 @@
 package deloitte.mxers.metvp.service;
 
 import deloitte.mxers.metvp.domen.CenaPraga;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,5 +20,6 @@ public interface CenePragaService {
     public Optional<CenaPraga> findById(Long id);
     public <S extends CenaPraga> S save(S s);
     public void delete(CenaPraga t);
+    public List<CenaPraga> findByDate(Date dateCP);    
     
 }

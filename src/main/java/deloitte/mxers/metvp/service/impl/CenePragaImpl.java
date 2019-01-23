@@ -8,6 +8,7 @@ package deloitte.mxers.metvp.service.impl;
 import deloitte.mxers.metvp.domen.CenaPraga;
 import deloitte.mxers.metvp.repository.CenePragaDAO;
 import deloitte.mxers.metvp.service.CenePragaService;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,12 @@ public class CenePragaImpl implements CenePragaService {
     public void delete(CenaPraga t) {
         cenePragaDAO.delete(t);
     }
+
+    @Override
+    public List<CenaPraga> findByDate(Date dateCP) {
+        return cenePragaDAO.findByDate(dateCP); 
+    }
+    
+    
     
 }
