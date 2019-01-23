@@ -85,14 +85,14 @@
                             <p:message for="pickListN" display="icon" />
                         </p:panelGrid>
                         <p:panel>
-                            <p:commandButton id="btnNovi" update="frmNoviUser" process="@form" action="#{MBUser.dodajNovogUsera()}" value="Сачувај" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('uDialogNovi').hide()" >                               
+                            <p:commandButton id="btnNovi" update="frmDatatableUser:uDT" process="@form" action="#{MBUser.dodajNovogUsera()}" value="Сачувај" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('uDialogNovi').hide()" >                               
                             </p:commandButton>
                             <p:spacer width="15" />
                             <p:commandButton value="Одустани" ajax="false" onclick="PF('uDialogNovi').hide()"/>                            
                         </p:panel> 
                         </h:form>
                     </p:outputPanel>
-                    <f:ajax event="close" render="uDT" />
+                    <f:ajax event="close" render="frmDatatableUser:uDT" />
                  </p:dialog>                 
                 
                 <p:dialog header="Ажурирање корисника" widgetVar="uDialogIzmeni" modal="true"                                                     
