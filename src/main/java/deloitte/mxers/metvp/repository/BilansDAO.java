@@ -35,4 +35,7 @@ public interface BilansDAO extends CrudRepository<Bilans, Long>{
     @Query("SELECT SUM(b.ostvarenaProizvodnja) FROM Bilans b WHERE godina = :godina")
     public Double ukupnoOstvarenoPoGodini(@Param("godina") Integer godina);    
     
+    @Query("SELECT b FROM Bilans b WHERE godina BETWEEN :godinaOd AND :godinaDo")
+    public List<Bilans> findByPeriod(@Param("godinaOd") Integer godinaOd, @Param("godinaDo") Integer godinaDo);
+    
 }

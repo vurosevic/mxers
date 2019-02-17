@@ -20,6 +20,6 @@ public interface CenePragaService {
     public Optional<CenaPraga> findById(Long id);
     public <S extends CenaPraga> S save(S s);
     public void delete(CenaPraga t);
-    public List<CenaPraga> findByDate(Date dateCP);    
+    public List<CenaPraga> findByDate(Date dateCP, Long id_elektrana);    
     
 }

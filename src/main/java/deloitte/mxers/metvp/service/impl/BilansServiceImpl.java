@@ -48,4 +48,11 @@ public class BilansServiceImpl implements BilansService {
     public Double ukupnoOstvarenoPoGodini(Integer godina) {
         return bilansDAO.ukupnoOstvarenoPoGodini(godina);
     }
+
+    @Override
+    public List<Bilans> findByPeriod(Integer godinaOd, Integer godinaDo) {
+        return bilansDAO.findByPeriod(godinaOd, godinaDo); 
+    }
+    
+    
 }

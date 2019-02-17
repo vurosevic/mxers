@@ -47,8 +47,8 @@ public class CenePragaImpl implements CenePragaService {
     }
 
     @Override
-    public List<CenaPraga> findByDate(Date dateCP) {
-        return cenePragaDAO.findByDate(dateCP); 
+    public List<CenaPraga> findByDate(Date dateCP, Long id_elektrana) {
+        return cenePragaDAO.findByDate(dateCP, id_elektrana);
     }
     
     

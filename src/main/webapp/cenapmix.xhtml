@@ -34,14 +34,31 @@
                         <p:outputLabel for="godinado" value="Година до:" />
                         <p:inputText id="godinado" value="#{MBCenaProizvodnogMiksa.godinaDo}" />                        
 
-                        <p:outputLabel for="troskoviers" value="Трошкови ЕРС-а [%]:" />
+                        <p:outputLabel for="troskoviers" value="Остали трошкови ЕРС-а [%]:" />
                         <p:inputText id="troskoviers" value="#{MBCenaProizvodnogMiksa.procenatTroskovaErs}" /> 
+                        
+                        <p:outputLabel for="ebit" value="Жељена ЕБИТ [%]:" />
+                        <p:inputText id="ebit" value="#{MBCenaProizvodnogMiksa.ebit}" />                         
+                        
+                        <p:outputLabel for="inflacija" value="Процењена инфлација за наредну годину [%]:" />
+                        <p:inputText id="inflacija" value="#{MBCenaProizvodnogMiksa.procenjenaInflacija}" />                                                 
 
                         <p:separator/>
-                        <p:commandButton process="@form" update="frmCenaMix" value="Израчунај" action="#{MBCenaProizvodnogMiksa.racunajUkupneTroskoveBalansiranja()}"/>
+                        <p:commandButton process="@form" update="frmCenaMix" value="Израчунај" action="#{MBCenaProizvodnogMiksa.racunaj()}"/>
                         
                         <p:outputLabel for="troskovibalansiranja" value="Укупни трошкови балансирања:" />
                         <p:inputText id="troskovibalansiranja" value="#{MBCenaProizvodnogMiksa.ukupniTroskoviBalansiranja}" />  
+                        
+                        <p:outputLabel for="prosecnaCena" value="Цена производног микса:" />
+                        <p:inputText id="prosecnaCena" value="#{MBCenaProizvodnogMiksa.prosecnaCena}" />                         
+                        
+                        <p:outputLabel for="troskovipgk" value="Трошкови прекограничних капацитета:" />
+                        <p:inputText id="troskovipgk" value="#{MBCenaProizvodnogMiksa.troskoviPgk}" />   
+                        
+                        <p:separator/><p:separator/>
+                        
+                        <p:outputLabel for="cvpmin" value="Најнижа вредност велепродајне цене:" />
+                        <p:inputText id="cvpmin" value="#{MBCenaProizvodnogMiksa.cvpmin}" />                        
 
                     </p:panelGrid>                    
                 </center>

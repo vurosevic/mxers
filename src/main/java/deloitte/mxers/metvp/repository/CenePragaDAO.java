@@ -33,7 +33,7 @@ public interface CenePragaDAO extends CrudRepository<CenaPraga, Long>{
     @Override
     public void delete(CenaPraga t);
     
-    @Query("SELECT cp FROM CenaPraga cp WHERE :dateCP BETWEEN datumOd AND datumDo")
-    public List<CenaPraga> findByDate(@Param("dateCP") Date dateCP);
+    @Query("SELECT cp FROM CenaPraga cp WHERE :dateCP BETWEEN datumOd AND datumDo AND elektrana.id = :id_elektrana")
+    public List<CenaPraga> findByDate(@Param("dateCP") Date dateCP, @Param("id_elektrana") Long id_elektrana);
            
 }

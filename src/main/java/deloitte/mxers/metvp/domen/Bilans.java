@@ -139,5 +139,13 @@ public class Bilans implements Serializable {
     public void setOstvareniIzvoz(Double ostvareniIzvoz) {
         this.ostvareniIzvoz = ostvareniIzvoz;
     }
+
+    @Override
+    public String toString() {
+        return "Bilans: " + id + ", Elektrana: " + elektrana.getId() + ", Ostvarena pr. " + 
+                ostvarenaProizvodnja + ", Mesec: " + mesec + ", Godina: " + godina;
+    }
+    
+    
            
 }

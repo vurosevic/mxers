@@ -6,8 +6,11 @@
 package deloitte.mxers.metvp.test;
 
 import deloitte.mxers.metvp.config.TransPersistenceJPAConfig;
+import deloitte.mxers.metvp.domen.Bilans;
 import deloitte.mxers.metvp.domen.CenaPraga;
+import deloitte.mxers.metvp.service.BilansService;
 import deloitte.mxers.metvp.service.CenePragaService;
+import java.io.PrintStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,20 +50,56 @@ public class MainTest {
             
         }
         
-        main.findByDate(datum); 
-                        
+        // main.findCenePragaByDate(datum, 3L);                         
+        
+        main.findBilansByPeriod(2016, 2018); 
+        
         System.out.println("Kraj...");                        
     }
     
     @Autowired
     private CenePragaService cenePragaService;    
     
-    private void findByDate(Date dateCP) {                
-        List<CenaPraga> ceneP = cenePragaService.findByDate(dateCP);        
+    @Autowired
+    private BilansService bilansService; 
+    
+    private void findCenePragaByDate(Date dateCP, Long idElektrana) {                
+        List<CenaPraga> ceneP = cenePragaService.findByDate(dateCP, idElektrana);        
         for (CenaPraga cp : ceneP) {
             System.out.println(cp);
         }
     }
+    
+    private void findBilansByPeriod(Integer godinaOd, Integer godinaDo){
+        List<Bilans> bilansLista = bilansService.findByPeriod(godinaOd, godinaDo);
+        SimpleDateFormat dateformat = new SimpleDateFormat("dd.MM.yyyy");
+        dateformat.setTimeZone(TimeZone.getTimeZone("CET"));  
+        Double prosecnaCena = 0.0;
+        Double ukupnaOstvarenaEnergija = 0.0;        
+        
+        for (Bilans bi : bilansLista) {            
+                Date datum2 = new Date();
+                try {
+                    datum2 = dateformat.parse("01." + bi.getMesec() + "." + bi.getGodina());
+                } catch (ParseException ex) {
+                    Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+                }            
+            
+                List<CenaPraga> cp = cenePragaService.findByDate(datum2, bi.getElektrana().getId());
+            
+                System.out.println("--------->" + bi.getElektrana().getId() + ", Ostvareno:" + bi.getOstvarenaProizvodnja()  
+                        + ", Cena: " + cp.get(0).getCena()
+                        + ", Vrednost: " + bi.getOstvarenaProizvodnja()*cp.get(0).getCena()); 
+                
+                prosecnaCena = prosecnaCena + bi.getOstvarenaProizvodnja()*cp.get(0).getCena();
+                ukupnaOstvarenaEnergija = ukupnaOstvarenaEnergija + bi.getOstvarenaProizvodnja();                
+        }        
+        
+        System.out.println("Vrednost: " + prosecnaCena); 
+        System.out.println("El. energija: " + ukupnaOstvarenaEnergija); 
+        System.out.println("Prosecna cena je: " + prosecnaCena/ukupnaOstvarenaEnergija); 
+    }
+    
     
 }
 
