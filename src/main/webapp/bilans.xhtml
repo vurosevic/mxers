@@ -31,19 +31,19 @@
                         <p:outputLabel value="Биланс" />
                     </f:facet>                    
                     <p:column selectionMode="single" style="width:16px;text-align:center"/>
-                    <p:column>
+                    <p:column filterBy="#{td.elektrana.naziv}">
                         <f:facet name="header" >Назив електране</f:facet>
                         #{td.elektrana.naziv}
                     </p:column>    
-                    <p:column>
+                    <p:column filterBy="#{td.mesec}">
                         <f:facet name="header" >Месец</f:facet>
                         #{td.mesec}
                     </p:column>                        
-                    <p:column>
+                    <p:column filterBy="#{td.godina}">
                         <f:facet name="header" >Година</f:facet>
                         #{td.godina}
                     </p:column>                       
-                    <p:column>
+                    <p:column filterBy="#{td.planiranaProizvodnja}">
                         <f:facet name="header" >Планирана производња</f:facet>                        
                         <div style="text-align: right;">
                             <p:outputLabel value="#{td.planiranaProizvodnja}" >
@@ -51,7 +51,7 @@
                             </p:outputLabel>                
                         </div>                         
                     </p:column>                  
-                    <p:column>
+                    <p:column filterBy="#{td.ostvarenaProizvodnja}">
                         <f:facet name="header" >Остварена производња</f:facet>                        
                         <div style="text-align: right;">
                             <p:outputLabel value="#{td.ostvarenaProizvodnja}" >
@@ -59,7 +59,7 @@
                             </p:outputLabel>                
                         </div>                           
                     </p:column>                  
-                    <p:column>
+                    <p:column filterBy="#{td.planiraniUvoz}">
                         <f:facet name="header" >Планирани увоз</f:facet>                        
                         <div style="text-align: right;">
                             <p:outputLabel value="#{td.planiraniUvoz}" >
@@ -67,7 +67,7 @@
                             </p:outputLabel>                
                         </div>                             
                     </p:column>                        
-                    <p:column>
+                    <p:column filterBy="#{td.planiraniIzvoz}">
                         <f:facet name="header" >Планирани извоз</f:facet>                        
                         <div style="text-align: right;">
                             <p:outputLabel value="#{td.planiraniIzvoz}" >
@@ -76,7 +76,7 @@
                         </div>                           
                     </p:column>         
                     
-                    <p:column>
+                    <p:column filterBy="#{td.ostvareniUvoz}">
                         <f:facet name="header" >Остварени увоз</f:facet>                        
                         <div style="text-align: right;">
                             <p:outputLabel value="#{td.ostvareniUvoz}" >
@@ -84,7 +84,7 @@
                             </p:outputLabel>                
                         </div>                             
                     </p:column>                        
-                    <p:column>
+                    <p:column filterBy="#{td.ostvareniIzvoz}">
                         <f:facet name="header" >Остварени извоз</f:facet>                        
                         <div style="text-align: right;">
                             <p:outputLabel value="#{td.ostvareniIzvoz}" >
@@ -100,7 +100,9 @@
                             <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBBilans.selectBilans}" 
                                 icon="ui ui-icon-pencil" value="Измени"  />                    
                             <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBBilans.selectBilans}"
-                                icon="ui ui-icon-close" value="Бриши"  />                                                            
+                                icon="ui ui-icon-close" value="Бриши"  />  
+                            <p:commandButton id="btnBilansReport" ajax="false" immediate="true" actionListener="#{MBBilans.bilansReportPDF}" icon="ui ui-icon-script" value="Извештај"  
+                                                         disabled="false"/>                            
                         </div>
                  </f:facet>       
                     <f:ajax event="rowSelectRadio" render="tdDT" />       

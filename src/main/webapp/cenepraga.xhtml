@@ -62,7 +62,9 @@
                             <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBCenePraga.selectCenaPraga}" 
                                 icon="ui ui-icon-pencil" value="Измени"  />                    
                             <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBCenePraga.selectCenaPraga}"
-                                icon="ui ui-icon-close" value="Бриши"  />                                                            
+                                icon="ui ui-icon-close" value="Бриши"  />  
+                            <p:commandButton id="btnCenePragaReport" ajax="false" immediate="true" actionListener="#{MBCenePraga.cenePragaReportPDF}" icon="ui ui-icon-script" value="Извештај"  
+                                                         disabled="false"/>
                         </div>
                  </f:facet>       
                     <f:ajax event="rowSelectRadio" render="tdDT" />       

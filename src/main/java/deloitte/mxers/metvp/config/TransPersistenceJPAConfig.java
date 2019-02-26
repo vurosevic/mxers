@@ -94,15 +94,15 @@ public class TransPersistenceJPAConfig {
 //        return liquibase;
 //    }
 //
-//    @Bean
-//    public DataSource dataSource() {
-//        System.out.println("@Bean: public DataSource dataSource()");
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-//        dataSource.setUrl("jdbc:mysql://localhost:3306/proba?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&nullNamePatternMatchesAll=true");       
-//        dataSource.setUsername("epss");
-//        dataSource.setPassword("epss.EPSS");
-//        return dataSource;
-//    }     
+    @Bean
+    public DataSource dataSource() {
+        System.out.println("@Bean: public DataSource dataSource()");
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/mxers?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&nullNamePatternMatchesAll=true");
+        dataSource.setUsername("epss");
+        dataSource.setPassword("epss.EPSS");
+        return dataSource;
+    }     
     
 }

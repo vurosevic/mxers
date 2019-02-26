@@ -31,19 +31,19 @@
                         <p:outputLabel value="Трошкови прекограничних капацитета" />
                     </f:facet>                    
                     <p:column selectionMode="single" style="width:16px;text-align:center"/>
-                    <p:column>
+                    <p:column filterBy="#{td.mesec}">
                         <f:facet name="header" >Месец</f:facet>
                         <div style="text-align: center;">
                             #{td.mesec}
                         </div>
                     </p:column>                        
-                    <p:column>
+                    <p:column filterBy="#{td.godina}">
                         <f:facet name="header" >Година</f:facet>
                         <div style="text-align: center;">
                             #{td.godina}
                         </div>
                     </p:column>    
-                    <p:column>
+                    <p:column filterBy="#{td.trosak}">
                         <f:facet name="header" >Трошак</f:facet>     
                         <div style="text-align: right;">
                             <p:outputLabel value="#{td.trosak}" >

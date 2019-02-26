@@ -5,13 +5,36 @@
  */
 package deloitte.mxers.metvp.mb;
 
+import deloitte.mxers.metvp.config.TransPersistenceJPAConfig;
 import deloitte.mxers.metvp.domen.CenaPraga;
 import deloitte.mxers.metvp.lazyViews.LazyDataModelCenePraga;
 import deloitte.mxers.metvp.service.CenePragaService;
 import deloitte.mxers.metvp.service.ElektraneService;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRReport;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.base.JRBaseReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.primefaces.model.LazyDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +54,9 @@ public class MBCenePraga {
     
     @Autowired      
     private CenePragaService cenaPragaService;    
+    
+    @Autowired
+    private DataSource dataSource;
     
     private List<CenaPraga> lista;    
     private CenaPraga selectCenaPraga;
@@ -121,5 +147,30 @@ public class MBCenePraga {
         cenaPragaService.delete(selectCenaPraga);
         init();
     }
+    
+    public void cenePragaReportPDF(ActionEvent actionEvent) throws JRException, IOException, SQLException{
+        //String jrxmlFile = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources/reports/cenepraga.jrxml");
+        String jrxmlFile = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources/reports/cenepraga.jasper");        
+//        ArrayList<PromenaSnabdevaca> ps = new ArrayList<>();
+//        ps.add(selectPromenaSnabdevaca);
+//        JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(ps);
+        ////JasperDesign jasperDesign = JRXmlLoader.load(jrxmlFile); 
+        ////JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+        //JasperPrint jasperPrint =  JasperFillManager.fillReport(jasperReport, new HashMap(), beanCollectionDataSource);  
+        
+        JasperReport jasperReport = (JasperReport)JRLoader.loadObjectFromFile(jrxmlFile);
+        JasperPrint jasperPrint =  JasperFillManager.fillReport(jasperReport, new HashMap(), dataSource.getConnection());
+        
+        //
+        
+        HttpServletResponse httpServletResponse = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=cene.pdf");       
+        FacesContext.getCurrentInstance().responseComplete();
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+        servletOutputStream.flush();
+        servletOutputStream.close();
+        FacesContext.getCurrentInstance().responseComplete();                  
+    }     
       
 }

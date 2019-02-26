@@ -9,9 +9,23 @@ import deloitte.mxers.metvp.domen.Bilans;
 import deloitte.mxers.metvp.lazyViews.LazyDataModelBilans;
 import deloitte.mxers.metvp.service.BilansService;
 import deloitte.mxers.metvp.service.ElektraneService;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 import org.primefaces.model.LazyDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +45,9 @@ public class MBBilans {
     
     @Autowired      
     private BilansService bilansService;
+    
+    @Autowired
+    private DataSource dataSource;    
     
     private List<Bilans> lista;    
     private Bilans selectBilans;
@@ -121,5 +138,20 @@ public class MBBilans {
         bilansService.delete(selectBilans);
         init();
     }    
+ 
+    public void bilansReportPDF(ActionEvent actionEvent) throws JRException, IOException, SQLException{
+        String jrxmlFile = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources/reports/bilans.jasper");
+        JasperReport jasperReport = (JasperReport)JRLoader.loadObjectFromFile(jrxmlFile);
+        JasperPrint jasperPrint =  JasperFillManager.fillReport(jasperReport, new HashMap(), dataSource.getConnection());
+
+        HttpServletResponse httpServletResponse = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=bilans.pdf");       
+        FacesContext.getCurrentInstance().responseComplete();
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+        servletOutputStream.flush();
+        servletOutputStream.close();
+        FacesContext.getCurrentInstance().responseComplete();                  
+    }     
     
 }
