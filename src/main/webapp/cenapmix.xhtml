@@ -28,6 +28,12 @@
                         <p:outputLabel value="Одређивање цене производног микса" />
                         </f:facet>
 
+                        <p:outputLabel for="period" value="Тип:" />
+                        <p:selectOneMenu id="period" dynamic="true" value="#{MBCenaProizvodnogMiksa.izabraniTip}">
+                            <f:selectItem itemLabel="Изабери тип" itemValue="" />
+                            <f:selectItems value="#{MBCenaProizvodnogMiksa.sifrePerioda}" />
+                        </p:selectOneMenu>
+                        
                         <p:outputLabel for="godinaod" value="Година од:" />
                         <p:inputText id="godinaod" value="#{MBCenaProizvodnogMiksa.godinaOd}" />                       
                         

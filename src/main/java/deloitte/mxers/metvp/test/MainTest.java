@@ -10,6 +10,7 @@ import deloitte.mxers.metvp.domen.Bilans;
 import deloitte.mxers.metvp.domen.CenaPraga;
 import deloitte.mxers.metvp.service.BilansService;
 import deloitte.mxers.metvp.service.CenePragaService;
+import deloitte.mxers.metvp.service.PeriodiService;
 import java.io.PrintStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,7 +53,8 @@ public class MainTest {
         
         // main.findCenePragaByDate(datum, 3L);                         
         
-        main.findBilansByPeriod(2016, 2018); 
+        //main.findBilansByPeriod(2016, 2018); 
+        main.findAllSifra();
         
         System.out.println("Kraj...");                        
     }
@@ -62,6 +64,9 @@ public class MainTest {
     
     @Autowired
     private BilansService bilansService; 
+    
+    @Autowired 
+    private PeriodiService periodiService;
     
     private void findCenePragaByDate(Date dateCP, Long idElektrana) {                
         List<CenaPraga> ceneP = cenePragaService.findByDate(dateCP, idElektrana);        
@@ -98,6 +103,12 @@ public class MainTest {
         System.out.println("Vrednost: " + prosecnaCena); 
         System.out.println("El. energija: " + ukupnaOstvarenaEnergija); 
         System.out.println("Prosecna cena je: " + prosecnaCena/ukupnaOstvarenaEnergija); 
+    }
+    
+    private void findAllSifra(){
+         for (String nazivPerioda : periodiService.findAllSifra()) {              
+             System.out.println("Period: " + nazivPerioda);             
+         }
     }
     
     

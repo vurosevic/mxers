@@ -10,6 +10,7 @@ import deloitte.mxers.metvp.domen.CenaPraga;
 import deloitte.mxers.metvp.service.BilansService;
 import deloitte.mxers.metvp.service.CenePragaService;
 import deloitte.mxers.metvp.service.DebalansService;
+import deloitte.mxers.metvp.service.PeriodiService;
 import deloitte.mxers.metvp.service.TrosakPrekogranicnihKapacitetaService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,6 +42,13 @@ public class MBCenaProizvodnogMiksa {
     
     @Autowired
     private TrosakPrekogranicnihKapacitetaService trosakPrekogranicnihKapacitetaService;
+    
+    @Autowired
+    private PeriodiService periodiService;
+    
+    private String izabraniTip;
+    
+    private List<String> sifrePerioda;
     
     private Integer godinaOd;
     
@@ -98,6 +107,11 @@ public class MBCenaProizvodnogMiksa {
     public void setProcenatTroskovaErs(Double procenatTroskovaErs) {
         this.procenatTroskovaErs = procenatTroskovaErs;
     }
+    
+    @PostConstruct    
+    public void init(){     
+         setSifrePerioda(periodiService.findAllSifra());                  
+    }      
     
     public void racunaj(){
         racunajUkupneTroskoveBalansiranja();
@@ -242,6 +256,35 @@ public class MBCenaProizvodnogMiksa {
 
     public void setCvpmin(Double cvpmin) {
         this.cvpmin = cvpmin;
+    }
+    
+
+    /**
+     * @return the izabraniTip
+     */
+    public String getIzabraniTip() {
+        return izabraniTip;
+    }
+
+    /**
+     * @param izabraniTip the izabraniTip to set
+     */
+    public void setIzabraniTip(String izabraniTip) {
+        this.izabraniTip = izabraniTip;
+    }
+
+    /**
+     * @return the sifrePerioda
+     */
+    public List<String> getSifrePerioda() {
+        return sifrePerioda;
+    }
+
+    /**
+     * @param sifrePerioda the sifrePerioda to set
+     */
+    public void setSifrePerioda(List<String> sifrePerioda) {
+        this.sifrePerioda = sifrePerioda;
     }
     
 }
