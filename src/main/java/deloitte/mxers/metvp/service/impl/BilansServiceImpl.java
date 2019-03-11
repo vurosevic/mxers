@@ -53,6 +53,11 @@ public class BilansServiceImpl implements BilansService {
     public List<Bilans> findByPeriod(Integer godinaOd, Integer godinaDo) {
         return bilansDAO.findByPeriod(godinaOd, godinaDo); 
     }
+
+    @Override
+    public List<Bilans> listaMesecnihOstvarenjaUGodini(Integer godina) {
+        return bilansDAO.listaMesecnihOstvarenjaUGodini(godina);
+    }
     
     
 }

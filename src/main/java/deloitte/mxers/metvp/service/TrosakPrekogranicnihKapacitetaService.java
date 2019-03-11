@@ -19,6 +19,7 @@ public interface TrosakPrekogranicnihKapacitetaService {
     public Optional<TrosakPrekogranicnihKapaciteta> findById(Long id);    
     public void delete(TrosakPrekogranicnihKapaciteta t);    
     public <S extends TrosakPrekogranicnihKapaciteta> S save(S s);        
-    public Double ukupanTrosakPoGodini(Integer godina);      
+    public Double ukupanTrosakPoGodini(Integer godina);  
+    public List<TrosakPrekogranicnihKapaciteta> listaTroskovaPoGodini(Integer godina);
     
 }

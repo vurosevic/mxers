@@ -7,6 +7,9 @@ package deloitte.mxers.metvp.mb;
 
 import deloitte.mxers.metvp.domen.Bilans;
 import deloitte.mxers.metvp.domen.CenaPraga;
+import deloitte.mxers.metvp.domen.Debalans;
+import deloitte.mxers.metvp.domen.Periodi;
+import deloitte.mxers.metvp.domen.TrosakPrekogranicnihKapaciteta;
 import deloitte.mxers.metvp.service.BilansService;
 import deloitte.mxers.metvp.service.CenePragaService;
 import deloitte.mxers.metvp.service.DebalansService;
@@ -123,20 +126,28 @@ public class MBCenaProizvodnogMiksa {
     public Double racunajUkupneTroskoveBalansiranja(){
         Double result = new Double(0);
         Double pom = new Double(0);
+        List<Periodi> listaMeseca = periodiService.findBySifra(izabraniTip);
         
-        for (int i=godinaOd; i<=godinaDo; i++){
-            try {
-            result += debalansService.ukupniTroskoviDebalansaPoGodini(i);            
-            } catch (Exception ex ){
-                System.out.println("Troskovi za godinu " + i + " su 0.");
-            }
-            try {
-            pom += bilansService.ukupnoOstvarenoPoGodini(i);
-            } catch (Exception ex){
-                System.out.println("Ostvareno el. en.  za godinu " + i + " je 0.");
+        for (int i=godinaOd; i<=godinaDo; i++){            
+            for (Debalans d : debalansService.listaMesecnihDebalansaPoGodini(i))    {
+                for (Periodi p : listaMeseca) {
+                    if (d.getMesec() == p.getMesec()){
+                        result += d.getVisakCena() + Math.abs(d.getVisakNcCena() + d.getVisakCena() + d.getManjakCena());                        
+                    }
+                }
             }
             
+            for (Bilans b : bilansService.listaMesecnihOstvarenjaUGodini(i)){
+                for (Periodi p : listaMeseca) {
+                    if (b.getMesec() == p.getMesec()){                    
+                        pom += b.getOstvarenaProizvodnja();
+                    }
+                }            
+            }                        
         }
+        
+        System.out.println("Debelans ukupni: " + result);
+        System.out.println("Ostvareno ukupno: " + pom); 
         
         ukupniTroskoviBalansiranja = result / pom;        
         return ukupniTroskoviBalansiranja;
@@ -145,19 +156,25 @@ public class MBCenaProizvodnogMiksa {
     public Double racunajTroskovePGK(){
         Double result = new Double(0);
         Double pom = new Double(0);
-
+        List<Periodi> listaMeseca = periodiService.findBySifra(izabraniTip);
+        
         for (int i=godinaOd; i<=godinaDo; i++){                     
-            try {
-            result += trosakPrekogranicnihKapacitetaService.ukupanTrosakPoGodini(i);   
-            } catch (Exception ex ){
-                System.out.println("Troskovi za godinu " + i + " su 0.");
-            }
-            try {
-            pom += bilansService.ukupnoOstvarenoPoGodini(i);
-            } catch (Exception ex){
-                System.out.println("Ostvareno el. en.  za godinu " + i + " je 0.");
-            }            
             
+            for (TrosakPrekogranicnihKapaciteta t : trosakPrekogranicnihKapacitetaService.listaTroskovaPoGodini(i)){
+                for (Periodi p : listaMeseca) {
+                    if (t.getMesec() == p.getMesec()){
+                        result += t.getTrosak();
+                    }
+                }
+            }
+            
+            for (Bilans b : bilansService.listaMesecnihOstvarenjaUGodini(i)){
+                for (Periodi p : listaMeseca) {
+                    if (b.getMesec() == p.getMesec()){                    
+                        pom += b.getOstvarenaProizvodnja();
+                    }
+                }            
+            }                                                
         }        
         
         troskoviPgk = result / pom;
@@ -171,17 +188,22 @@ public class MBCenaProizvodnogMiksa {
         dateformat.setTimeZone(TimeZone.getTimeZone("CET"));                  
         Double ukupnaOstvarenaEnergija = 0.0;        
         prosecnaCena = 0.0;
+        List<Periodi> listaMeseca = periodiService.findBySifra(izabraniTip);
         
-        for (Bilans bi : bilansLista) {            
-                Date datum2 = new Date();                
-                try {
-                    datum2 = dateformat.parse("01." + bi.getMesec() + "." + bi.getGodina());
-                } catch (ParseException ex) {                    
-                }            
-            
-                List<CenaPraga> cp = cenePragaService.findByDate(datum2, bi.getElektrana().getId());                                            
-                prosecnaCena = prosecnaCena + bi.getOstvarenaProizvodnja()*cp.get(0).getCena();
-                ukupnaOstvarenaEnergija = ukupnaOstvarenaEnergija + bi.getOstvarenaProizvodnja();                
+        for (Bilans bi : bilansLista) {      
+            for (Periodi p : listaMeseca) {
+               if (bi.getMesec() == p.getMesec()){  
+                    Date datum2 = new Date();                
+                    try {
+                        datum2 = dateformat.parse("01." + bi.getMesec() + "." + bi.getGodina());
+                    } catch (ParseException ex) {                    
+                    }            
+
+                    List<CenaPraga> cp = cenePragaService.findByDate(datum2, bi.getElektrana().getId());                                            
+                    prosecnaCena = prosecnaCena + bi.getOstvarenaProizvodnja()*cp.get(0).getCena();
+                    ukupnaOstvarenaEnergija = ukupnaOstvarenaEnergija + bi.getOstvarenaProizvodnja();
+                }
+            }
         }        
         
         prosecnaCena = prosecnaCena/ukupnaOstvarenaEnergija;

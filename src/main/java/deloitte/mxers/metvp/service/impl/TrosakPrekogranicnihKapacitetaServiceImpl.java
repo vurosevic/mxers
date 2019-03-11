@@ -49,5 +49,11 @@ public class TrosakPrekogranicnihKapacitetaServiceImpl implements TrosakPrekogra
     public Double ukupanTrosakPoGodini(Integer godina) {
         return trosakPrekogranicnihKapacitetaDAO.ukupanTrosakPoGodini(godina);
     }
+
+    @Override
+    public List<TrosakPrekogranicnihKapaciteta> listaTroskovaPoGodini(Integer godina) {
+        return trosakPrekogranicnihKapacitetaDAO.listaTroskovaPoGodini(godina);
+    }
+    
     
 }

@@ -34,5 +34,7 @@ public interface DebalansDAO extends CrudRepository<Debalans, Long>{
     
     @Query("SELECT SUM(d.visakCena) + ABS(SUM(d.visakCena + d.visakNcCena + d.manjakCena)) FROM Debalans d WHERE godina = :godina")
     public Double ukupniTroskoviDebalansaPoGodini(@Param("godina") Integer godina);      
-    
+
+    @Query("SELECT d FROM Debalans d WHERE godina = :godina")
+    public List<Debalans> listaMesecnihDebalansaPoGodini(@Param("godina") Integer godina);          
 }

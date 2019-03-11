@@ -35,4 +35,7 @@ public interface TrosakPrekogranicnihKapacitetaDAO  extends CrudRepository<Trosa
     @Query("SELECT SUM(t.trosak) FROM TrosakPrekogranicnihKapaciteta t WHERE godina = :godina")
     public Double ukupanTrosakPoGodini(@Param("godina") Integer godina);  
     
+    @Query("SELECT t FROM TrosakPrekogranicnihKapaciteta t WHERE godina = :godina")
+    public List<TrosakPrekogranicnihKapaciteta> listaTroskovaPoGodini(@Param("godina") Integer godina);      
+    
 }

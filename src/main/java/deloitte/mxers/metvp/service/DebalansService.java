@@ -25,4 +25,5 @@ public interface DebalansService {
     
     public Double ukupniTroskoviDebalansaPoGodini(Integer godina);   
     
+    public List<Debalans> listaMesecnihDebalansaPoGodini(Integer godina);     
 }

@@ -48,4 +48,11 @@ public class DebalansServiceImpl implements DebalansService {
     public Double ukupniTroskoviDebalansaPoGodini(Integer godina){
         return debalansDAO.ukupniTroskoviDebalansaPoGodini(godina);
     }
+
+    @Override
+    public List<Debalans> listaMesecnihDebalansaPoGodini(Integer godina) {
+        return debalansDAO.listaMesecnihDebalansaPoGodini(godina);
+    }
+    
+    
 }
