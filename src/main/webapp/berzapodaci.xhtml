@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">                
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="frmDatatableTd">   
+                <center>
+                <p:dataTable  id="tdDT" style="width: 60%" 
+                              value="#{MBBerzaPodaci.lazyModel}" var="td" paginator="true" rows="10"                                
+                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                              rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                              selection="#{MBBerzaPodaci.selectBerzaPodaci}" lazy="true">
+                    <f:facet name="header">
+                        <p:outputLabel value="Берза подаци" />
+                    </f:facet>
+                    <p:columnGroup type="header">
+                      <p:row>
+                      <p:column headerText="" style="vertical-align: bottom"/>
+                      <p:column headerText="Берза" style="vertical-align: bottom" filterBy="#{td.berza.naziv}"/>
+                      <p:column headerText="Датум" style="vertical-align: bottom" filterBy="#{td.datum}"/>
+                      <p:column headerText="Врста оптерећења" style="vertical-align: bottom" filterBy="#{td.vrstaOpterecenja}"/>
+                      <p:column headerText="Период" style="vertical-align: bottom" filterBy="#{td.period}"/>
+                      <p:column headerText="Година периода" style="vertical-align: bottom" filterBy="#{td.godinaPerioda}"/>
+                      <p:column headerText="Цена" style="vertical-align: bottom" filterBy="#{td.cena}"/>
+                      <p:column headerText="Обим трговања" style="vertical-align: bottom" filterBy="#{td.obimTrgovanja}"/>
+                      </p:row>
+                    </p:columnGroup>                    
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column filterBy="#{td.berza.naziv}">
+<!--                        <f:facet name="header" >Берза</f:facet>-->
+                        #{td.berza.naziv}
+                    </p:column>    
+                    <p:column filterBy="#{td['datum']}">                        
+                        <div style="text-align: center;">
+                            <p:outputLabel style="text-align: center" value="#{td['datum']}" >
+                                <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </p:outputLabel>                 
+                        </div>                                                
+                    </p:column>                        
+                    <p:column filterBy="#{td.vrstaOpterecenja}">
+<!--                        <f:facet name="header" >Врста оптерећења</f:facet>-->
+                        <div style="text-align: center;">
+                            #{td.vrstaOpterecenja}    
+                        </div>  
+                    </p:column>                       
+                    <p:column filterBy="#{td.period}">
+<!--                        <f:facet name="header" >Период</f:facet>-->
+                        <div style="text-align: center;">
+                             #{td.period}
+                        </div>                        
+                    </p:column>
+                    <p:column filterBy="#{td.godinaPerioda}">
+<!--                        <f:facet name="header" >Година периода</f:facet>-->
+                        <div style="text-align: center;">
+                             #{td.godinaPerioda}
+                        </div>                                                
+                    </p:column>                     
+                    <p:column filterBy="#{td.cena}">
+<!--                        <f:facet name="header" >Цена</f:facet>                        -->
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.cena}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                         
+                    </p:column>                  
+                    <p:column filterBy="#{td.obimTrgovanja}">
+<!--                        <f:facet name="header" >Обим трговања</f:facet>                        -->
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.obimTrgovanja}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                           
+                    </p:column>                                      
+                    <f:facet name="footer">
+                        <div style="text-align:left">                                                    
+                            <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
+                                icon="ui ui-icon-plus" value="Додај"  />
+                            <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBBerzaPodaci.selectBerzaPodaci}" 
+                                icon="ui ui-icon-pencil" value="Измени"  />                    
+                            <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBBerzaPodaci.selectBerzaPodaci}"
+                                icon="ui ui-icon-close" value="Бриши"  />                             
+                        </div>
+                 </f:facet>       
+                    <f:ajax event="rowSelectRadio" render="tdDT" />       
+                    <f:ajax event="rowUnselectCheckbox" render="tdDT" />   
+                </p:dataTable>   
+                </center>
+                <p:dialog header="Унос нових података о берзи" widgetVar="tdDialogNovi" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:messages style="color:red" autoUpdate="true" />   
+                    <p:outputPanel id="tdDetailNovi" style="text-align:left;">
+                        <p:panelGrid  columns="3" rendered="true" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                            <p:outputLabel for="berza" value="Берза:" />
+                            <p:selectOneMenu id="berza" required="true" style="width:150px" value="#{MBBerzaPodaci.selectBerzaId}">
+                                <f:selectItem itemLabel="Изаберите берзу" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBBerza.lista}" var="elek" itemLabel="#{elek.naziv}" itemValue="#{elek.id}"/>
+                            </p:selectOneMenu>                                                          
+                            <p:spacer/>                            
+                            
+                            <p:outputLabel for="datum" value="Датум:" />
+                            <p:calendar id="datum" required="true" 
+                                        value="#{MBBerzaPodaci.noviBerzaPodaci.datum}" 
+                                        pattern="dd.MM.yyyy" timeZone="Europe/Belgrade" />                              
+                            <p:message for="datum" display="icon" />
+                            
+                            <p:outputLabel for="vrstaopterecenja" value="Врста оптерећења:" />
+                            <p:selectOneMenu id="vrstaopterecenja" required="true" style="width:150px" value="#{MBBerzaPodaci.noviBerzaPodaci.vrstaOpterecenja}">
+                                <f:selectItem itemLabel="Basic Load" itemValue="BL" />
+                                <f:selectItem itemLabel="Peek Load" itemValue="PL" />
+                            </p:selectOneMenu>                              
+                            <p:message for="vrstaopterecenja" display="icon" />                            
+                            
+                            <p:outputLabel for="period" value="Период:" />                            
+                            <p:selectOneMenu id="period" required="true" style="width:150px" value="#{MBBerzaPodaci.noviBerzaPodaci.period}">
+                                <f:selectItem itemLabel="Изаберите период" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBCenaProizvodnogMiksa.sifrePerioda}" />
+                            </p:selectOneMenu>                             
+                            <p:message for="period" display="icon" /> 
+                            
+                            <p:outputLabel for="godinaperioda" value="Година периода:" />
+                            <p:inputNumber id="godinaperioda" required="true" value="#{MBBerzaPodaci.noviBerzaPodaci.godinaPerioda}" />
+                            <p:message for="godinaperioda" display="icon" />
+                            
+                            <p:outputLabel for="cena" value="Цена:" />
+                            <p:inputNumber id="cena" required="true" value="#{MBBerzaPodaci.noviBerzaPodaci.cena}" />
+                            <p:message for="cena" display="icon" />                            
+
+                            <p:outputLabel for="obimtrgovanja" value="Обим трговања:" />
+                            <p:inputNumber id="obimtrgovanja" required="true" value="#{MBBerzaPodaci.noviBerzaPodaci.obimTrgovanja}" />  
+                            <p:message for="obimtrgovanja" display="icon" />  
+                            
+                        </p:panelGrid>
+                        <p:panel >
+                            <p:commandButton id="btnNovi" update="tdDetailNovi" process="@form" action="#{MBBerzaPodaci.dodajNoveBerzaPodatke()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogNovi').hide();" >                               
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false" onclick="PF('tdDialogNovi').hide()"/>                            
+                        </p:panel>                         
+                    </p:outputPanel>
+                    <f:ajax event="close" render="frmDatatableTd" /> 
+                 </p:dialog>                 
+                
+                <p:dialog header="Ажурирање података на берзи" widgetVar="tdDialogIzmeni" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">     
+                    <p:messages style="color:red" autoUpdate="true" /> 
+                    <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
+                        <h:form id="frmIzmenaTd">
+                            <p:panelGrid  columns="3" rendered="#{not empty MBBerzaPodaci.selectBerzaPodaci}" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                                <p:outputLabel for="berza" value="Берза:" />
+                                <p:selectOneMenu id="berza" required="true" style="width:150px" value="#{MBBerzaPodaci.selectBerzaId}"> 
+                                    <f:selectItem itemLabel="#{MBBerzaPodaci.selectBerzaPodaci.berza.naziv}" itemValue="#{MBBerzaPodaci.selectBerzaPodaci.berza.id}" noSelectionOption="false" />
+                                    <f:selectItems value="#{MBBerza.lista}" var="elek" itemLabel="#{elek.naziv}" itemValue="#{elek.id}"/>
+                                </p:selectOneMenu>                                                          
+                                <p:spacer/>                            
+
+                                <p:outputLabel for="datum" value="Датум:" />
+                                <p:calendar id="datum" required="true" 
+                                            value="#{MBBerzaPodaci.selectBerzaPodaci.datum}" 
+                                            pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>                              
+                                <p:message for="datum" display="icon" />
+
+                                <p:outputLabel for="vrstaopterecenja" value="Врста оптерећења:" />
+                                <p:selectOneMenu id="vrstaopterecenja" required="true" style="width:150px" value="#{MBBerzaPodaci.selectBerzaPodaci.vrstaOpterecenja}">
+                                    <f:selectItem itemLabel="Basic Load" itemValue="BL" />
+                                    <f:selectItem itemLabel="Peek Load" itemValue="PL" />
+                                </p:selectOneMenu>                              
+                                <p:message for="vrstaopterecenja" display="icon" />                            
+
+                                <p:outputLabel for="period" value="Период:" />                            
+                                <p:selectOneMenu id="period" required="true" style="width:150px" value="#{MBBerzaPodaci.selectBerzaPodaci.period}">
+                                    <f:selectItems value="#{MBCenaProizvodnogMiksa.sifrePerioda}" />
+                                </p:selectOneMenu>                             
+                                <p:message for="period" display="icon" /> 
+
+                                <p:outputLabel for="godinaperioda" value="Година периода:" />
+                                <p:inputNumber id="godinaperioda" required="true" value="#{MBBerzaPodaci.selectBerzaPodaci.godinaPerioda}" />
+                                <p:message for="godinaperioda" display="icon" />
+
+                                <p:outputLabel for="cena" value="Цена:" />
+                                <p:inputNumber id="cena" required="true" value="#{MBBerzaPodaci.selectBerzaPodaci.cena}" />
+                                <p:message for="cena" display="icon" />                            
+
+                                <p:outputLabel for="obimtrgovanja" value="Обим трговања:" />
+                                <p:inputNumber id="obimtrgovanja" required="true" value="#{MBBerzaPodaci.selectBerzaPodaci.obimTrgovanja}" /> 
+                                <p:message for="obimtrgovanja" display="icon" />                                                           
+
+                            </p:panelGrid>
+                            <p:panel rendered="#{not empty MBBerzaPodaci.selectBerzaPodaci}">
+                                <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBBerzaPodaci.azurirajBerzaPodatke()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false"  onclick="PF('tdDialogIzmeni').hide()"/>
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT"/>
+                 </p:dialog>                
+
+                <p:dialog header="Потврда брисања" widgetVar="tdDialogBrisi" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">                    
+                    <p:outputPanel id="tdDetailBrisi" style="text-align:left;">
+                        <h:form id="frmBrisiTd">
+                            <p:panelGrid  columns="2" rendered="#{not empty MBBerzaPodaci.selectBerzaPodaci}" columnClasses="label,value" class="panelGridNoBorderDialog">        
+                            <h:outputText value="Берза:" />
+                            <h:outputLabel value="#{MBBerzaPodaci.selectBerzaPodaci.berza.naziv}" />
+
+                            <h:outputText value="Датум:" />
+                            <h:outputLabel value="#{MBBerzaPodaci.selectBerzaPodaci.datum}" > 
+                                <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </h:outputLabel>
+                            
+                            <h:outputText value="Врста оптерећења:" />
+                            <h:outputLabel value="#{MBBerzaPodaci.selectBerzaPodaci.vrstaOpterecenja}" />                             
+                            
+                            <h:outputText value="Период:" />
+                            <h:outputLabel value="#{MBBerzaPodaci.selectBerzaPodaci.period}" />                             
+
+                            <h:outputText value="Година периода:" />
+                            <h:outputLabel value="#{MBBerzaPodaci.selectBerzaPodaci.godinaPerioda}" />  
+                            
+                            <h:outputText value="Цена:" />
+                            <h:outputLabel value="#{MBBerzaPodaci.selectBerzaPodaci.cena}" />  
+                            
+                            <h:outputText value="Обим трговања:" />
+                            <h:outputLabel value="#{MBBerzaPodaci.selectBerzaPodaci.obimTrgovanja}" />                              
+                            
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBBerzaPodaci.selectBerzaPodaci}">
+                                <p:commandButton process="@form" action="#{MBBerzaPodaci.brisiBerzaPodatke()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15"/>
+                            <p:commandButton value="Одустани"  onclick="PF('tdDialogBrisi').hide()"/> 
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />                                        
+                 </p:dialog>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
