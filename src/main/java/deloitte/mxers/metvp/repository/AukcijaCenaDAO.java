@@ -35,6 +35,10 @@ public interface AukcijaCenaDAO extends CrudRepository<AukcijaCena, Long>{
     @Query("SELECT ac FROM AukcijaCena ac WHERE aukcija.id = :aukcija_id")
     public List<AukcijaCena> listaCenaPoAukciji(@Param("aukcija_id") Long aukcija_id); 
     
-    @Query("SELECT ac FROM AukcijaCena ac WHERE aukcija.id = :aukcija_id AND aukcija.godina = :godina")
+    @Query("SELECT ac FROM AukcijaCena ac WHERE aukcija.id = :aukcija_id AND godina = :godina")
     public List<AukcijaCena> listaCenaPoAukcijiZaGodinu(@Param("aukcija_id") Long aukcija_id, @Param("godina") Integer godina); 
+    
+    @Query("SELECT ac FROM AukcijaCena ac WHERE aukcija.id = :aukcija_id AND godina = :godina AND smer.id = :smer_id")
+    public List<AukcijaCena> listaCenaPoAukcijiZaGodinuPoSmeru(@Param("aukcija_id") Long aukcija_id, @Param("godina") Integer godina, @Param("smer_id") Long smer_id); 
+    
 }

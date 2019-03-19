@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">                
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                
+            <h:form id="frmDatatableTd">   
+                <div class="ui-g">
+                    <div class="ui-g-6">
+                      
+                        <center>
+                        <p:dataTable  id="tdDT" style="width: 60%" 
+                                      value="#{MBAukcije.lazyModel}" var="td" paginator="true" rows="10"                                
+                                      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                      rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                                      selection="#{MBAukcije.selectAukcija}" lazy="true">
+                            <f:facet name="header">
+                                <p:outputLabel value="Годишње аукције" />
+                            </f:facet>                    
+                            <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                            <p:column>
+                                <f:facet name="header" >Назив државе од</f:facet>
+                                #{td.drzavaOd.nazivDrzave}
+                            </p:column>    
+                            <p:column>
+                                <f:facet name="header" >Назив државе ка</f:facet>
+                                #{td.drzavaDo.nazivDrzave}
+                            </p:column>                        
+                            <f:facet name="footer">
+                                <div style="text-align:left">                                                    
+                                    <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
+                                        icon="ui ui-icon-plus" value="Додај"  />
+                                    <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBAukcije.selectAukcija}" 
+                                        icon="ui ui-icon-pencil" value="Измени"  />                    
+                                    <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBAukcije.selectAukcija}"
+                                        icon="ui ui-icon-close" value="Бриши"  />                                                            
+                                </div>
+                         </f:facet>       
+                            <f:ajax event="rowSelectRadio" render="tdDT" />       
+                            <f:ajax event="rowUnselectCheckbox" render="tdDT" />   
+                        </p:dataTable>   
+                        </center>
+                        <p:dialog header="Унос нове аукције" widgetVar="tdDialogNovi" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                            <p:messages style="color:red" autoUpdate="true" />   
+                            <p:outputPanel id="tdDetailNovi" style="text-align:left;">
+                                <p:panelGrid  columns="3" rendered="true" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                                    <p:outputLabel for="drzavaOd" value="Држава од:" />
+                                    <p:selectOneMenu id="drzavaOd" required="true" style="width:150px" value="#{MBAukcije.novaDrzavaOdId}">
+                                        <f:selectItem itemLabel="Изаберите државу" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{MBDrzave.lista}" var="drzava" itemLabel="#{drzava.nazivDrzave}" itemValue="#{drzava.id}"/>
+                                    </p:selectOneMenu>                                                          
+                                    <p:spacer/>
+
+                                    <p:outputLabel for="drzavaDo" value="Држава до:" />
+                                    <p:selectOneMenu id="drzavaDo" required="true" style="width:150px" value="#{MBAukcije.novaDrzavaDoId}">
+                                        <f:selectItem itemLabel="Изаберите државу" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{MBDrzave.lista}" var="drzava2" itemLabel="#{drzava2.nazivDrzave}" itemValue="#{drzava2.id}"/>
+                                    </p:selectOneMenu>                                                          
+                                    <p:spacer/>                            
+
+                                </p:panelGrid>
+                                <p:panel >
+                                    <p:commandButton id="btnNovi" update="tdDetailNovi" process="@form" action="#{MBAukcije.dodajNovuAukciju()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogNovi').hide();" >                               
+                                    </p:commandButton>
+                                    <p:spacer width="15" />
+                                    <p:commandButton value="Одустани" ajax="false" onclick="PF('tdDialogNovi').hide()"/>                            
+                                </p:panel>                         
+                            </p:outputPanel>
+                            <f:ajax event="close" render="tdDT" /> 
+                         </p:dialog>                 
+                        <p:dialog header="Ажурирање аукције" widgetVar="tdDialogIzmeni" modal="true"                                                     
+                                  showEffect="fade" hideEffect="fade" resizable="false">     
+                            <p:messages style="color:red" autoUpdate="true" /> 
+                            <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
+                                <h:form id="frmIzmenaTd">
+                                    <p:panelGrid  columns="3" rendered="#{not empty MBAukcije.selectAukcija}" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                                    <p:outputLabel for="drzavaod2" value="Држава од:" />
+                                    <p:selectOneMenu id="drzavaod2" required="false" style="width:150px" value="#{MBAukcije.selectDrzavaOdId}">
+                                        <f:selectItem itemLabel="#{MBAukcije.selectAukcija.drzavaOd.nazivDrzave}" itemValue="#{MBAukcije.selectAukcija.drzavaOd.id}" noSelectionOption="true" />
+                                        <f:selectItems value="#{MBDrzave.lista}" var="drzava3" itemLabel="#{drzava3.nazivDrzave}" itemValue="#{drzava3.id}"/>
+                                    </p:selectOneMenu>                             
+                                    <p:spacer/>
+
+                                    <p:outputLabel for="drzavado2" value="Држава до:" />
+                                    <p:selectOneMenu id="drzavado2" required="false" style="width:150px" value="#{MBAukcije.selectDrzavaDoId}">
+                                        <f:selectItem itemLabel="#{MBAukcije.selectAukcija.drzavaDo.nazivDrzave}" itemValue="#{MBAukcije.selectAukcija.drzavaDo.id}" noSelectionOption="true" />
+                                        <f:selectItems value="#{MBDrzave.lista}" var="drzava4" itemLabel="#{drzava4.nazivDrzave}" itemValue="#{drzava4.id}"/>
+                                    </p:selectOneMenu>                             
+                                    <p:spacer/>                            
+
+                                </p:panelGrid>
+                                    <p:panel rendered="#{not empty MBAukcije.selectAukcija}">
+                                        <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBAukcije.azurirajAukciju()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
+                                    </p:commandButton>
+                                    <p:spacer width="15" />
+                                    <p:commandButton value="Одустани" ajax="false"  onclick="PF('tdDialogIzmeni').hide()"/>
+                                </p:panel>                                                       
+                                </h:form>
+                            </p:outputPanel>
+                            <f:ajax event="close" render="tdDT" />
+                         </p:dialog>                
+                        <p:dialog header="Потврда брисања" widgetVar="tdDialogBrisi" modal="true"                                                     
+                                  showEffect="fade" hideEffect="fade" resizable="false">                    
+                            <p:outputPanel id="tdDetailBrisi" style="text-align:left;">
+                                <h:form id="frmBrisiTd">
+                                    <p:panelGrid  columns="2" rendered="#{not empty MBAukcije.selectAukcija}" columnClasses="label,value" class="panelGridNoBorderDialog">        
+
+                                    <h:outputText value="Држава од:" />
+                                    <h:outputLabel value="#{MBAukcije.selectAukcija.drzavaOd.nazivDrzave}" /> 
+
+                                    <h:outputText value="Држава до:" />
+                                    <h:outputLabel value="#{MBAukcije.selectAukcija.drzavaDo.nazivDrzave}" />                             
+
+                                </p:panelGrid>
+                                    <p:panel rendered="#{not empty MBAukcije.selectAukcija}">
+                                        <p:commandButton process="@form" action="#{MBAukcije.brisiAukciju()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
+                                    </p:commandButton>
+                                    <p:spacer width="15"/>
+                                    <p:commandButton value="Одустани"  onclick="PF('tdDialogBrisi').hide()"/> 
+                                </p:panel>                                                       
+                                </h:form>
+                            </p:outputPanel>
+                            <f:ajax event="close" render="tdDT" />                                        
+                         </p:dialog>                        
+                      
+                    </div>
+                    
+<!--                    Dodati cene ovde -->
+                    
+                    <div class="ui-g-6">6</div>
+                </div>
+            </h:form>                        
+                 
+
+                
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
