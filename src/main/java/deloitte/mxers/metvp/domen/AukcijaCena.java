@@ -37,8 +37,7 @@ public class AukcijaCena implements Serializable {
     private Smer smer;    
     
     @Column(name = "Godina")
-    @Size(max = 5)
-    private String godina;     
+    private Integer godina;     
     
     @Column(name = "Cena")
     private Double cena;
@@ -78,14 +77,14 @@ public class AukcijaCena implements Serializable {
     /**
      * @return the godina
      */
-    public String getGodina() {
+    public Integer getGodina() {
         return godina;
     }
 
     /**
      * @param godina the godina to set
      */
-    public void setGodina(String godina) {
+    public void setGodina(Integer godina) {
         this.godina = godina;
     }
 
