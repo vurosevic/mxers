@@ -35,6 +35,10 @@ public class MBAukcije {
     
     @Autowired  
     private DrzavaService drzavaService;
+    
+    @Autowired
+    private MBAukcijaCene mBAukcijaCene;
+    
     private List<Aukcija> lista;    
     private Aukcija selectAukcija;
     private Aukcija novaAukcija;    
@@ -184,6 +188,11 @@ public class MBAukcije {
         aukcijaService.delete(selectAukcija);
         init();
     }     
+    
+    public void refreshAukcijaCene(){
+        mBAukcijaCene.setSelectAukcijaId(selectAukcija.getId());
+        mBAukcijaCene.refresh();
+    }
 
     /**
      * @return the novaDrzavaOdId
@@ -211,6 +220,20 @@ public class MBAukcije {
      */
     public void setNovaDrzavaDoId(Long novaDrzavaDoId) {
         this.novaDrzavaDoId = novaDrzavaDoId;
+    }
+
+    /**
+     * @return the mBAukcijaCene
+     */
+    public MBAukcijaCene getmBAukcijaCene() {
+        return mBAukcijaCene;
+    }
+
+    /**
+     * @param mBAukcijaCene the mBAukcijaCene to set
+     */
+    public void setmBAukcijaCene(MBAukcijaCene mBAukcijaCene) {
+        this.mBAukcijaCene = mBAukcijaCene;
     }
     
 }

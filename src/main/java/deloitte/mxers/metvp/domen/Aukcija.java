@@ -79,5 +79,11 @@ public class Aukcija implements Serializable {
     public void setDrzavaDo(Drzava drzavaDo) {
         this.drzavaDo = drzavaDo;
     }
+
+    @Override
+    public String toString() {
+        return drzavaOd.getOznaka() + " - " + drzavaDo.getOznaka();
+    }
         
+    
 }
