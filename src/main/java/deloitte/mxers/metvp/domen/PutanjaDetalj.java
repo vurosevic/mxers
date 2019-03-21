@@ -22,6 +22,48 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "mhers_putanje_detalji")
 public class PutanjaDetalj {
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the putanjaDef
+     */
+    public PutanjaDef getPutanjaDef() {
+        return putanjaDef;
+    }
+
+    /**
+     * @param putanjaDef the putanjaDef to set
+     */
+    public void setPutanjaDef(PutanjaDef putanjaDef) {
+        this.putanjaDef = putanjaDef;
+    }
+
+    /**
+     * @return the aukcija
+     */
+    public Aukcija getAukcija() {
+        return aukcija;
+    }
+
+    /**
+     * @param aukcija the aukcija to set
+     */
+    public void setAukcija(Aukcija aukcija) {
+        this.aukcija = aukcija;
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

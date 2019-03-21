@@ -45,6 +45,9 @@ public class PutanjaDetaljServiceImpl implements PutanjaDetaljService {
         putanjaDetaljDAO.delete(t);
     }
 
-
+    @Override
+    public List<PutanjaDetalj> listaPutanjaDetaljaPoDef(Long putanjaDef_id) {
+        return putanjaDetaljDAO.listaPutanjaDetaljaPoDef(putanjaDef_id);
+    }
     
 }

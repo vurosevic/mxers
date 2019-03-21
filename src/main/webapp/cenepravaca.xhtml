@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                
+                <div class="ui-g">
+                    
+                    <div class="ui-g-3">
+                      
+                    </div>                    
+                    
+                    <div class="ui-g-3">
+                        <h:form id="frmDatatableGodina">
+                            <p:panelGrid columns="2" class="panelGridNoBorder">                                                    
+                            <p:outputLabel value="Година: " />
+                            <p:selectOneMenu id="gzPso" style="width:150px" value="#{MBPutanjaDef.godinaZaProracun}"> 
+                                <f:selectItem itemLabel="Изаберите годину" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBPutanjaDef.listaGodina}" var="gz" itemLabel="#{gz}" itemValue="#{gz}"/>                                
+                                <p:ajax event="change" update=":frmDatatableTdP:tdDT" listener="#{MBPutanjaDef.init}"/>                                
+                            </p:selectOneMenu>                         
+                        </p:panelGrid>
+                        </h:form>
+                    </div>
+                    <div class="ui-g-3">
+                        
+                        <h:form id="frmDatatableSmer">
+                            <p:panelGrid columns="2" class="panelGridNoBorder">                                                    
+                            <p:outputLabel value="Улаз/Излаз: " />
+                            <p:selectOneMenu id="gzPso2" style="width:150px" value="#{MBPutanjaDef.smerIdZaProracun}"> 
+                                <f:selectItem itemLabel="Изаберите смер" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBAukcijaCene.listaSmer}" var="gz" itemLabel="#{gz.nazivSmera}" itemValue="#{gz.id}"/>                                
+                                <p:ajax event="change" update=":frmDatatableTdP:tdDT" listener="#{MBPutanjaDef.init}"/> 
+                            </p:selectOneMenu>                         
+                        </p:panelGrid>
+                        </h:form>                        
+                        
+                    </div>
+                    
+                    
+                    <div class="ui-g-3"></div>
+                </div>
+                
+                <div class="ui-g">
+                    <div class="ui-g-3"></div>
+                    
+                    <div class="ui-g-6">
+                        <h:form id="frmDatatableTdP"> 
+                        <center>
+                        <p:dataTable  id="tdDT" style="width: 100%" 
+                                      value="#{MBPutanjaDef.lazyModel}" var="td" paginator="true" rows="10"                                
+                                      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                      rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                                      selection="#{MBPutanjaDef.selectPutanjaDef}" lazy="true">
+                            <f:facet name="header">
+                                <p:outputLabel value="Правци" />
+                            </f:facet>                    
+                            <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                            <p:column>
+                                <f:facet name="header" >Назив</f:facet>
+                                #{td.naziv}
+                            </p:column>    
+                            <p:column>
+                                <f:facet name="header" >Берза</f:facet>
+                                #{td.berza.naziv}
+                            </p:column>    
+                            <p:column>
+                                <f:facet name="header" >Укупна цена</f:facet>
+                                #{MBPutanjaDef.racunajCenuZaPravac(td.id)}
+                            </p:column>                              
+                            <f:facet name="footer">
+                                <div style="text-align:left">   
+<!--                                <p:commandButton process="tdDT" update=":frmDatatableTdP:tdDT" action="#{MBPutanjaDef.refresh}" 
+                                            icon="ui ui-icon-plus" value="Освежи"  />                                      -->
+<!--                                    <p:commandButton process="tdDT" update=":frmDatatableTdP:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
+                                        icon="ui ui-icon-plus" value="Додај"  />
+                                    <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTdP:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBPutanjaDef.selectPutanjaDef}" 
+                                        icon="ui ui-icon-pencil" value="Измени"  />                    
+                                    <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTdP:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBPutanjaDef.selectPutanjaDef}"
+                                        icon="ui ui-icon-close" value="Бриши"  />                                                            -->
+                                </div>
+                         </f:facet>       
+<!--                            <p:ajax event="rowSelectRadio" update=":frmDatatableAc:tdDT" listener="#{MBPutanjaDef.refreshPutanjuDef}"/>       -->
+                            <f:ajax event="rowSelectRadio" render="tdDT" />  
+                        </p:dataTable>   
+                        </center>                      
+                      </h:form>                         
+                    </div>
+                    
+                    <div class="ui-g-3"></div>
+                </div>
+                
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -59,5 +59,11 @@ public class AukcijaCenaServiceImpl implements AukcijaCenaService {
     public List<AukcijaCena> listaCenaPoAukcijiZaGodinuPoSmeru(Long aukcija_id, Integer godina, Long smer_id) {
         return aukcijaCenaDAO.listaCenaPoAukcijiZaGodinuPoSmeru(aukcija_id, godina, smer_id);
     }
+
+    @Override
+    public List<Integer> listaGodina() {
+        return aukcijaCenaDAO.listaGodina();
+    }
+    
     
 }

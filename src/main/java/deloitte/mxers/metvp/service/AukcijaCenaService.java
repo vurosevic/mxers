@@ -23,5 +23,6 @@ public interface AukcijaCenaService {
     public void delete(AukcijaCena t);
     public List<AukcijaCena> listaCenaPoAukciji(Long aukcija_id); 
     public List<AukcijaCena> listaCenaPoAukcijiZaGodinu(Long aukcija_id, Integer godina); 
-    public List<AukcijaCena> listaCenaPoAukcijiZaGodinuPoSmeru(Long aukcija_id, Integer godina, Long smer_id);    
+    public List<AukcijaCena> listaCenaPoAukcijiZaGodinuPoSmeru(Long aukcija_id, Integer godina, Long smer_id);  
+    public List<Integer> listaGodina(); 
 }

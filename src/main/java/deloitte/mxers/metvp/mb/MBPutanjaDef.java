@@ -5,10 +5,16 @@
  */
 package deloitte.mxers.metvp.mb;
 
+import deloitte.mxers.metvp.domen.AukcijaCena;
 import deloitte.mxers.metvp.domen.PutanjaDef;
+import deloitte.mxers.metvp.domen.PutanjaDetalj;
 import deloitte.mxers.metvp.lazyViews.LazyDataModelPutanjaDef;
+import deloitte.mxers.metvp.service.AukcijaCenaService;
 import deloitte.mxers.metvp.service.BerzaService;
 import deloitte.mxers.metvp.service.PutanjaDefService;
+import deloitte.mxers.metvp.service.PutanjaDetaljService;
+import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
@@ -33,6 +39,15 @@ public class MBPutanjaDef {
     @Autowired  
     private BerzaService berzaService;
     
+    @Autowired  
+    private PutanjaDetaljService putanjaDetaljService;   
+    
+    @Autowired  
+    private AukcijaCenaService aukcijaCenaService;      
+    
+    @Autowired
+    private MBPutanjaDetalj mBPutanjaDetalj;    
+    
 //    @Autowired
 //    private MBAukcijaCene mBAukcijaCene;
     
@@ -42,13 +57,23 @@ public class MBPutanjaDef {
     
     private LazyDataModel<PutanjaDef> lazyModel;      
 
+    // za proracun cena
+    
+    private List<Integer> listaGodina;
+    
+    private Integer godinaZaProracun;
+    private Long smerIdZaProracun;
+    
     @PostConstruct
     public void init(){     
-         setLista(getPutanjaDefService().findAll());         
+         setLista(getPutanjaDefService().findAll());
+         setListaGodina(aukcijaCenaService.listaGodina());
          setLazyModel(new LazyDataModelPutanjaDef(getPutanjaDefService().findAll())); 
          setNovaPutanjaDef(new PutanjaDef());
          setSelectPutanjaDef(null);
          selectBerzaId = null;
+//         godinaZaProracun = 2019;
+//         smerIdZaProracun = 1L;
     } 
     
     /**
@@ -182,5 +207,84 @@ public class MBPutanjaDef {
         init();
     }    
     
+    public void refreshPutanjuDef(){
+        mBPutanjaDetalj.setSelectPutanjaDefId(selectPutanjaDef.getId());
+        mBPutanjaDetalj.refresh();
+    }
+    
+    public void refresh(){
+         setLista(getPutanjaDefService().findAll());
+         setLazyModel(new LazyDataModelPutanjaDef(getPutanjaDefService().findAll())); 
+    }
+    
+    public Double racunajCenuZaPravac(Long pravacId){
+        Double rez = 0.0;
+        DecimalFormat df = new DecimalFormat("#.##");
+        List<PutanjaDetalj> detalji = getPutanjaDetaljService().listaPutanjaDetaljaPoDef(pravacId);
+        
+        for (PutanjaDetalj pd : detalji){
+            List<AukcijaCena> cene = aukcijaCenaService.listaCenaPoAukcijiZaGodinuPoSmeru(pd.getAukcija().getId(), getGodinaZaProracun(), getSmerIdZaProracun());
+            for (AukcijaCena ac : cene) {
+                rez += ac.getCena();
+            }            
+        }
+        return Double.valueOf(df.format(rez));
+    }
+
+    /**
+     * @return the putanjaDetaljService
+     */
+    public PutanjaDetaljService getPutanjaDetaljService() {
+        return putanjaDetaljService;
+    }
+
+    /**
+     * @param putanjaDetaljService the putanjaDetaljService to set
+     */
+    public void setPutanjaDetaljService(PutanjaDetaljService putanjaDetaljService) {
+        this.putanjaDetaljService = putanjaDetaljService;
+    }
+
+    /**
+     * @return the listaGodina
+     */
+    public List<Integer> getListaGodina() {
+        return listaGodina;
+    }
+
+    /**
+     * @param listaGodina the listaGodina to set
+     */
+    public void setListaGodina(List<Integer> listaGodina) {
+        this.listaGodina = listaGodina;
+    }
+
+    /**
+     * @return the godinaZaProracun
+     */
+    public Integer getGodinaZaProracun() {
+        return godinaZaProracun;
+    }
+
+    /**
+     * @param godinaZaProracun the godinaZaProracun to set
+     */
+    public void setGodinaZaProracun(Integer godinaZaProracun) {
+        this.godinaZaProracun = godinaZaProracun;
+    }
+
+    /**
+     * @return the smerIdZaProracun
+     */
+    public Long getSmerIdZaProracun() {
+        return smerIdZaProracun;
+    }
+
+    /**
+     * @param smerIdZaProracun the smerIdZaProracun to set
+     */
+    public void setSmerIdZaProracun(Long smerIdZaProracun) {
+        this.smerIdZaProracun = smerIdZaProracun;
+    }
     
 }

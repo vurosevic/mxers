@@ -19,5 +19,5 @@ public interface PutanjaDetaljService {
     public Optional<PutanjaDetalj> findById(Long id);
     public <S extends PutanjaDetalj> S save(S s);
     public void delete(PutanjaDetalj t);
-    
+    public List<PutanjaDetalj> listaPutanjaDetaljaPoDef(Long putanjaDef_id);    
 }
