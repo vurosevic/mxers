@@ -230,6 +230,27 @@ public class MBPutanjaDef {
         }
         return Double.valueOf(df.format(rez));
     }
+    
+    public Double daLiJeMinimumZaPravac(Long pravacId){
+        Double minimum = racunajCenuZaPravac(pravacId);
+        PutanjaDef putanja = putanjaDefService.findById(pravacId).get();
+                
+        for (PutanjaDef p : lista) {
+           if (putanja.getBerza().getId() == p.getBerza().getId()){
+               Double pm = racunajCenuZaPravac(p.getId());
+               if (minimum > pm){
+                   minimum = pm;
+               }
+           } 
+        }
+   
+//      if (minimum == racunajCenuZaPravac(pravacId))
+//          return "da";
+//      else return "ne";
+
+        return minimum;
+        
+    }
 
     /**
      * @return the putanjaDetaljService

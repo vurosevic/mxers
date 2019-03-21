@@ -76,3 +76,9 @@ a:link:hover, a:visited:hover  {
     overflow:hidden;
     text-overflow:ellipsis;    
 }
+
+
+.normal{
+   background-color:blue;
+   background-image:none;
+}

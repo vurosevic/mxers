@@ -67,7 +67,7 @@
                         <p:dataTable  id="tdDT" style="width: 100%" 
                                       value="#{MBPutanjaDef.lazyModel}" var="td" paginator="true" rows="10"                                
                                       paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                      rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                                      rowsPerPageTemplate="5,10,15" rowKey="#{td.id}" 
                                       selection="#{MBPutanjaDef.selectPutanjaDef}" lazy="true">
                             <f:facet name="header">
                                 <p:outputLabel value="Правци" />
@@ -84,7 +84,11 @@
                             <p:column>
                                 <f:facet name="header" >Укупна цена</f:facet>
                                 #{MBPutanjaDef.racunajCenuZaPravac(td.id)}
-                            </p:column>                              
+                            </p:column>  
+                            <p:column>
+                                <f:facet name="header" >Минимум</f:facet>
+                                #{MBPutanjaDef.daLiJeMinimumZaPravac(td.id)}
+                            </p:column>                             
                             <f:facet name="footer">
                                 <div style="text-align:left">   
 <!--                                <p:commandButton process="tdDT" update=":frmDatatableTdP:tdDT" action="#{MBPutanjaDef.refresh}" 
