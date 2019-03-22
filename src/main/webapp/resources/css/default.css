@@ -82,3 +82,8 @@ a:link:hover, a:visited:hover  {
    background-color:blue;
    background-image:none;
 }
+
+.colored {
+background-color: #FF0000;
+color: #FFFFFF;
+}

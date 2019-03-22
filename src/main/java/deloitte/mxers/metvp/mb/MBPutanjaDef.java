@@ -231,8 +231,9 @@ public class MBPutanjaDef {
         return Double.valueOf(df.format(rez));
     }
     
-    public Double daLiJeMinimumZaPravac(Long pravacId){
+    public Boolean daLiJeMinimumZaPravac(Long pravacId){
         Double minimum = racunajCenuZaPravac(pravacId);
+        Double pocetak = minimum;
         PutanjaDef putanja = putanjaDefService.findById(pravacId).get();
                 
         for (PutanjaDef p : lista) {
@@ -244,11 +245,13 @@ public class MBPutanjaDef {
            } 
         }
    
-//      if (minimum == racunajCenuZaPravac(pravacId))
-//          return "da";
-//      else return "ne";
+      if (minimum == pocetak)
+          if (minimum != 0.0)
+          return Boolean.TRUE;
+          else return Boolean.FALSE;
+      else return Boolean.FALSE;
 
-        return minimum;
+    //    return minimum;
         
     }
 
