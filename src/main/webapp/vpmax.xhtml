@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+               
+            <p:accordionPanel multiple="true">
+                <p:tab title="Финални сет података">
+                    <center>
+                        <p:panelGrid columns="6">
+                            <f:facet name="header">
+                                <p:outputLabel value="Финални сет" />
+                            </f:facet>
+
+                            <p:outputLabel value="" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(0).period}-#{MBVpMax.getFinalData(0).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpMax.getFinalData(1).period}-#{MBVpMax.getFinalData(1).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(2).period}-#{MBVpMax.getFinalData(2).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(3).period}-#{MBVpMax.getFinalData(3).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(4).period}-#{MBVpMax.getFinalData(4).godinaPerioda}" />
+
+                            <p:outputLabel value="BL" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(0).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(1).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(2).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(3).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(4).cena}" />
+
+                            <p:outputLabel value="PL" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(5).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(6).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(7).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(8).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(9).cena}" />                    
+
+                        </p:panelGrid>
+                    </center>
+                </p:tab>
+                <p:tab title="Извозни сет података"></p:tab>
+                <p:tab title="Увозни сет података"></p:tab>
+            </p:accordionPanel>
+    
+                
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
