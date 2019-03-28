@@ -1,0 +1,480 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">                
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="frmDatatableTd">   
+                <center>
+                <p:dataTable  id="tdDT" style="width: 100%" 
+                              value="#{MBSatnaOpterecenja.lazyModel}" var="td" paginator="true" rows="10"                                
+                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                              rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                              selection="#{MBSatnaOpterecenja.selectSatnaOpterecenja}" lazy="true">
+                    <f:facet name="header">
+                        <p:outputLabel value="Сатна оптерећења" />
+                    </f:facet>                    
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column style="width: 70px">
+                        <f:facet name="header" >Датум</f:facet>
+                        <div style="text-align: center;">
+                            <p:outputLabel style="text-align: center" value="#{td['datum']}" >
+                                <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </p:outputLabel>                 
+                        </div>                        
+                    </p:column>    
+                    <p:column>
+                        <f:facet name="header" >00</f:facet>
+                        <div style="text-align: center;">
+                         #{td.op00}   
+                        </div>
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >01</f:facet>
+                        <div style="text-align: center;">
+                         #{td.op01}   
+                        </div>
+                    </p:column>                      
+                    <p:column>
+                        <f:facet name="header" >02</f:facet>
+                        #{td.op02}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >03</f:facet>
+                        #{td.op03}
+                    </p:column>                     
+                    <p:column>
+                        <f:facet name="header" >04</f:facet>
+                        #{td.op04}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >05</f:facet>
+                        #{td.op05}
+                    </p:column>                     
+                    <p:column>
+                        <f:facet name="header" >06</f:facet>
+                        #{td.op06}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >07</f:facet>
+                        #{td.op07}
+                    </p:column>                        
+                    <p:column>
+                        <f:facet name="header" >08</f:facet>
+                        #{td.op08}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >09</f:facet>
+                        #{td.op09}
+                    </p:column>                        
+                    <p:column>
+                        <f:facet name="header" >10</f:facet>
+                        #{td.op10}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >11</f:facet>
+                        #{td.op11}
+                    </p:column>                     
+                    <p:column>
+                        <f:facet name="header" >12</f:facet>
+                        #{td.op12}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >13</f:facet>
+                        #{td.op13}
+                    </p:column>    
+                    
+                    <p:column>
+                        <f:facet name="header" >14</f:facet>
+                        #{td.op14}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >15</f:facet>
+                        #{td.op15}
+                    </p:column>                     
+                    <p:column>
+                        <f:facet name="header" >16</f:facet>
+                        #{td.op16}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >17</f:facet>
+                        #{td.op17}
+                    </p:column>                      
+
+                    <p:column>
+                        <f:facet name="header" >18</f:facet>
+                        #{td.op18}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >19</f:facet>
+                        #{td.op19}
+                    </p:column>                     
+                    <p:column>
+                        <f:facet name="header" >20</f:facet>
+                        #{td.op20}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >21</f:facet>
+                        #{td.op21}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header" >22</f:facet>
+                        #{td.op22}
+                    </p:column>                       
+                    <p:column>
+                        <f:facet name="header" >23</f:facet>
+                        #{td.op23}
+                    </p:column>                    
+                    
+                    <f:facet name="footer">
+                        <div style="text-align:left">                                                    
+                            <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
+                                icon="ui ui-icon-plus" value="Додај"  />
+                            <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBSatnaOpterecenja.selectSatnaOpterecenja}" 
+                                icon="ui ui-icon-pencil" value="Измени"  />                    
+                            <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBSatnaOpterecenja.selectSatnaOpterecenja}"
+                                icon="ui ui-icon-close" value="Бриши"  />                                                            
+                        </div>
+                 </f:facet>       
+                    <f:ajax event="rowSelectRadio" render="tdDT" />       
+                    <f:ajax event="rowUnselectCheckbox" render="tdDT" />   
+                </p:dataTable>   
+                </center>
+                <p:dialog header="Унос нове сатне потрошње за дан" widgetVar="tdDialogNovi" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:messages style="color:red" autoUpdate="true" />   
+                    <p:outputPanel id="tdDetailNovi" style="text-align:left;">
+                        <p:panelGrid  columns="9" rendered="true" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                            <p:outputLabel for="datum" value="Датум:" />
+                            <p:calendar id="datum" required="true" tabindex="0"
+                                        value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.datum}" 
+                                        pattern="dd.MM.yyyy" timeZone="Europe/Belgrade" />                              
+                            <p:message for="datum" display="icon" />
+                            <p:spacer/> <p:spacer/> <p:spacer/>    
+                            <p:spacer/> <p:spacer/> <p:spacer/>    
+                            
+                            <p:outputLabel for="op00" value="Сат 00:" />
+                            <p:inputText tabindex="1" id="op00" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op00}" >
+                            </p:inputText>
+                            <p:message for="op00" display="icon" />
+
+                            <p:outputLabel  for="op08" value="Сат 08:" />
+                            <p:inputText tabindex="9" id="op08" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op08}" >
+                            </p:inputText>
+                            <p:message for="op08" display="icon" />
+                            
+                            <p:outputLabel for="op16" value="Сат 16:" />
+                            <p:inputText tabindex="17" id="op16" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op16}" >
+                            </p:inputText>
+                            <p:message for="op16" display="icon" />
+                            
+                            <p:outputLabel for="op01" value="Сат 01:" />
+                            <p:inputText tabindex="2" id="op01" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op01}" >
+                            </p:inputText>
+                            <p:message for="op01" display="icon" />
+
+                            <p:outputLabel for="op09" value="Сат 09:" />
+                            <p:inputText tabindex="10" id="op09" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op09}" >
+                            </p:inputText>
+                            <p:message for="op09" display="icon" />
+                            
+                            <p:outputLabel for="op17" value="Сат 17:" />
+                            <p:inputText tabindex="18" id="op17" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op17}" >
+                            </p:inputText>
+                            <p:message for="op17" display="icon" />                            
+                            
+                            <p:outputLabel for="op02" value="Сат 02:" />
+                            <p:inputText tabindex="3" id="op02" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op02}" >
+                            </p:inputText>
+                            <p:message for="op02" display="icon" />
+
+                            <p:outputLabel for="op10" value="Сат 10:" />
+                            <p:inputText tabindex="11" id="op10" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op10}" >
+                            </p:inputText>
+                            <p:message for="op10" display="icon" />
+                            
+                            <p:outputLabel for="op18" value="Сат 18:" />
+                            <p:inputText tabindex="19" id="op18" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op18}" >
+                            </p:inputText>
+                            <p:message for="op18" display="icon" />                             
+
+                            <p:outputLabel for="op03" value="Сат 03:" />
+                            <p:inputText tabindex="4" id="op03" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op03}" >
+                            </p:inputText>
+                            <p:message for="op03" display="icon" />
+
+                            <p:outputLabel for="op11" value="Сат 11:" />
+                            <p:inputText tabindex="12" id="op11" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op11}" >
+                            </p:inputText>
+                            <p:message for="op11" display="icon" />
+                            
+                            <p:outputLabel for="op19" value="Сат 19:" />
+                            <p:inputText tabindex="20" id="op19" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op19}" >
+                            </p:inputText>
+                            <p:message for="op19" display="icon" />                             
+
+                            <p:outputLabel for="op04" value="Сат 04:" />
+                            <p:inputText tabindex="5" id="op04" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op04}" >
+                            </p:inputText>
+                            <p:message for="op04" display="icon" />
+
+                            <p:outputLabel for="op12" value="Сат 12:" />
+                            <p:inputText tabindex="13" id="op12" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op12}" >
+                            </p:inputText>
+                            <p:message for="op12" display="icon" />
+                            
+                            <p:outputLabel for="op20" value="Сат 20:" />
+                            <p:inputText tabindex="21" id="op20" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op20}" >
+                            </p:inputText>
+                            <p:message for="op20" display="icon" />                              
+                            
+                            <p:outputLabel for="op05" value="Сат 05:" />
+                            <p:inputText tabindex="6" id="op05" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op05}" >
+                            </p:inputText>
+                            <p:message for="op05" display="icon" />
+
+                            <p:outputLabel for="op13" value="Сат 13:" />
+                            <p:inputText tabindex="14" id="op13" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op13}" >
+                            </p:inputText>
+                            <p:message for="op13" display="icon" />
+                            
+                            <p:outputLabel for="op21" value="Сат 21:" />
+                            <p:inputText tabindex="22" id="op21" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op21}" >
+                            </p:inputText>
+                            <p:message for="op21" display="icon" />                             
+                            
+                            <p:outputLabel for="op06" value="Сат 06:" />
+                            <p:inputText tabindex="7" id="op06" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op06}" >
+                            </p:inputText>
+                            <p:message for="op06" display="icon" />
+
+                            <p:outputLabel for="op14" value="Сат 14:" />
+                            <p:inputText tabindex="15" id="op14" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op14}" >
+                            </p:inputText>
+                            <p:message for="op14" display="icon" />
+                            
+                            <p:outputLabel for="op22" value="Сат 22:" />
+                            <p:inputText tabindex="23" id="op22" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op22}" >
+                            </p:inputText>
+                            <p:message for="op22" display="icon" />     
+                            
+                            <p:outputLabel for="op07" value="Сат 07:" />
+                            <p:inputText tabindex="8" id="op07" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op07}" >
+                            </p:inputText>
+                            <p:message for="op07" display="icon" />
+
+                            <p:outputLabel for="op15" value="Сат 15:" />
+                            <p:inputText tabindex="16" id="op15" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op15}" >
+                            </p:inputText>
+                            <p:message for="op15" display="icon" />
+                            
+                            <p:outputLabel for="op23" value="Сат 23:" />
+                            <p:inputText tabindex="24" id="op23" required="true" value="#{MBSatnaOpterecenja.novaSatnaOpterecenja.op23}" >                               
+                            </p:inputText>
+                            <p:message for="op23" display="icon" />                            
+                            
+                        </p:panelGrid>
+                        <p:panel >
+                            <p:commandButton id="btnNovi" update="tdDetailNovi" process="@form" action="#{MBSatnaOpterecenja.dodajNovaSatnaOpterecenja()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogNovi').hide();" >                               
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false" onclick="PF('tdDialogNovi').hide()"/>                            
+                        </p:panel>                         
+                    </p:outputPanel>
+                    <f:ajax event="close" render="frmDatatableTd" /> 
+                 </p:dialog>                 
+                
+                <p:dialog header="Ажурирање сатне потрошње" widgetVar="tdDialogIzmeni" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">     
+                    <p:messages style="color:red" autoUpdate="true" /> 
+                    <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
+                        <h:form id="frmIzmenaTd">
+                        <p:panelGrid  columns="9" rendered="#{not empty MBSatnaOpterecenja.selectSatnaOpterecenja}" columnClasses="label,value" class="panelGridNoBorderDialog">
+ 
+                            <p:outputLabel for="datum" value="Датум:" />
+                            <p:calendar id="datum" required="true" tabindex="0"
+                                        value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.datum}" 
+                                        pattern="dd.MM.yyyy" timeZone="Europe/Belgrade" />                              
+                            <p:message for="datum" display="icon" />
+                            <p:spacer/> <p:spacer/> <p:spacer/>    
+                            <p:spacer/> <p:spacer/> <p:spacer/>    
+                            
+                            <p:outputLabel for="op00" value="Сат 00:" />
+                            <p:inputText tabindex="1" id="op00" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op00}" >
+                            </p:inputText>
+                            <p:message for="op00" display="icon" />
+
+                            <p:outputLabel  for="op08" value="Сат 08:" />
+                            <p:inputText tabindex="9" id="op08" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op08}" >
+                            </p:inputText>
+                            <p:message for="op08" display="icon" />
+                            
+                            <p:outputLabel for="op16" value="Сат 16:" />
+                            <p:inputText tabindex="17" id="op16" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op16}" >
+                            </p:inputText>
+                            <p:message for="op16" display="icon" />
+                            
+                            <p:outputLabel for="op01" value="Сат 01:" />
+                            <p:inputText tabindex="2" id="op01" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op01}" >
+                            </p:inputText>
+                            <p:message for="op01" display="icon" />
+
+                            <p:outputLabel for="op09" value="Сат 09:" />
+                            <p:inputText tabindex="10" id="op09" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op09}" >
+                            </p:inputText>
+                            <p:message for="op09" display="icon" />
+                            
+                            <p:outputLabel for="op17" value="Сат 17:" />
+                            <p:inputText tabindex="18" id="op17" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op17}" >
+                            </p:inputText>
+                            <p:message for="op17" display="icon" />                            
+                            
+                            <p:outputLabel for="op02" value="Сат 02:" />
+                            <p:inputText tabindex="3" id="op02" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op02}" >
+                            </p:inputText>
+                            <p:message for="op02" display="icon" />
+
+                            <p:outputLabel for="op10" value="Сат 10:" />
+                            <p:inputText tabindex="11" id="op10" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op10}" >
+                            </p:inputText>
+                            <p:message for="op10" display="icon" />
+                            
+                            <p:outputLabel for="op18" value="Сат 18:" />
+                            <p:inputText tabindex="19" id="op18" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op18}" >
+                            </p:inputText>
+                            <p:message for="op18" display="icon" />                             
+
+                            <p:outputLabel for="op03" value="Сат 03:" />
+                            <p:inputText tabindex="4" id="op03" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op03}" >
+                            </p:inputText>
+                            <p:message for="op03" display="icon" />
+
+                            <p:outputLabel for="op11" value="Сат 11:" />
+                            <p:inputText tabindex="12" id="op11" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op11}" >
+                            </p:inputText>
+                            <p:message for="op11" display="icon" />
+                            
+                            <p:outputLabel for="op19" value="Сат 19:" />
+                            <p:inputText tabindex="20" id="op19" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op19}" >
+                            </p:inputText>
+                            <p:message for="op19" display="icon" />                             
+
+                            <p:outputLabel for="op04" value="Сат 04:" />
+                            <p:inputText tabindex="5" id="op04" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op04}" >
+                            </p:inputText>
+                            <p:message for="op04" display="icon" />
+
+                            <p:outputLabel for="op12" value="Сат 12:" />
+                            <p:inputText tabindex="13" id="op12" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op12}" >
+                            </p:inputText>
+                            <p:message for="op12" display="icon" />
+                            
+                            <p:outputLabel for="op20" value="Сат 20:" />
+                            <p:inputText tabindex="21" id="op20" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op20}" >
+                            </p:inputText>
+                            <p:message for="op20" display="icon" />                              
+                            
+                            <p:outputLabel for="op05" value="Сат 05:" />
+                            <p:inputText tabindex="6" id="op05" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op05}" >
+                            </p:inputText>
+                            <p:message for="op05" display="icon" />
+
+                            <p:outputLabel for="op13" value="Сат 13:" />
+                            <p:inputText tabindex="14" id="op13" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op13}" >
+                            </p:inputText>
+                            <p:message for="op13" display="icon" />
+                            
+                            <p:outputLabel for="op21" value="Сат 21:" />
+                            <p:inputText tabindex="22" id="op21" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op21}" >
+                            </p:inputText>
+                            <p:message for="op21" display="icon" />                             
+                            
+                            <p:outputLabel for="op06" value="Сат 06:" />
+                            <p:inputText tabindex="7" id="op06" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op06}" >
+                            </p:inputText>
+                            <p:message for="op06" display="icon" />
+
+                            <p:outputLabel for="op14" value="Сат 14:" />
+                            <p:inputText tabindex="15" id="op14" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op14}" >
+                            </p:inputText>
+                            <p:message for="op14" display="icon" />
+                            
+                            <p:outputLabel for="op22" value="Сат 22:" />
+                            <p:inputText tabindex="23" id="op22" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op22}" >
+                            </p:inputText>
+                            <p:message for="op22" display="icon" />     
+                            
+                            <p:outputLabel for="op07" value="Сат 07:" />
+                            <p:inputText tabindex="8" id="op07" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op07}" >
+                            </p:inputText>
+                            <p:message for="op07" display="icon" />
+
+                            <p:outputLabel for="op15" value="Сат 15:" />
+                            <p:inputText tabindex="16" id="op15" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op15}" >
+                            </p:inputText>
+                            <p:message for="op15" display="icon" />
+                            
+                            <p:outputLabel for="op23" value="Сат 23:" />
+                            <p:inputText tabindex="24" id="op23" required="true" value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.op23}" >                               
+                            </p:inputText>
+                            <p:message for="op23" display="icon" />    
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBSatnaOpterecenja.selectSatnaOpterecenja}">
+                                <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBSatnaOpterecenja.azurirajSatnaOpterecenja()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false"  onclick="PF('tdDialogIzmeni').hide()"/>
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />
+                 </p:dialog>                
+
+                <p:dialog header="Потврда брисања" widgetVar="tdDialogBrisi" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">                    
+                    <p:outputPanel id="tdDetailBrisi" style="text-align:left;">
+                        <h:form id="frmBrisiTd">
+                            <p:panelGrid  columns="3" rendered="#{not empty MBSatnaOpterecenja.selectSatnaOpterecenja}" columnClasses="label,value" class="panelGridNoBorderDialog">        
+                            <h:outputText value="Датум:" />
+                            <h:outputLabel value="#{MBSatnaOpterecenja.selectSatnaOpterecenja.datum}" >
+                                 <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Belgrade"/>
+                            </h:outputLabel>
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBSatnaOpterecenja.selectSatnaOpterecenja}">
+                                <p:commandButton process="@form" action="#{MBSatnaOpterecenja.brisiSatnaOpterecenja()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15"/>
+                            <p:commandButton value="Одустани"  onclick="PF('tdDialogBrisi').hide()"/> 
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />                                        
+                 </p:dialog>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

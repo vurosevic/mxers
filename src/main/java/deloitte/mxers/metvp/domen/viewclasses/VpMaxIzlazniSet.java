@@ -41,7 +41,7 @@ public class VpMaxIzlazniSet {
     @Size(max = 10)
     private String godinaPerioda;
     
-    @Column(name = "Final_cena")
+    @Column(name = "Cena")
     private Double cena;      
 
     /**

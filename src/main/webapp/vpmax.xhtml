@@ -53,8 +53,70 @@
                         </p:panelGrid>
                     </center>
                 </p:tab>
-                <p:tab title="Извозни сет података"></p:tab>
-                <p:tab title="Увозни сет података"></p:tab>
+                
+                <p:tab title="Извозни сет података">
+                    <center>
+                        <p:panelGrid columns="6">
+                            <f:facet name="header">
+                                <p:outputLabel value="Извозни сет" />
+                            </f:facet>
+
+                            <p:outputLabel value="" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(0).period}-#{MBVpMax.getIzlazniSetData(0).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(1).period}-#{MBVpMax.getIzlazniSetData(1).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(2).period}-#{MBVpMax.getIzlazniSetData(2).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(3).period}-#{MBVpMax.getIzlazniSetData(3).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(4).period}-#{MBVpMax.getIzlazniSetData(4).godinaPerioda}" />
+
+                            <p:outputLabel value="BL" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(0).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(1).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(2).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(3).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(4).cena}" />
+
+                            <p:outputLabel value="PL" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(5).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(6).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(7).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(8).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getIzlazniSetData(9).cena}" />                    
+
+                        </p:panelGrid>
+                    </center>                    
+                </p:tab>
+                
+                <p:tab title="Увозни сет података">
+                    <center>
+                        <p:panelGrid columns="6">
+                            <f:facet name="header">
+                                <p:outputLabel value="Увозни сет" />
+                            </f:facet>
+
+                            <p:outputLabel value="" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(0).period}-#{MBVpMax.getUlazniSetData(0).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(1).period}-#{MBVpMax.getUlazniSetData(1).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(2).period}-#{MBVpMax.getUlazniSetData(2).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(3).period}-#{MBVpMax.getUlazniSetData(3).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(4).period}-#{MBVpMax.getUlazniSetData(4).godinaPerioda}" />
+
+                            <p:outputLabel value="BL" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(0).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(1).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(2).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(3).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(4).cena}" />
+
+                            <p:outputLabel value="PL" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(5).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(6).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(7).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(8).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getUlazniSetData(9).cena}" />                    
+
+                        </p:panelGrid>
+                    </center>                     
+                </p:tab>
             </p:accordionPanel>
     
                 
