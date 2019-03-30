@@ -1,0 +1,27 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package deloitte.mxers.metvp.repository;
+
+import deloitte.mxers.metvp.domen.viewclasses.SatnaPotrosnjaPeriodAvg;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+/**
+ *
+ * @author Vladimir
+ */
+@Repository("satnaPotrosnjaPeriodAvgDAO")
+public interface SatnaPotrosnjaPeriodAvgDAO extends CrudRepository<SatnaPotrosnjaPeriodAvg, Long>{
+
+    @Override
+    public List<SatnaPotrosnjaPeriodAvg> findAll();
+
+    @Override
+    public Optional<SatnaPotrosnjaPeriodAvg> findById(Long id);
+  
+}
