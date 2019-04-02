@@ -34,5 +34,10 @@ public class SatnaPotrosnjaPeriodNormServiceImpl implements SatnaPotrosnjaPeriod
     public Optional<SatnaPotrosnjaPeriodNorm> findById(Long id) {
         return satnaPotrosnjaPeriodNormDAO.findById(id);
     }
-    
+
+    @Override
+    public List<SatnaPotrosnjaPeriodNorm> findByGodinaPeriod(Integer godina, String sifraPerioda) {
+        return satnaPotrosnjaPeriodNormDAO.findByGodinaPeriod(godina, sifraPerioda);
+    }
+        
 }

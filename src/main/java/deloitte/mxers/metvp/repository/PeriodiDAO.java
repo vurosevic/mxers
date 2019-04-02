@@ -38,4 +38,7 @@ public interface PeriodiDAO extends CrudRepository<Periodi, Long>{
     @Query("SELECT DISTINCT p.sifraPerioda FROM Periodi p")
     public List<String> findAllSifra();     
     
+    @Query("SELECT DISTINCT p.sifraPerioda FROM Periodi p WHERE p.sifraPerioda LIKE 'Q%'")
+    public List<String> findAllSifraKvartal();    
+    
 }

@@ -54,6 +54,11 @@ public class PeriodiServiceImpl implements PeriodiService {
     public List<String> findAllSifra() {
         return periodiDAO.findAllSifra();
     }
+
+    @Override
+    public List<String> findAllSifraKvartal() {
+        return periodiDAO.findAllSifraKvartal();
+    }
     
     
     

@@ -34,5 +34,14 @@ public class SatnaPotrosnjaPeriodAvgServiceImpl implements SatnaPotrosnjaPeriodA
     public Optional<SatnaPotrosnjaPeriodAvg> findById(Long id) {
         return satnaPotrosnjaPeriodAvgDAO.findById(id);
     }
-    
+
+    @Override
+    public List<Integer> findAllGodina() {
+        return satnaPotrosnjaPeriodAvgDAO.findAllGodina();
+    }
+
+    @Override
+    public List<SatnaPotrosnjaPeriodAvg> findByGodinaPeriod(Integer godina, String sifraPerioda) {
+        return satnaPotrosnjaPeriodAvgDAO.findByGodinaPeriod(godina, sifraPerioda);
+    }        
 }

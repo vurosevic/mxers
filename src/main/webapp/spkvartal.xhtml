@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                
+                <div class="ui-g">
+                    
+                    <div class="ui-g-3">
+                      
+                    </div>                    
+                    
+                    <div class="ui-g-3">
+                        <h:form id="frmDatatableGodina">
+                            <p:panelGrid columns="2" class="panelGridNoBorder">                                                    
+                            <p:outputLabel value="Година: " />
+                            <p:selectOneMenu id="gzPso" style="width:150px" value="#{MBSPKvartal.selectGodina}"> 
+                                <f:selectItem itemLabel="Изаберите годину" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBSPKvartal.listaGodina}" var="gz" itemLabel="#{gz}" itemValue="#{gz}"/>
+                                <p:ajax event="change" update=":frmPanelSP:panelSP" listener="#{MBSPKvartal.init}"/>                                
+                                <p:ajax event="change" update=":frmGraph"/>
+<!--                                <p:ajax event="change" update=":frmGraph:graph1"/>
+                                <p:ajax event="change" update=":frmGraph:graph2"/> -->
+                            </p:selectOneMenu>                         
+                        </p:panelGrid>
+                        </h:form>
+                    </div>
+                    <div class="ui-g-3">
+                        
+                        <h:form id="frmDatatableSmer">
+                            <p:panelGrid columns="2" class="panelGridNoBorder">                                                    
+                            <p:outputLabel value="Квартал: " />
+                            <p:selectOneMenu id="gzPso2" style="width:150px" value="#{MBSPKvartal.selectKvartal}"> 
+                                <f:selectItem itemLabel="Изаберите квартал" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBSPKvartal.listaKvartala}" var="gz" itemLabel="#{gz}" itemValue="#{gz}"/> 
+                                <p:ajax event="change" update=":frmPanelSP:panelSP" listener="#{MBSPKvartal.init}"/> 
+                                <p:ajax event="change" update=":frmGraph"/>
+<!--                                <p:ajax event="change" update=":frmGraph:graph1"/> 
+                                <p:ajax event="change" update=":frmGraph:graph2"/> -->
+                            </p:selectOneMenu>                         
+                        </p:panelGrid>
+                        </h:form>                        
+                        
+                    </div>
+                    
+                    
+                    <div class="ui-g-3"></div>
+                </div>
+                
+                <div class="ui-g">   
+                    
+                    <div class="ui-g-6">
+                      <h:form id="frmPanelSP">
+                      <p:panelGrid id="panelSP" columns="6"> 
+                                  <f:facet name="header">
+                                      <p:outputLabel value="Прорачун типског дијаграма за квартал" />
+                                  </f:facet>
+
+                                  <p:outputLabel value="Време" />
+                                  <p:outputLabel value="#{MBSPKvartal.getNazivMeseca(0)}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getNazivMeseca(1)}" />
+                                  <p:outputLabel value="#{MBSPKvartal.getNazivMeseca(2)}" />
+                                  <p:outputLabel value="#{MBSPKvartal.selectKvartal}-avg" />
+                                  <p:outputLabel value="#{MBSPKvartal.selectKvartal}-norm" />
+
+                                  <p:outputLabel value="0" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg00}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg00}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg00}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg00}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm00}"/>
+
+                                  <p:outputLabel value="1" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg01}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg01}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg01}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg01}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm01}"/> 
+
+                                  <p:outputLabel value="2" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg02}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg02}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg02}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg02}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm02}"/>                             
+
+                                  <p:outputLabel value="3" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg03}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg03}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg03}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg03}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm03}"/>                             
+
+                                  <p:outputLabel value="4" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg04}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg04}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg04}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg04}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm04}"/>                             
+
+                                  <p:outputLabel value="5" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg05}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg05}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg05}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg05}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm05}"/>                             
+
+                                  <p:outputLabel value="6" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg06}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg06}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg06}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg06}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm06}"/>     
+
+                                  <p:outputLabel value="7" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg07}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg07}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg07}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg07}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm07}"/>   
+
+                                  <p:outputLabel value="8" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg08}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg08}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg08}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg08}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm08}"/>                             
+
+                                  <p:outputLabel value="9" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg09}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg09}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg09}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg09}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm09}"/>   
+
+                                  <p:outputLabel value="10" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg10}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg10}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg10}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg10}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm10}"/>                               
+
+                                  <p:outputLabel value="11" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg11}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg11}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg11}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg11}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm11}"/>                                                           
+
+                                  <p:outputLabel value="12" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg12}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg12}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg12}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg12}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm12}"/>                                                           
+
+                                  <p:outputLabel value="13" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg13}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg13}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg13}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg13}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm13}"/>    
+
+                                  <p:outputLabel value="14" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg14}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg14}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg14}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg14}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm14}"/>                                                           
+
+                                  <p:outputLabel value="15" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg15}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg15}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg15}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg15}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm15}"/>                            
+
+                                  <p:outputLabel value="16" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg16}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg16}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg16}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg16}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm16}"/>                            
+
+                                  <p:outputLabel value="17" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg17}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg17}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg17}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg17}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm17}"/>                            
+
+                                  <p:outputLabel value="18" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg18}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg18}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg18}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg18}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm18}"/>  
+
+                                  <p:outputLabel value="19" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg19}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg19}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg19}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg19}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm19}"/>                            
+
+                                  <p:outputLabel value="20" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg20}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg20}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg20}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg20}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm20}"/> 
+
+                                  <p:outputLabel value="21" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg21}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg21}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg21}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg21}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm21}"/>                             
+
+                                  <p:outputLabel value="22" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg22}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg22}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg22}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg22}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm22}"/>                             
+
+                                  <p:outputLabel value="23" />
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(0).opAvg23}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(1).opAvg23}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getMesecAvgData(2).opAvg23}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodAvgData().opAvg23}"/>
+                                  <p:outputLabel value="#{MBSPKvartal.getPeriodNormData().opNorm23}"/>                             
+                      </p:panelGrid>
+                      </h:form>
+                    </div> 
+                    
+
+                    
+                    <div class="ui-g-6">
+                        <h:form id="frmGraph">
+                          
+                            <p:tabView>
+                                <p:tab title="Апсолутне јединице">
+                                    <p:chart id="graph1" type="line" model="#{MBSPKvartal.lineModel1}" style="height:400px;"/>  
+                                </p:tab>
+                                <p:tab title="Релативне">
+                                    <p:chart id="graph2" type="line" model="#{MBSPKvartal.lineModel2}" style="height:400px;"/>  
+                                </p:tab>        
+                            </p:tabView>                            
+                            
+                        </h:form>
+                        
+                    </div>                      
+                </div> 
+                
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

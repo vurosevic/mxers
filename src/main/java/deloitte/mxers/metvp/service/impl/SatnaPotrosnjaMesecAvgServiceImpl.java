@@ -34,5 +34,12 @@ public class SatnaPotrosnjaMesecAvgServiceImpl implements SatnaPotrosnjaMesecAvg
     public Optional<SatnaPotrosnjaMesecAvg> findById(Long id) {
         return satnaPotrosnjaMesecAvgDAO.findById(id);
     }
+
+    @Override
+    public List<SatnaPotrosnjaMesecAvg> findByGodinaKvartal(Integer godina, String kvartal) {
+        return satnaPotrosnjaMesecAvgDAO.findByGodinaKvartal(godina, kvartal);
+    }
+    
+    
     
 }

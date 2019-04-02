@@ -17,5 +17,5 @@ public interface SatnaPotrosnjaMesecAvgService {
  
     public List<SatnaPotrosnjaMesecAvg> findAll();
     public Optional<SatnaPotrosnjaMesecAvg> findById(Long id);           
-    
+    public List<SatnaPotrosnjaMesecAvg> findByGodinaKvartal(Integer godina, String kvartal); 
 }

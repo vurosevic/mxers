@@ -36,76 +36,76 @@ public class SatnaPotrosnjaPeriodNorm implements Serializable {
     private String sifraPerioda;  
     
     @Column(name = "OpNorm_00")
-    private Integer opNorm00; 
+    private Double opNorm00; 
     
     @Column(name = "OpNorm_01")
-    private Integer opNorm01; 
+    private Double opNorm01; 
 
     @Column(name = "OpNorm_02")
-    private Integer opNorm02; 
+    private Double opNorm02; 
 
     @Column(name = "OpNorm_03")
-    private Integer opNorm03;
+    private Double opNorm03;
     
     @Column(name = "OpNorm_04")
-    private Integer opNorm04; 
+    private Double opNorm04; 
     
     @Column(name = "OpNorm_05")
-    private Integer opNorm05; 
+    private Double opNorm05; 
 
     @Column(name = "OpNorm_06")
-    private Integer opNorm06; 
+    private Double opNorm06; 
 
     @Column(name = "OpNorm_07")
-    private Integer opNorm07;   
+    private Double opNorm07;   
     
     @Column(name = "OpNorm_08")
-    private Integer opNorm08; 
+    private Double opNorm08; 
     
     @Column(name = "OpNorm_09")
-    private Integer opNorm09; 
+    private Double opNorm09; 
 
     @Column(name = "OpNorm_10")
-    private Integer opNorm10; 
+    private Double opNorm10; 
 
     @Column(name = "OpNorm_11")
-    private Integer opNorm11;
+    private Double opNorm11;
     
     @Column(name = "OpNorm_12")
-    private Integer opNorm12; 
+    private Double opNorm12; 
     
     @Column(name = "OpNorm_13")
-    private Integer opNorm13; 
+    private Double opNorm13; 
 
     @Column(name = "OpNorm_14")
-    private Integer opNorm14; 
+    private Double opNorm14; 
 
     @Column(name = "OpNorm_15")
-    private Integer opNorm15;  
+    private Double opNorm15;  
     
     @Column(name = "OpNorm_16")
-    private Integer opNorm16; 
+    private Double opNorm16; 
     
     @Column(name = "OpNorm_17")
-    private Integer opNorm17; 
+    private Double opNorm17; 
 
     @Column(name = "OpNorm_18")
-    private Integer opNorm18; 
+    private Double opNorm18; 
 
     @Column(name = "OpNorm_19")
-    private Integer opNorm19;
+    private Double opNorm19;
     
     @Column(name = "OpNorm_20")
-    private Integer opNorm20; 
+    private Double opNorm20; 
     
     @Column(name = "OpNorm_21")
-    private Integer opNorm21; 
+    private Double opNorm21; 
 
     @Column(name = "OpNorm_22")
-    private Integer opNorm22; 
+    private Double opNorm22; 
 
     @Column(name = "OpNorm_23")
-    private Integer opNorm23;     
+    private Double opNorm23;     
 
     /**
      * @return the id
@@ -152,336 +152,336 @@ public class SatnaPotrosnjaPeriodNorm implements Serializable {
     /**
      * @return the opNorm00
      */
-    public Integer getOpNorm00() {
+    public Double getOpNorm00() {
         return opNorm00;
     }
 
     /**
      * @param opNorm00 the opNorm00 to set
      */
-    public void setOpNorm00(Integer opNorm00) {
+    public void setOpNorm00(Double opNorm00) {
         this.opNorm00 = opNorm00;
     }
 
     /**
      * @return the opNorm01
      */
-    public Integer getOpNorm01() {
+    public Double getOpNorm01() {
         return opNorm01;
     }
 
     /**
      * @param opNorm01 the opNorm01 to set
      */
-    public void setOpNorm01(Integer opNorm01) {
+    public void setOpNorm01(Double opNorm01) {
         this.opNorm01 = opNorm01;
     }
 
     /**
      * @return the opNorm02
      */
-    public Integer getOpNorm02() {
+    public Double getOpNorm02() {
         return opNorm02;
     }
 
     /**
      * @param opNorm02 the opNorm02 to set
      */
-    public void setOpNorm02(Integer opNorm02) {
+    public void setOpNorm02(Double opNorm02) {
         this.opNorm02 = opNorm02;
     }
 
     /**
      * @return the opNorm03
      */
-    public Integer getOpNorm03() {
+    public Double getOpNorm03() {
         return opNorm03;
     }
 
     /**
      * @param opNorm03 the opNorm03 to set
      */
-    public void setOpNorm03(Integer opNorm03) {
+    public void setOpNorm03(Double opNorm03) {
         this.opNorm03 = opNorm03;
     }
 
     /**
      * @return the opNorm04
      */
-    public Integer getOpNorm04() {
+    public Double getOpNorm04() {
         return opNorm04;
     }
 
     /**
      * @param opNorm04 the opNorm04 to set
      */
-    public void setOpNorm04(Integer opNorm04) {
+    public void setOpNorm04(Double opNorm04) {
         this.opNorm04 = opNorm04;
     }
 
     /**
      * @return the opNorm05
      */
-    public Integer getOpNorm05() {
+    public Double getOpNorm05() {
         return opNorm05;
     }
 
     /**
      * @param opNorm05 the opNorm05 to set
      */
-    public void setOpNorm05(Integer opNorm05) {
+    public void setOpNorm05(Double opNorm05) {
         this.opNorm05 = opNorm05;
     }
 
     /**
      * @return the opNorm06
      */
-    public Integer getOpNorm06() {
+    public Double getOpNorm06() {
         return opNorm06;
     }
 
     /**
      * @param opNorm06 the opNorm06 to set
      */
-    public void setOpNorm06(Integer opNorm06) {
+    public void setOpNorm06(Double opNorm06) {
         this.opNorm06 = opNorm06;
     }
 
     /**
      * @return the opNorm07
      */
-    public Integer getOpNorm07() {
+    public Double getOpNorm07() {
         return opNorm07;
     }
 
     /**
      * @param opNorm07 the opNorm07 to set
      */
-    public void setOpNorm07(Integer opNorm07) {
+    public void setOpNorm07(Double opNorm07) {
         this.opNorm07 = opNorm07;
     }
 
     /**
      * @return the opNorm08
      */
-    public Integer getOpNorm08() {
+    public Double getOpNorm08() {
         return opNorm08;
     }
 
     /**
      * @param opNorm08 the opNorm08 to set
      */
-    public void setOpNorm08(Integer opNorm08) {
+    public void setOpNorm08(Double opNorm08) {
         this.opNorm08 = opNorm08;
     }
 
     /**
      * @return the opNorm09
      */
-    public Integer getOpNorm09() {
+    public Double getOpNorm09() {
         return opNorm09;
     }
 
     /**
      * @param opNorm09 the opNorm09 to set
      */
-    public void setOpNorm09(Integer opNorm09) {
+    public void setOpNorm09(Double opNorm09) {
         this.opNorm09 = opNorm09;
     }
 
     /**
      * @return the opNorm10
      */
-    public Integer getOpNorm10() {
+    public Double getOpNorm10() {
         return opNorm10;
     }
 
     /**
      * @param opNorm10 the opNorm10 to set
      */
-    public void setOpNorm10(Integer opNorm10) {
+    public void setOpNorm10(Double opNorm10) {
         this.opNorm10 = opNorm10;
     }
 
     /**
      * @return the opNorm11
      */
-    public Integer getOpNorm11() {
+    public Double getOpNorm11() {
         return opNorm11;
     }
 
     /**
      * @param opNorm11 the opNorm11 to set
      */
-    public void setOpNorm11(Integer opNorm11) {
+    public void setOpNorm11(Double opNorm11) {
         this.opNorm11 = opNorm11;
     }
 
     /**
      * @return the opNorm12
      */
-    public Integer getOpNorm12() {
+    public Double getOpNorm12() {
         return opNorm12;
     }
 
     /**
      * @param opNorm12 the opNorm12 to set
      */
-    public void setOpNorm12(Integer opNorm12) {
+    public void setOpNorm12(Double opNorm12) {
         this.opNorm12 = opNorm12;
     }
 
     /**
      * @return the opNorm13
      */
-    public Integer getOpNorm13() {
+    public Double getOpNorm13() {
         return opNorm13;
     }
 
     /**
      * @param opNorm13 the opNorm13 to set
      */
-    public void setOpNorm13(Integer opNorm13) {
+    public void setOpNorm13(Double opNorm13) {
         this.opNorm13 = opNorm13;
     }
 
     /**
      * @return the opNorm14
      */
-    public Integer getOpNorm14() {
+    public Double getOpNorm14() {
         return opNorm14;
     }
 
     /**
      * @param opNorm14 the opNorm14 to set
      */
-    public void setOpNorm14(Integer opNorm14) {
+    public void setOpNorm14(Double opNorm14) {
         this.opNorm14 = opNorm14;
     }
 
     /**
      * @return the opNorm15
      */
-    public Integer getOpNorm15() {
+    public Double getOpNorm15() {
         return opNorm15;
     }
 
     /**
      * @param opNorm15 the opNorm15 to set
      */
-    public void setOpNorm15(Integer opNorm15) {
+    public void setOpNorm15(Double opNorm15) {
         this.opNorm15 = opNorm15;
     }
 
     /**
      * @return the opNorm16
      */
-    public Integer getOpNorm16() {
+    public Double getOpNorm16() {
         return opNorm16;
     }
 
     /**
      * @param opNorm16 the opNorm16 to set
      */
-    public void setOpNorm16(Integer opNorm16) {
+    public void setOpNorm16(Double opNorm16) {
         this.opNorm16 = opNorm16;
     }
 
     /**
      * @return the opNorm17
      */
-    public Integer getOpNorm17() {
+    public Double getOpNorm17() {
         return opNorm17;
     }
 
     /**
      * @param opNorm17 the opNorm17 to set
      */
-    public void setOpNorm17(Integer opNorm17) {
+    public void setOpNorm17(Double opNorm17) {
         this.opNorm17 = opNorm17;
     }
 
     /**
      * @return the opNorm18
      */
-    public Integer getOpNorm18() {
+    public Double getOpNorm18() {
         return opNorm18;
     }
 
     /**
      * @param opNorm18 the opNorm18 to set
      */
-    public void setOpNorm18(Integer opNorm18) {
+    public void setOpNorm18(Double opNorm18) {
         this.opNorm18 = opNorm18;
     }
 
     /**
      * @return the opNorm19
      */
-    public Integer getOpNorm19() {
+    public Double getOpNorm19() {
         return opNorm19;
     }
 
     /**
      * @param opNorm19 the opNorm19 to set
      */
-    public void setOpNorm19(Integer opNorm19) {
+    public void setOpNorm19(Double opNorm19) {
         this.opNorm19 = opNorm19;
     }
 
     /**
      * @return the opNorm20
      */
-    public Integer getOpNorm20() {
+    public Double getOpNorm20() {
         return opNorm20;
     }
 
     /**
      * @param opNorm20 the opNorm20 to set
      */
-    public void setOpNorm20(Integer opNorm20) {
+    public void setOpNorm20(Double opNorm20) {
         this.opNorm20 = opNorm20;
     }
 
     /**
      * @return the opNorm21
      */
-    public Integer getOpNorm21() {
+    public Double getOpNorm21() {
         return opNorm21;
     }
 
     /**
      * @param opNorm21 the opNorm21 to set
      */
-    public void setOpNorm21(Integer opNorm21) {
+    public void setOpNorm21(Double opNorm21) {
         this.opNorm21 = opNorm21;
     }
 
     /**
      * @return the opNorm22
      */
-    public Integer getOpNorm22() {
+    public Double getOpNorm22() {
         return opNorm22;
     }
 
     /**
      * @param opNorm22 the opNorm22 to set
      */
-    public void setOpNorm22(Integer opNorm22) {
+    public void setOpNorm22(Double opNorm22) {
         this.opNorm22 = opNorm22;
     }
 
     /**
      * @return the opNorm23
      */
-    public Integer getOpNorm23() {
+    public Double getOpNorm23() {
         return opNorm23;
     }
 
     /**
      * @param opNorm23 the opNorm23 to set
      */
-    public void setOpNorm23(Integer opNorm23) {
+    public void setOpNorm23(Double opNorm23) {
         this.opNorm23 = opNorm23;
     }
     

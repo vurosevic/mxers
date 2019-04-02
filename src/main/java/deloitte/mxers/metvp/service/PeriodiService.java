@@ -21,4 +21,5 @@ public interface PeriodiService {
     public <S extends Periodi> S save(S s);
     public List<Periodi> findBySifra(String sifraPerioda);    
     public List<String> findAllSifra();    
+    public List<String> findAllSifraKvartal(); 
 }

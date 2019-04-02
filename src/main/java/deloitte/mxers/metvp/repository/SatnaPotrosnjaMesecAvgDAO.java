@@ -8,7 +8,9 @@ package deloitte.mxers.metvp.repository;
 import deloitte.mxers.metvp.domen.viewclasses.SatnaPotrosnjaMesecAvg;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,4 +26,7 @@ public interface SatnaPotrosnjaMesecAvgDAO extends CrudRepository<SatnaPotrosnja
     @Override
     public Optional<SatnaPotrosnjaMesecAvg> findById(Long id);        
     
+    @Query("SELECT sa FROM SatnaPotrosnjaMesecAvg sa WHERE godina = :godina AND kvartal = :kvartal")  
+    public List<SatnaPotrosnjaMesecAvg> findByGodinaKvartal(@Param("godina") Integer godina, @Param("kvartal") String kvartal); 
+     
 }

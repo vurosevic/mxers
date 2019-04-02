@@ -17,5 +17,6 @@ public interface SatnaPotrosnjaPeriodNormService {
     
     public List<SatnaPotrosnjaPeriodNorm> findAll();
     public Optional<SatnaPotrosnjaPeriodNorm> findById(Long id);     
+    public List<SatnaPotrosnjaPeriodNorm> findByGodinaPeriod(Integer godina, String sifraPerioda); 
     
 }

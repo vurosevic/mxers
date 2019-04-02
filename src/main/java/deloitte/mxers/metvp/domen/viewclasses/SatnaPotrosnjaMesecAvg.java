@@ -35,6 +35,9 @@ public class SatnaPotrosnjaMesecAvg implements Serializable {
     @Column(name = "Mesec")
     private Integer mesec;  
     
+    @Column(name = "Kvartal")
+    private String kvartal;
+    
     @Column(name = "OpAvg_00")
     private Integer opAvg00; 
     
@@ -485,6 +488,20 @@ public class SatnaPotrosnjaMesecAvg implements Serializable {
      */
     public void setMesec(Integer mesec) {
         this.mesec = mesec;
+    }
+
+    /**
+     * @return the kvartal
+     */
+    public String getKvartal() {
+        return kvartal;
+    }
+
+    /**
+     * @param kvartal the kvartal to set
+     */
+    public void setKvartal(String kvartal) {
+        this.kvartal = kvartal;
     }
     
 }
