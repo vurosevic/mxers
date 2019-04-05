@@ -29,6 +29,9 @@ public interface SatnaPotrosnjaPeriodAvgDAO extends CrudRepository<SatnaPotrosnj
     @Query("SELECT sa FROM SatnaPotrosnjaPeriodAvg sa WHERE godina = :godina AND sifraPerioda = :sifraPerioda")  
     public List<SatnaPotrosnjaPeriodAvg> findByGodinaPeriod(@Param("godina") Integer godina, @Param("sifraPerioda") String sifraPerioda); 
     
+    @Query("SELECT sa FROM SatnaPotrosnjaPeriodAvg sa WHERE godina = :godina ORDER BY sifraPerioda")  
+    public List<SatnaPotrosnjaPeriodAvg> findByGodina(@Param("godina") Integer godina);     
+    
     @Query("SELECT DISTINCT sa.godina FROM SatnaPotrosnjaPeriodAvg sa ORDER BY sa.godina")
     public List<Integer> findAllGodina();             
 }

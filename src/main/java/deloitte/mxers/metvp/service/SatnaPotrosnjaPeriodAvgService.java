@@ -18,5 +18,6 @@ public interface SatnaPotrosnjaPeriodAvgService {
     public List<SatnaPotrosnjaPeriodAvg> findAll();
     public Optional<SatnaPotrosnjaPeriodAvg> findById(Long id);    
     public List<SatnaPotrosnjaPeriodAvg> findByGodinaPeriod(Integer godina, String sifraPerioda); 
+    public List<SatnaPotrosnjaPeriodAvg> findByGodina(Integer godina); 
     public List<Integer> findAllGodina();
 }

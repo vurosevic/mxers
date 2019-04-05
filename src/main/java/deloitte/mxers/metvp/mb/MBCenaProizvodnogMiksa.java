@@ -49,6 +49,9 @@ public class MBCenaProizvodnogMiksa {
     @Autowired
     private PeriodiService periodiService;
     
+    @Autowired
+    private MBVpFinalSetJc mBVpFinalSetJc;
+    
     private String izabraniTip;
     
     private List<String> sifrePerioda;
@@ -307,6 +310,20 @@ public class MBCenaProizvodnogMiksa {
      */
     public void setSifrePerioda(List<String> sifrePerioda) {
         this.sifrePerioda = sifrePerioda;
+    }
+
+    /**
+     * @return the mBVpFinalSetJc
+     */
+    public MBVpFinalSetJc getmBVpFinalSetJc() {
+        return mBVpFinalSetJc;
+    }
+
+    /**
+     * @param mBVpFinalSetJc the mBVpFinalSetJc to set
+     */
+    public void setmBVpFinalSetJc(MBVpFinalSetJc mBVpFinalSetJc) {
+        this.mBVpFinalSetJc = mBVpFinalSetJc;
     }
     
 }

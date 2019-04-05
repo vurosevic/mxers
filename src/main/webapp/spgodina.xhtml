@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                
+                <div class="ui-g">
+                    
+                    <div class="ui-g-3">
+                      
+                    </div>                    
+                    
+                    <div class="ui-g-3">
+                        <h:form id="frmDatatableGodina">
+                            <p:panelGrid columns="2" class="panelGridNoBorder">                                                    
+                            <p:outputLabel value="Година: " />
+                            <p:selectOneMenu id="gzPso" style="width:150px" value="#{MBSPGodina.selectGodina}"> 
+                                <f:selectItem itemLabel="Изаберите годину" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBSPGodina.listaGodina}" var="gz" itemLabel="#{gz}" itemValue="#{gz}"/>
+                                <p:ajax event="change" update=":frmPanelSP:panelSP" listener="#{MBSPGodina.init}"/>                                
+                                <p:ajax event="change" update=":frmGraph"/>
+                            </p:selectOneMenu>                         
+                        </p:panelGrid>
+                        </h:form>
+                    </div>
+                    <div class="ui-g-3">
+                                              
+                    </div>
+                    
+                    
+                    <div class="ui-g-3"></div>
+                </div>
+                
+                <div class="ui-g">   
+                    
+                    <div class="ui-g-6">
+                      <h:form id="frmPanelSP">
+                      <p:panelGrid id="panelSP" columns="7"> 
+                                  <f:facet name="header">
+                                      <p:outputLabel value="Прорачун типског дијаграма за годину" />
+                                  </f:facet>
+
+                                  <p:outputLabel value="Време" />
+                                  <p:outputLabel value="Q1"/>
+                                  <p:outputLabel value="Q2" />
+                                  <p:outputLabel value="Q3" />
+                                  <p:outputLabel value="Q4" />
+                                  <p:outputLabel value="YR-avg" />
+                                  <p:outputLabel value="YR-norm" />
+
+                                  <p:outputLabel value="0" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg00}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg00}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg00}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg00}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg00}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm00}"/>
+
+                                  <p:outputLabel value="1" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg01}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg01}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg01}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg01}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg01}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm01}"/>
+
+                                  <p:outputLabel value="2" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg02}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg02}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg02}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg02}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg02}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm02}"/>                             
+
+                                  <p:outputLabel value="3" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg03}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg03}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg03}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg03}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg03}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm03}"/>                            
+
+                                  <p:outputLabel value="4" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg04}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg04}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg04}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg04}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg04}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm04}"/>                            
+
+                                  <p:outputLabel value="5" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg05}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg05}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg05}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg05}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg05}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm05}"/>                            
+
+                                  <p:outputLabel value="6" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg06}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg06}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg06}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg06}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg06}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm06}"/>     
+
+                                  <p:outputLabel value="7" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg07}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg07}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg07}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg07}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg07}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm07}"/>  
+
+                                  <p:outputLabel value="8" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg08}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg08}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg08}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg08}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg08}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm08}"/>                             
+
+                                  <p:outputLabel value="9" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg09}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg09}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg09}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg09}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg09}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm09}"/>  
+
+                                  <p:outputLabel value="10" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg10}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg10}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg10}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg10}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg10}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm10}"/>                              
+
+                                  <p:outputLabel value="11" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg11}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg11}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg11}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg11}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg11}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm11}"/>                                                             
+
+                                  <p:outputLabel value="12" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg12}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg12}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg12}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg12}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg12}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm12}"/>                                                           
+
+                                  <p:outputLabel value="13" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg13}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg13}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg13}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg13}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg13}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm13}"/>   
+
+                                  <p:outputLabel value="14" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg14}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg14}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg14}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg14}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg14}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm14}"/>                                                          
+
+                                  <p:outputLabel value="15" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg15}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg15}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg15}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg15}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg15}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm15}"/>                            
+
+                                  <p:outputLabel value="16" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg16}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg16}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg16}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg16}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg16}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm16}"/>                             
+
+                                  <p:outputLabel value="17" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg17}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg17}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg17}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg17}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg17}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm17}"/>                             
+
+                                  <p:outputLabel value="18" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg18}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg18}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg18}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg18}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg18}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm18}"/>  
+
+                                  <p:outputLabel value="19" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg19}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg19}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg19}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg19}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg19}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm19}"/>                            
+
+                                  <p:outputLabel value="20" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg20}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg20}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg20}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg20}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg20}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm20}"/>  
+
+                                  <p:outputLabel value="21" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg21}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg21}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg21}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg21}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg21}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm21}"/>                             
+
+                                  <p:outputLabel value="22" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg22}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg22}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg22}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg22}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg22}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm22}"/>                             
+
+                                  <p:outputLabel value="23" />
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(0).opAvg23}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(1).opAvg23}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(2).opAvg23}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(3).opAvg23}"/>                                  
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodAvgData(4).opAvg23}"/>
+                                  <p:outputLabel value="#{MBSPGodina.getPeriodNormData().opNorm23}"/>                            
+                      </p:panelGrid>
+                      </h:form>
+                    </div> 
+                    
+
+                    
+                    <div class="ui-g-6">
+                        <h:form id="frmGraph">
+                          
+                            <p:tabView>
+                                <p:tab title="Апсолутне јединице">
+                                    <p:chart id="graph1" type="line" model="#{MBSPGodina.lineModel1}" style="height:400px;"/>  
+                                </p:tab>
+                                <p:tab title="Релативне">
+                                    <p:chart id="graph2" type="line" model="#{MBSPGodina.lineModel2}" style="height:400px;"/>  
+                                </p:tab>        
+                            </p:tabView>                            
+                            
+                        </h:form>
+                        
+                    </div>                      
+                </div> 
+                
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

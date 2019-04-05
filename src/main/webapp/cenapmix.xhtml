@@ -20,55 +20,156 @@
             </ui:define>
 
             <ui:define name="content">  
-                <h:form id="frmCenaMix">
-                <center>
-                    <p:panelGrid columns="2" class="panelGridNoBorderDialog">
-                        <f:facet name="header">
-<!--                            <p:graphicImage name="demo/images/misc/kobe.png" />-->
-                        <p:outputLabel value="Одређивање цене производног микса" />
-                        </f:facet>
+                
+            <div class="ui-g">
+                <div class="ui-g-6">
+                        <h:form id="frmCenaMix">
+                        <center>
+                           <p:panelGrid columns="2" class="panelGridNoBorderDialog">
+                               <f:facet name="header">
+       <!--                            <p:graphicImage name="demo/images/misc/kobe.png" />-->
+                               <p:outputLabel value="Одређивање цене производног микса" />
+                               </f:facet>
 
-                        <p:outputLabel for="period" value="Тип:" />
-                        <p:selectOneMenu id="period" dynamic="true" value="#{MBCenaProizvodnogMiksa.izabraniTip}">
-                            <f:selectItem itemLabel="Изабери тип" itemValue="" />
-                            <f:selectItems value="#{MBCenaProizvodnogMiksa.sifrePerioda}" />
-                        </p:selectOneMenu>
-                        
-                        <p:outputLabel for="godinaod" value="Година од:" />
-                        <p:inputText id="godinaod" value="#{MBCenaProizvodnogMiksa.godinaOd}" />                       
-                        
-                        <p:outputLabel for="godinado" value="Година до:" />
-                        <p:inputText id="godinado" value="#{MBCenaProizvodnogMiksa.godinaDo}" />                        
+                               <p:outputLabel for="period" value="Тип:" />
+                               <p:selectOneMenu id="period" dynamic="true" value="#{MBCenaProizvodnogMiksa.izabraniTip}">
+                                   <f:selectItem itemLabel="Изабери тип" itemValue="" />
+                                   <f:selectItems value="#{MBCenaProizvodnogMiksa.sifrePerioda}" />
+                               </p:selectOneMenu>
 
-                        <p:outputLabel for="troskoviers" value="Остали трошкови ЕРС-а [%]:" />
-                        <p:inputText id="troskoviers" value="#{MBCenaProizvodnogMiksa.procenatTroskovaErs}" /> 
-                        
-                        <p:outputLabel for="ebit" value="Жељена ЕБИТ [%]:" />
-                        <p:inputText id="ebit" value="#{MBCenaProizvodnogMiksa.ebit}" />                         
-                        
-                        <p:outputLabel for="inflacija" value="Процењена инфлација за наредну годину [%]:" />
-                        <p:inputText id="inflacija" value="#{MBCenaProizvodnogMiksa.procenjenaInflacija}" />                                                 
+                               <p:outputLabel for="godinaod" value="Година од:" />
+                               <p:inputText id="godinaod" value="#{MBCenaProizvodnogMiksa.godinaOd}" />                       
 
-                        <p:separator/>
-                        <p:commandButton process="@form" update="frmCenaMix" value="Израчунај" action="#{MBCenaProizvodnogMiksa.racunaj()}"/>
-                        
-                        <p:outputLabel for="troskovibalansiranja" value="Укупни трошкови балансирања:" />
-                        <p:inputText id="troskovibalansiranja" value="#{MBCenaProizvodnogMiksa.ukupniTroskoviBalansiranja}" />  
-                        
-                        <p:outputLabel for="prosecnaCena" value="Цена производног микса:" />
-                        <p:inputText id="prosecnaCena" value="#{MBCenaProizvodnogMiksa.prosecnaCena}" />                         
-                        
-                        <p:outputLabel for="troskovipgk" value="Трошкови прекограничних капацитета:" />
-                        <p:inputText id="troskovipgk" value="#{MBCenaProizvodnogMiksa.troskoviPgk}" />   
-                        
-                        <p:separator/><p:separator/>
-                        
-                        <p:outputLabel for="cvpmin" value="Најнижа вредност велепродајне цене:" />
-                        <p:inputText id="cvpmin" value="#{MBCenaProizvodnogMiksa.cvpmin}" />                        
+                               <p:outputLabel for="godinado" value="Година до:" />
+                               <p:inputText id="godinado" value="#{MBCenaProizvodnogMiksa.godinaDo}" />                        
 
-                    </p:panelGrid>                    
-                </center>
-                </h:form>
+                               <p:outputLabel for="troskoviers" value="Остали трошкови ЕРС-а [%]:" />
+                               <p:inputText id="troskoviers" value="#{MBCenaProizvodnogMiksa.procenatTroskovaErs}" /> 
+
+                               <p:outputLabel for="ebit" value="Жељена ЕБИТ [%]:" />
+                               <p:inputText id="ebit" value="#{MBCenaProizvodnogMiksa.ebit}" />                         
+
+                               <p:outputLabel for="inflacija" value="Процењена инфлација за наредну годину [%]:" />
+                               <p:inputText id="inflacija" value="#{MBCenaProizvodnogMiksa.procenjenaInflacija}" />                                                 
+
+                               <p:separator/>
+                               <p:commandButton process="@form" update="frmCenaMix" value="Израчунај" action="#{MBCenaProizvodnogMiksa.racunaj()}"/>
+
+                               <p:outputLabel for="troskovibalansiranja" value="Укупни трошкови балансирања:" />
+                               <p:inputText id="troskovibalansiranja" value="#{MBCenaProizvodnogMiksa.ukupniTroskoviBalansiranja}" />  
+
+                               <p:outputLabel for="prosecnaCena" value="Цена производног микса:" />
+                               <p:inputText id="prosecnaCena" value="#{MBCenaProizvodnogMiksa.prosecnaCena}" />                         
+
+                               <p:outputLabel for="troskovipgk" value="Трошкови прекограничних капацитета:" />
+                               <p:inputText id="troskovipgk" value="#{MBCenaProizvodnogMiksa.troskoviPgk}" />   
+
+                               <p:separator/><p:separator/>
+
+                               <p:outputLabel for="cvpmin" value="Најнижа вредност велепродајне цене:" />
+                               <p:inputText id="cvpmin" value="#{MBCenaProizvodnogMiksa.cvpmin}" />                        
+
+                           </p:panelGrid>                    
+                       </center>
+                       </h:form>                   
+                </div>
+                
+                
+                <div class="ui-g-6">
+                    <center>
+                        
+                        <p:panelGrid columns="4">
+                            <f:facet name="header">
+                                <p:outputLabel value="Коефицијенти" />
+                            </f:facet>
+                            
+                            <p:outputLabel value="Период" />
+                            <p:outputLabel value="K(bl+pl)"/>
+                            <p:outputLabel value="Kbl" />
+                            <p:outputLabel value="Kpl" />    
+                            
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(0).period}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(0).kBlPl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(0).kBl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(0).kPl}" />
+                            
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(1).period}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(1).kBlPl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(1).kBl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(1).kPl}" />
+
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(2).period}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(2).kBlPl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(2).kBl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(2).kPl}" />
+                            
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(3).period}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(3).kBlPl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(3).kBl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(3).kPl}" />                            
+
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).period}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).kBlPl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).kBl}" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).kPl}" />                            
+                        </p:panelGrid>
+                        
+                        <p:spacer />
+                        
+                        <p:panelGrid columns="6">
+                            <f:facet name="header">
+                                <p:outputLabel value="Финални сет" />
+                            </f:facet>
+
+                            <p:outputLabel value="" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(0).period}-#{MBVpMax.getFinalData(0).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpMax.getFinalData(1).period}-#{MBVpMax.getFinalData(1).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(2).period}-#{MBVpMax.getFinalData(2).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(3).period}-#{MBVpMax.getFinalData(3).godinaPerioda}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(4).period}-#{MBVpMax.getFinalData(4).godinaPerioda}" />
+
+                            <p:outputLabel value="BL" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(0).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(1).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(2).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(3).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(4).cena}" />
+
+                            <p:outputLabel value="PL" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(5).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(6).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(7).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(8).cena}" />
+                            <p:outputLabel value="#{MBVpMax.getFinalData(9).cena}" />                    
+
+                        </p:panelGrid>
+                        
+                        <p:spacer/>
+                        
+                        <p:panelGrid columns="6">
+                            <f:facet name="header">
+                                <p:outputLabel value="Јединствена цена" />
+                            </f:facet>
+
+                            <p:outputLabel value="" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(0).period}-#{MBVpFinalSetJc.getFinalSetJcData(0).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(1).period}-#{MBVpFinalSetJc.getFinalSetJcData(1).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(2).period}-#{MBVpFinalSetJc.getFinalSetJcData(2).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(3).period}-#{MBVpFinalSetJc.getFinalSetJcData(3).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).period}-#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).godinaPerioda}"/>
+                            
+                            <p:outputLabel value="" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(0).cenaJc}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(1).cenaJc}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(2).cenaJc}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(3).cenaJc}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).cenaJc}"/> 
+                        </p:panelGrid>
+                    </center>                    
+                </div>
+            </div>                
+                
+
             </ui:define>
 
             <ui:define name="bottom">
