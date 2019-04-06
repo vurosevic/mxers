@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="top">                
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="frmDatatableTd">   
+                <center>
+                <p:dataTable  id="tdDT" style="width: 80%" 
+                              value="#{MBKonkurencijaCene.lazyModel}" var="td" paginator="true" rows="10"                                
+                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                              rowsPerPageTemplate="5,10,15" rowKey="#{td.id}"
+                              selection="#{MBKonkurencijaCene.selectKonkurencijaCene}" lazy="true">
+                    <f:facet name="header">
+                        <p:outputLabel value="Цене конкуренције" />
+                    </f:facet>                    
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column>
+                        <f:facet name="header" >Назив конкурентске фирме</f:facet>
+                        #{td.konkurencija.naziv}
+                    </p:column>    
+                    <p:column>
+                        <f:facet name="header" >Производ</f:facet>
+                        #{td.period}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header" >Година</f:facet>
+                        #{td.godinaPerioda}
+                    </p:column>           
+                    <p:column>
+                        <f:facet name="header" >Цена</f:facet>
+                        #{td.cena}
+                    </p:column>  
+                    <p:column>
+                        <f:facet name="header" >Назив купца</f:facet>
+                        #{td.nazivKupca}
+                    </p:column>                    
+                    <f:facet name="footer">
+                        <div style="text-align:left">                                                    
+                            <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
+                                icon="ui ui-icon-plus" value="Додај"  />
+                            <p:commandButton id="btnEdit" process="tdDT" update=":frmDatatableTd:tdDetailIzmeni" oncomplete="PF('tdDialogIzmeni').show()" disabled="#{empty MBKonkurencijaCene.selectKonkurencijaCene}" 
+                                icon="ui ui-icon-pencil" value="Измени"  />                    
+                            <p:commandButton id="btnDelete" process="tdDT" update=":frmDatatableTd:tdDetailBrisi" oncomplete="PF('tdDialogBrisi').show()" disabled="#{empty MBKonkurencijaCene.selectKonkurencijaCene}"
+                                icon="ui ui-icon-close" value="Бриши"  />                                                            
+                        </div>
+                 </f:facet>       
+                    <f:ajax event="rowSelectRadio" render="tdDT" />       
+                    <f:ajax event="rowUnselectCheckbox" render="tdDT" />   
+                </p:dataTable>   
+                </center>
+                <p:dialog header="Унос новог податка о цени конкуренције" widgetVar="tdDialogNovi" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:messages style="color:red" autoUpdate="true" />   
+                    <p:outputPanel id="tdDetailNovi" style="text-align:left;">
+                        <p:panelGrid  columns="3" rendered="true" columnClasses="label,value" class="panelGridNoBorderDialog">
+
+                            <p:outputLabel for="konkurencija" value="Конкуренска фирма:" />
+                            <p:selectOneMenu id="konkurencija" required="true" style="width:150px" value="#{MBKonkurencijaCene.selectKonkurencijaId}">
+                                <f:selectItem itemLabel="Изабери конкуренску фирму" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{MBKonkurencija.lista}" var="konk" itemLabel="#{konk.naziv}" itemValue="#{konk.id}"/>
+                            </p:selectOneMenu> 
+                            <p:spacer/>
+                            
+                            <p:outputLabel for="proizvod" value="Производ:" />
+                            <p:selectOneMenu id="proizvod" dynamic="true" value="#{MBKonkurencijaCene.novaKonkurencijaCene.period}">
+                               <f:selectItem itemLabel="Изабери производ" itemValue="" />
+                               <f:selectItems value="#{MBKonkurencijaCene.sifrePerioda}" />
+                            </p:selectOneMenu>                            
+                            <p:spacer/>                            
+
+                            <p:outputLabel for="godina" value="Производ:" />
+                            <p:selectOneMenu id="godina" dynamic="true" value="#{MBKonkurencijaCene.novaKonkurencijaCene.godinaPerioda}">
+                               <f:selectItem itemLabel="Изабери годину" itemValue="" />
+                               <f:selectItems value="#{MBKonkurencijaCene.godinePerioda}" />
+                            </p:selectOneMenu>                            
+                            <p:spacer/>                                                       
+
+                            <p:outputLabel for="cena" value="Цена:" />
+                            <p:inputText id="cena" required="true" value="#{MBKonkurencijaCene.novaKonkurencijaCene.cena}" >
+                                <p:ajax update="cena" event="keyup" />
+                            </p:inputText>
+                            <p:message for="cena" display="icon" />  
+
+                            <p:outputLabel for="nazivkupca" value="Назив купца:" />
+                            <p:inputText id="nazivkupca" required="true" value="#{MBKonkurencijaCene.novaKonkurencijaCene.nazivKupca}" >
+                                <p:ajax update="nazivkupca" event="keyup" />
+                            </p:inputText>
+                            <p:message for="nazivkupca" display="icon" />                              
+                            
+                        </p:panelGrid>
+                        <p:panel >
+                            <p:commandButton id="btnNovi" update="tdDetailNovi" process="@form" action="#{MBKonkurencijaCene.dodajNovuKonkurencijuCenu()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogNovi').hide();" >                               
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false" onclick="PF('tdDialogNovi').hide()"/>                            
+                        </p:panel>                         
+                    </p:outputPanel>
+                    <f:ajax event="close" render="frmDatatableTd" /> 
+                 </p:dialog>                 
+                
+                <p:dialog header="Ажурирање цене конкуренције" widgetVar="tdDialogIzmeni" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">     
+                    <p:messages style="color:red" autoUpdate="true" /> 
+                    <p:outputPanel id="tdDetailIzmeni" style="text-align:left;">
+                        <h:form id="frmIzmenaTd">
+                            <p:panelGrid  columns="3" rendered="#{not empty MBKonkurencijaCene.selectKonkurencijaCene}" columnClasses="label,value" class="panelGridNoBorderDialog">
+ 
+                            <p:outputLabel for="konkurencija" value="Конкуренска фирма:" />
+                            <p:selectOneMenu id="konkurencija" required="false" style="width:150px" value="#{MBKonkurencijaCene.selectKonkurencijaId}">
+                                <f:selectItem itemLabel="#{MBKonkurencijaCene.selectKonkurencijaCene.konkurencija.naziv}" itemValue="#{MBKonkurencijaCene.selectKonkurencijaCene.konkurencija.id}" noSelectionOption="true" />
+                                <f:selectItems value="#{MBKonkurencija.lista}" var="konk" itemLabel="#{konk.naziv}" itemValue="#{konk.id}"/>
+                            </p:selectOneMenu> 
+                            <p:spacer/>
+                            
+                            <p:outputLabel for="proizvod" value="Производ:" />
+                            <p:selectOneMenu id="proizvod" dynamic="true" value="#{MBKonkurencijaCene.selectKonkurencijaCene.period}">
+                                <f:selectItem itemLabel="#{MBKonkurencijaCene.selectKonkurencijaCene.period}" itemValue="#{MBKonkurencijaCene.selectKonkurencijaCene.period}" noSelectionOption="true" />
+                               <f:selectItems value="#{MBKonkurencijaCene.sifrePerioda}" />
+                            </p:selectOneMenu>                            
+                            <p:spacer/>                            
+
+                            <p:outputLabel for="godina" value="Година:" />
+                            <p:selectOneMenu id="godina" dynamic="true" value="#{MBKonkurencijaCene.selectKonkurencijaCene.godinaPerioda}">
+                                <f:selectItem itemLabel="#{MBKonkurencijaCene.selectKonkurencijaCene.godinaPerioda}" itemValue="#{MBKonkurencijaCene.selectKonkurencijaCene.godinaPerioda}" noSelectionOption="true" />
+                               <f:selectItems value="#{MBKonkurencijaCene.godinePerioda}" />
+                            </p:selectOneMenu>                            
+                            <p:spacer/>                                                       
+
+                            <p:outputLabel for="cena" value="Цена:" />
+                            <p:inputText id="cena" required="true" value="#{MBKonkurencijaCene.selectKonkurencijaCene.cena}" >
+                            </p:inputText>
+                            <p:message for="cena" display="icon" />  
+
+                            <p:outputLabel for="nazivkupca" value="Назив купца:" />
+                            <p:inputText id="nazivkupca" required="true" value="#{MBKonkurencijaCene.selectKonkurencijaCene.nazivKupca}" >
+                            </p:inputText>
+                            <p:message for="nazivkupca" display="icon" />   
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBKonkurencijaCene.selectKonkurencijaCene}">
+                                <p:commandButton process="@form" update="frmIzmenaTd" action="#{MBKonkurencijaCene.azurirajKonkurencijuCenu()}" value="Сачувај" oncomplete="if (!args.validationFailed) PF('tdDialogIzmeni').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15" />
+                            <p:commandButton value="Одустани" ajax="false"  onclick="PF('tdDialogIzmeni').hide()"/>
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />
+                 </p:dialog>                
+
+                <p:dialog header="Потврда брисања" widgetVar="tdDialogBrisi" modal="true"                                                     
+                          showEffect="fade" hideEffect="fade" resizable="false">                    
+                    <p:outputPanel id="tdDetailBrisi" style="text-align:left;">
+                        <h:form id="frmBrisiTd">
+                            <p:panelGrid  columns="2" rendered="#{not empty MBKonkurencijaCene.selectKonkurencijaCene}" columnClasses="label,value" class="panelGridNoBorderDialog">        
+                            <h:outputText value="Назив конкурентске фирме:" />
+                            <h:outputLabel value="#{MBKonkurencijaCene.selectKonkurencijaCene.konkurencija.naziv}" />
+
+                            <h:outputText value="Производ:" />
+                            <h:outputLabel value="#{MBKonkurencijaCene.selectKonkurencijaCene.period}" /> 
+                            
+                            <h:outputText value="Година:" />
+                            <h:outputLabel value="#{MBKonkurencijaCene.selectKonkurencijaCene.godinaPerioda}" /> 
+                            
+                            <h:outputText value="Цена:" />
+                            <h:outputLabel value="#{MBKonkurencijaCene.selectKonkurencijaCene.cena}" /> 
+                            
+                            <h:outputText value="Назив купца:" />
+                            <h:outputLabel value="#{MBKonkurencijaCene.selectKonkurencijaCene.nazivKupca}" /> 
+
+                        </p:panelGrid>
+                            <p:panel rendered="#{not empty MBKonkurencijaCene.selectKonkurencijaCene}">
+                            <p:commandButton process="@form" action="#{MBKonkurencijaCene.brisiKonkurencijuCenu()}" value="Бриши" oncomplete="PF('tdDialogBrisi').hide()"> 
+                            </p:commandButton>
+                            <p:spacer width="15"/>
+                            <p:commandButton value="Одустани"  onclick="PF('tdDialogBrisi').hide()"/> 
+                        </p:panel>                                                       
+                        </h:form>
+                    </p:outputPanel>
+                    <f:ajax event="close" render="tdDT" />                                        
+                 </p:dialog>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

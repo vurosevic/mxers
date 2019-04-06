@@ -5,7 +5,7 @@
  */
 package deloitte.mxers.metvp.service;
 
-import deloitte.mxers.metvp.domen.BerzaPodaci;
+import deloitte.mxers.metvp.domen.Konkurencija;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,12 +13,11 @@ import java.util.Optional;
  *
  * @author Vladimir
  */
-public interface BerzaPodaciService {
-
-    public List<BerzaPodaci> findAll();
-    public Optional<BerzaPodaci> findById(Long id);
-    public <S extends BerzaPodaci> S save(S s);
-    public void delete(BerzaPodaci t);  
-    public List<String> findAllGodinePerioda(); 
+public interface KonkurencijaService {
+    
+    public List<Konkurencija> findAll();
+    public Optional<Konkurencija> findById(Long id);
+    public <S extends Konkurencija> S save(S s);
+    public void delete(Konkurencija t);    
     
 }

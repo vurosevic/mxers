@@ -44,5 +44,11 @@ public class BerzaPodaciServiceImpl implements BerzaPodaciService {
     public void delete(BerzaPodaci t) {
         berzaPodaciDAO.delete(t);
     }
+
+    @Override
+    public List<String> findAllGodinePerioda() {
+        return berzaPodaciDAO.findAllGodinePerioda();
+    }
+    
     
 }

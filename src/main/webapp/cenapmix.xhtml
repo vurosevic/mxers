@@ -20,22 +20,14 @@
             </ui:define>
 
             <ui:define name="content">  
-                
+            <h:form id="frmCenaMix">
             <div class="ui-g">
                 <div class="ui-g-6">
-                        <h:form id="frmCenaMix">
                         <center>
                            <p:panelGrid columns="2" class="panelGridNoBorderDialog">
                                <f:facet name="header">
-       <!--                            <p:graphicImage name="demo/images/misc/kobe.png" />-->
-                               <p:outputLabel value="Одређивање цене производног микса" />
+                               <p:outputLabel value="Одређивање најниже вредности ВП цене" />
                                </f:facet>
-
-                               <p:outputLabel for="period" value="Тип:" />
-                               <p:selectOneMenu id="period" dynamic="true" value="#{MBCenaProizvodnogMiksa.izabraniTip}">
-                                   <f:selectItem itemLabel="Изабери тип" itemValue="" />
-                                   <f:selectItems value="#{MBCenaProizvodnogMiksa.sifrePerioda}" />
-                               </p:selectOneMenu>
 
                                <p:outputLabel for="godinaod" value="Година од:" />
                                <p:inputText id="godinaod" value="#{MBCenaProizvodnogMiksa.godinaOd}" />                       
@@ -49,35 +41,123 @@
                                <p:outputLabel for="ebit" value="Жељена ЕБИТ [%]:" />
                                <p:inputText id="ebit" value="#{MBCenaProizvodnogMiksa.ebit}" />                         
 
-                               <p:outputLabel for="inflacija" value="Процењена инфлација за наредну годину [%]:" />
-                               <p:inputText id="inflacija" value="#{MBCenaProizvodnogMiksa.procenjenaInflacija}" />                                                 
-
                                <p:separator/>
-                               <p:commandButton process="@form" update="frmCenaMix" value="Израчунај" action="#{MBCenaProizvodnogMiksa.racunaj()}"/>
+                               <p:commandButton process="@form" update="frmCenaMix" value="Израчунај" action="#{MBCenaProizvodnogMiksa.racunajSve()}"/>
+                               
+                               <p:separator/>
+                               <p:commandButton process="@form" update="frmCenaMix" value="Израчунај ЈЦ" action="#{MBCenaProizvodnogMiksa.izvorSvihJc()}"/>   
 
-                               <p:outputLabel for="troskovibalansiranja" value="Укупни трошкови балансирања:" />
-                               <p:inputText id="troskovibalansiranja" value="#{MBCenaProizvodnogMiksa.ukupniTroskoviBalansiranja}" />  
+                                <p:accordionPanel multiple="true">
+                                    <p:tab title="Најнижа вредност ВП цене">
+                                        <p:panelGrid columns="2" class="panelGridNoBorderDialog">
+                                            <f:facet name="header">
+                                            <p:outputLabel value="Одређивање цене производног микса" />                               
+                                            </f:facet>  
 
-                               <p:outputLabel for="prosecnaCena" value="Цена производног микса:" />
-                               <p:inputText id="prosecnaCena" value="#{MBCenaProizvodnogMiksa.prosecnaCena}" />                         
+                                            <p:outputLabel value="Период" />
+                                            <p:outputLabel value="Најнижа вредност ВП цене" />
 
-                               <p:outputLabel for="troskovipgk" value="Трошкови прекограничних капацитета:" />
-                               <p:inputText id="troskovipgk" value="#{MBCenaProizvodnogMiksa.troskoviPgk}" />   
+                                            <p:outputLabel value="Q1" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnCvpmin()[0]}" />
 
-                               <p:separator/><p:separator/>
+                                            <p:outputLabel value="Q2" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnCvpmin()[1]}" />                               
 
-                               <p:outputLabel for="cvpmin" value="Најнижа вредност велепродајне цене:" />
-                               <p:inputText id="cvpmin" value="#{MBCenaProizvodnogMiksa.cvpmin}" />                        
+                                            <p:outputLabel value="Q3" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnCvpmin()[2]}" />
 
-                           </p:panelGrid>                    
-                       </center>
-                       </h:form>                   
+                                            <p:outputLabel value="Q4" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnCvpmin()[3]}" />                               
+
+                                            <p:outputLabel value="YR" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnCvpmin()[4]}" />
+                                        </p:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Укупни трошкови балансирања">
+                                        <p:panelGrid columns="2" class="panelGridNoBorderDialog">
+                                            <f:facet name="header">
+                                            <p:outputLabel value="Укупни трошкови балансирања" />                               
+                                            </f:facet>  
+
+                                            <p:outputLabel value="Период" />
+                                            <p:outputLabel value="Укупни трошкови балансирања" />
+
+                                            <p:outputLabel value="Q1" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnUkupniTroskoviBalansiranja()[0]}" />
+
+                                            <p:outputLabel value="Q2" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnUkupniTroskoviBalansiranja()[1]}" />                               
+
+                                            <p:outputLabel value="Q3" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnUkupniTroskoviBalansiranja()[2]}" />
+
+                                            <p:outputLabel value="Q4" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnUkupniTroskoviBalansiranja()[3]}" />                               
+
+                                            <p:outputLabel value="YR" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnUkupniTroskoviBalansiranja()[4]}" />
+                                        </p:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Цена производног микса">
+                                        <p:panelGrid columns="2" class="panelGridNoBorderDialog">
+                                            <f:facet name="header">
+                                            <p:outputLabel value="Цена производног микса" />                               
+                                            </f:facet>  
+
+                                            <p:outputLabel value="Период" />
+                                            <p:outputLabel value="Цена производног микса" />
+
+                                            <p:outputLabel value="Q1" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnProsecnaCena()[0]}" />
+
+                                            <p:outputLabel value="Q2" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnProsecnaCena()[1]}" />                               
+
+                                            <p:outputLabel value="Q3" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnProsecnaCena()[2]}" />
+
+                                            <p:outputLabel value="Q4" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnProsecnaCena()[3]}" />                               
+
+                                            <p:outputLabel value="YR" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnProsecnaCena()[4]}" />
+                                        </p:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Трошкови прекограничних капацитета">
+                                        <p:panelGrid columns="2" class="panelGridNoBorderDialog">
+                                            <f:facet name="header">
+                                            <p:outputLabel value="Трошкови прекограничних капацитета" />                               
+                                            </f:facet>  
+
+                                            <p:outputLabel value="Период" />
+                                            <p:outputLabel value="Трошкови прекограничних капацитета" />
+
+                                            <p:outputLabel value="Q1" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnTroskoviPgk()[0]}" />
+
+                                            <p:outputLabel value="Q2" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnTroskoviPgk()[1]}" />                               
+
+                                            <p:outputLabel value="Q3" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnTroskoviPgk()[2]}" />
+
+                                            <p:outputLabel value="Q4" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnTroskoviPgk()[3]}" />                               
+
+                                            <p:outputLabel value="YR" />
+                                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.getnTroskoviPgk()[4]}" />
+                                        </p:panelGrid>
+                                    </p:tab>                                    
+                                </p:accordionPanel>
+                                <p:spacer/>
+                           </p:panelGrid>   
+                            
+                       </center>                 
                 </div>
                 
                 
                 <div class="ui-g-6">
                     <center>
-                        
                         <p:panelGrid columns="4">
                             <f:facet name="header">
                                 <p:outputLabel value="Коефицијенти" />
@@ -165,10 +245,33 @@
                             <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(3).cenaJc}"/>
                             <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).cenaJc}"/> 
                         </p:panelGrid>
+                        
+                        <p:spacer/>
+                        
+                        <p:panelGrid columns="6">
+                            <f:facet name="header">
+                                <p:outputLabel value="Избор јединствене цене" />
+                            </f:facet>
+
+                            <p:outputLabel value="" />
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(0).period}-#{MBVpFinalSetJc.getFinalSetJcData(0).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(1).period}-#{MBVpFinalSetJc.getFinalSetJcData(1).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(2).period}-#{MBVpFinalSetJc.getFinalSetJcData(2).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetJcData(3).period}-#{MBVpFinalSetJc.getFinalSetJcData(3).godinaPerioda}"/>
+                            <p:outputLabel value="#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).period}-#{MBVpFinalSetJc.getFinalSetGodinaJcData(0).godinaPerioda}"/>
+                            
+                            <p:outputLabel value="" />
+                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.jedinstveneVpCene[0]}"/>
+                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.jedinstveneVpCene[1]}"/>
+                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.jedinstveneVpCene[2]}"/>
+                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.jedinstveneVpCene[3]}"/>
+                            <p:outputLabel value="#{MBCenaProizvodnogMiksa.jedinstveneVpCene[4]}"/> 
+                        </p:panelGrid>    
+                            
                     </center>                    
                 </div>
             </div>                
-                
+            </h:form>       
 
             </ui:define>
 

@@ -8,6 +8,7 @@ package deloitte.mxers.metvp.repository;
 import deloitte.mxers.metvp.domen.BerzaPodaci;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -29,5 +30,8 @@ public interface BerzaPodaciDAO extends CrudRepository<BerzaPodaci, Long>{
 
     @Override
     public void delete(BerzaPodaci t);
+    
+    @Query("SELECT DISTINCT bp.godinaPerioda FROM BerzaPodaci bp ORDER BY bp.godinaPerioda")
+    public List<String> findAllGodinePerioda();         
             
 }
