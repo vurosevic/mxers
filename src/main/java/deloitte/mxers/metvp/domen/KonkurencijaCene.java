@@ -50,6 +50,9 @@ public class KonkurencijaCene implements Serializable {
     @Column(name = "Naziv_kupca")
     @Size(max = 255)
     private String nazivKupca;
+    
+    @Column(name = "Godisnja_potrosnja")
+    private Double godisnjaPotrosnja;    
 
     /**
      * @return the id
@@ -133,6 +136,20 @@ public class KonkurencijaCene implements Serializable {
      */
     public void setNazivKupca(String nazivKupca) {
         this.nazivKupca = nazivKupca;
+    }
+
+    /**
+     * @return the godisnjaPotrosnja
+     */
+    public Double getGodisnjaPotrosnja() {
+        return godisnjaPotrosnja;
+    }
+
+    /**
+     * @param godisnjaPotrosnja the godisnjaPotrosnja to set
+     */
+    public void setGodisnjaPotrosnja(Double godisnjaPotrosnja) {
+        this.godisnjaPotrosnja = godisnjaPotrosnja;
     }
     
     

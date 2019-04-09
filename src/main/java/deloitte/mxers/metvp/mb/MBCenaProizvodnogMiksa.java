@@ -549,7 +549,9 @@ public class MBCenaProizvodnogMiksa {
         if (Double.isNaN(cVpMax)) return Double.NaN;
         
         Double cVpsMin = konkurencijaCeneService.minCenaByProizvod(period, godinaPerioda);
-        Double kurs =  kursnaListaService.kursNaDan(cal.getTime());
+        //Double kurs =  kursnaListaService.kursNaDan(cal.getTime());
+        if (kursnaListaService.kursPoslednji().isEmpty()) return rezultat;
+        Double kurs =  kursnaListaService.kursPoslednji().get(0).getKurs();
 
         if (kurs == null) return Double.NaN;
         Double cVpMin = cVpMinKM/kurs;
@@ -558,11 +560,14 @@ public class MBCenaProizvodnogMiksa {
             // cVpMin < cVpMax
             
             // nema podataka od konkurencije
-            if (cVpsMin == null) return cVpMin;
+            if (cVpsMin == null) {
+                if (0.95*cVpMax < cVpMin) return cVpMin;
+                else return 0.95*cVpMax;                
+            } 
             
             if (cVpMax < cVpsMin) {
                 if (0.95*cVpMax < cVpMin) return cVpMin;
-                else return cVpMax;
+                else return 0.95*cVpMax;
             } else {
                 // cVpMax > cVpsMin
                 if (0.95*cVpsMin < cVpMin) return rezultat; // odluka rukovodstva

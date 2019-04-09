@@ -20,6 +20,7 @@ public interface KursnaListaService {
     public Optional<KursnaLista> findById(Long id);
     public void delete(KursnaLista t);
     public <S extends KursnaLista> S save(S s);
-    public Double kursNaDan(Date datum);     
+    public Double kursNaDan(Date datum);  
+    public List<KursnaLista> kursPoslednji(); 
     
 }

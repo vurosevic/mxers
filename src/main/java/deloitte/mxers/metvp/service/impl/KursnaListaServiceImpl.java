@@ -50,5 +50,11 @@ public class KursnaListaServiceImpl implements KursnaListaService {
     public Double kursNaDan(Date datum) {
         return kursnaListaDAO.kursNaDan(datum);
     }
+
+    @Override
+    public List<KursnaLista> kursPoslednji() {
+        return kursnaListaDAO.kursPoslednji();
+    }
+    
     
 }

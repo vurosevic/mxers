@@ -50,7 +50,15 @@
                     <p:column>
                         <f:facet name="header" >Назив купца</f:facet>
                         #{td.nazivKupca}
-                    </p:column>                    
+                    </p:column>    
+                    <p:column>
+                        <f:facet name="header" >Годишња потрошња</f:facet>
+                        <div style="text-align: right;">
+                            <p:outputLabel value="#{td.godisnjaPotrosnja}" >
+                                <f:convertNumber pattern="#,##0.##" minFractionDigits="2" locale="sr_RS"/>
+                            </p:outputLabel>                
+                        </div>                        
+                    </p:column>                      
                     <f:facet name="footer">
                         <div style="text-align:left">                                                    
                             <p:commandButton process="tdDT" update=":frmDatatableTd:tdDetailNovi" oncomplete="PF('tdDialogNovi').show()" 
@@ -101,7 +109,13 @@
                             <p:inputText id="nazivkupca" required="true" value="#{MBKonkurencijaCene.novaKonkurencijaCene.nazivKupca}" >
                                 <p:ajax update="nazivkupca" event="keyup" />
                             </p:inputText>
-                            <p:message for="nazivkupca" display="icon" />                              
+                            <p:message for="nazivkupca" display="icon" />    
+                            
+                            <p:outputLabel for="gpot" value="Годишња потрошња:" />
+                            <p:inputText id="gpot" required="true" value="#{MBKonkurencijaCene.novaKonkurencijaCene.godisnjaPotrosnja}" >
+                                <p:ajax update="gpot" event="keyup" />
+                            </p:inputText>
+                            <p:message for="gpot" display="icon" />                             
                             
                         </p:panelGrid>
                         <p:panel >
@@ -151,6 +165,12 @@
                             <p:inputText id="nazivkupca" required="true" value="#{MBKonkurencijaCene.selectKonkurencijaCene.nazivKupca}" >
                             </p:inputText>
                             <p:message for="nazivkupca" display="icon" />   
+                            
+                            <p:outputLabel for="gpot" value="Годишња потрошња:" />
+                            <p:inputText id="gpot" required="true" value="#{MBKonkurencijaCene.selectKonkurencijaCene.godisnjaPotrosnja}" >
+                                <p:ajax update="gpot" event="keyup" />
+                            </p:inputText>
+                            <p:message for="gpot" display="icon" />                              
 
                         </p:panelGrid>
                             <p:panel rendered="#{not empty MBKonkurencijaCene.selectKonkurencijaCene}">

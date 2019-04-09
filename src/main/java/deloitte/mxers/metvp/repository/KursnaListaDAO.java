@@ -34,6 +34,8 @@ public interface KursnaListaDAO extends CrudRepository<KursnaLista, Long>{
     @Query("SELECT kl.kurs FROM KursnaLista kl WHERE kl.datum = :datum")
     public Double kursNaDan(@Param("datum") Date datum);        
     
+    @Query("SELECT kl FROM KursnaLista kl ORDER BY datum DESC")
+    public List<KursnaLista> kursPoslednji(); 
     
     
 }
